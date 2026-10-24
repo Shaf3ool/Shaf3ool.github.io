@@ -1,0 +1,64 @@
+/* ==========================================================
+   tokens.css — design tokens for the Shaf3ool portfolio
+   Brand palette from the Shaf3ool kit: Ink, Paper, Launch orange.
+   ========================================================== */
+
+/* ---------- Fonts (self-hosted, latin subset) ---------- */
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("../assets/fonts/serif.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+/* Italic cut of the editorial serif, used for accents */
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("../assets/fonts/serif-italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+/* Variable sans for body and UI (400–700) */
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("../assets/fonts/sans.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+/* ---------- Colour, type and spacing tokens ---------- */
+:root {
+  /* Brand colours */
+  --ink: #141414;
+  --ink-2: #1d1c1b;
+  --ink-3: #2a2826;
+  --paper: #f4f1ea;
+  --paper-2: #ebe6db;
+  --orange: #ff5a36;
+  --ember: #e2441f;
+  --glow: #ffb59e;
+  /* Text tints on dark and light backgrounds */
+  --on-ink: #f4f1ea;
+  --on-ink-dim: rgba(244, 241, 234, 0.62);
+  --on-paper: #141414;
+  --on-paper-dim: rgba(20, 20, 20, 0.64);
+  --line-dark: rgba(244, 241, 234, 0.14);
+  --line-light: rgba(20, 20, 20, 0.14);
+  /* Type families */
+  --serif: "Instrument Serif", "Times New Roman", serif;
+  --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Fluid type scale */
+  --fs-hero: clamp(3.6rem, 13vw, 12.5rem);
+  --fs-h2: clamp(2.5rem, 6.4vw, 5.6rem);
+  --fs-h3: clamp(1.4rem, 2.4vw, 1.9rem);
+  --fs-lead: clamp(1.08rem, 1.6vw, 1.32rem);
+  /* Layout */
+  --wrap: 1240px;
+  --gutter: clamp(1.15rem, 4vw, 3rem);
+  --section: clamp(5rem, 11vw, 9.5rem);
+  --radius: 18px;
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+}

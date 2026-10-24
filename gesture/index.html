@@ -1,0 +1,80 @@
+<!doctype html>
+<!--
+  Shaf3ool · Hand-Controlled 3D Object — webcam hand-tracking demo.
+  Structure: index.html (layout) · css/styles.css (look) · js/*.js (one ES module per job).
+  Libraries come from CDNs (Three.js, MediaPipe Tasks Vision) so this folder stays tiny.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Demo page: keep it out of search engines -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Hand-Controlled 3D — Shaf3ool Web Studio</title>
+  <meta name="description" content="Move, rotate and resize a 3D object with your bare hand: webcam hand tracking (MediaPipe) + Three.js. A Shaf3ool Web Studio demo.">
+  <meta name="theme-color" content="#0b1020">
+  <!-- Inline SVG favicon: avoids a 404 (and its console error) without an extra file -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 6 52 44H12z' fill='%2349c27a'/%3E%3Crect x='28' y='44' width='8' height='12' fill='%238a5a3b'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Import map: lets our modules write `import * as THREE from "three"` -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- 3D canvas is injected here by js/scene.js -->
+  <main id="stage" aria-label="Interactive 3D object"></main>
+
+  <!-- Top bar: brand + title -->
+  <header class="topbar">
+    <p class="brand"><span class="brand-mark" aria-hidden="true">◆</span> Shaf3ool <span class="brand-sub">· Web Studio</span></p>
+    <h1 class="title">Hand-Controlled 3D</h1>
+  </header>
+
+  <!-- Control panel: camera button, status line, scene buttons -->
+  <section class="panel" aria-label="Controls">
+    <button id="btn-camera" class="btn btn-primary" type="button">
+      <span aria-hidden="true">📷</span> Enable camera
+    </button>
+    <p id="status" class="status" role="status" aria-live="polite">Touch / mouse mode — drag the object.</p>
+    <div class="row">
+      <button id="btn-fire" class="btn btn-chip" type="button" aria-label="Fire effect"><span aria-hidden="true">🔥</span> Fire</button>
+      <button id="btn-regrow" class="btn btn-chip" type="button" aria-label="Sparkle and regrow effect"><span aria-hidden="true">✨</span> Sparkle</button>
+    </div>
+    <!-- Object picker: buttons are generated from the OBJECTS registry in js/objects.js -->
+    <p class="label" id="picker-label">Object</p>
+    <div id="object-picker" class="picker" role="group" aria-labelledby="picker-label"></div>
+    <!-- Load any .glb model from this device (it is never uploaded) -->
+    <input id="file-glb" class="visually-hidden" type="file" accept=".glb,model/gltf-binary">
+    <label class="btn btn-chip btn-file" for="file-glb"><span aria-hidden="true">⬆</span> Load your own .glb</label>
+  </section>
+
+  <!-- Gesture hint: text swaps between hand mode and touch mode -->
+  <aside id="hint" class="hint" aria-label="How to control">
+    <p id="hint-text">Drag = rotate · Scroll / pinch = zoom · Tap 🔥 or ✨</p>
+  </aside>
+
+  <!-- Hand skeleton preview (dots only, the camera image is never drawn) -->
+  <canvas id="hand-preview" class="hand-preview" width="200" height="150" aria-hidden="true" hidden></canvas>
+
+  <!-- Hidden video element that receives the webcam stream (stays on this device) -->
+  <video id="cam" playsinline muted hidden></video>
+
+  <!-- Credits: studio, libraries, 3D, inspiration -->
+  <footer class="credits">
+    <p>Made by <strong>Shaf3ool · Web Studio</strong></p>
+    <p>3D objects: procedural low-poly, built in code (no third-party models) · Three.js (MIT) · MediaPipe Hands (Apache-2.0) · Idea inspired by @naniludiana's TouchDesigner piece</p>
+    <p class="privacy">🔒 Camera frames are processed on your device and never uploaded.</p>
+  </footer>
+
+  <!-- Fallback message when JavaScript modules or WebGL are missing -->
+  <noscript><p class="noscript">This demo needs JavaScript and WebGL.</p></noscript>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

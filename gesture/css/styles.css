@@ -1,0 +1,169 @@
+/* ==========================================================
+   Gesture Forest — styles
+   Layout: full-screen 3D canvas, UI floats on top in glass cards.
+   ========================================================== */
+
+/* ---- Design tokens ---- */
+:root {
+  --bg: #0b1020;
+  --ink: #f2f5ff;
+  --muted: #b7c0d8;
+  --glass: rgba(16, 22, 42, 0.62);
+  --line: rgba(255, 255, 255, 0.14);
+  --accent: #49c27a;      /* forest green */
+  --fire: #ff8a3d;        /* ember orange */
+  --radius: 16px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---- Base reset ---- */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;              /* the canvas fills the screen, nothing scrolls */
+  background: radial-gradient(120% 90% at 50% 20%, #1b2547 0%, var(--bg) 70%);
+  color: var(--ink);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- 3D stage ---- */
+#stage {
+  position: fixed;
+  inset: 0;
+  touch-action: none;            /* we handle drag / pinch ourselves */
+}
+#stage canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+#stage canvas:active { cursor: grabbing; }
+
+/* ---- Top bar ---- */
+.topbar {
+  position: fixed;
+  top: 16px; left: 20px; right: 20px;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  pointer-events: none;          /* never blocks dragging the island */
+}
+.brand { margin: 0; font-weight: 700; letter-spacing: 0.02em; }
+.brand-mark { color: var(--accent); }
+.brand-sub { color: var(--muted); font-weight: 500; }
+.title {
+  margin: 0;
+  font-size: clamp(20px, 3.2vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* ---- Control panel (glass card) ---- */
+.panel {
+  position: fixed;
+  left: 20px; top: 76px;
+  width: min(300px, calc(100vw - 40px));
+  padding: 14px;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.status { margin: 10px 0; color: var(--muted); font-size: 13px; min-height: 2.9em; }
+.row { display: flex; gap: 8px; }
+
+/* ---- Buttons ---- */
+.btn {
+  font: inherit;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn:hover { background: rgba(255, 255, 255, 0.12); }
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible { outline: 3px solid #9fe3b9; outline-offset: 2px; }
+.btn[disabled] { opacity: 0.55; cursor: progress; }
+.btn-primary {
+  width: 100%;
+  font-weight: 700;
+  background: linear-gradient(135deg, #3fae6c, #2c8a8f);
+  border-color: transparent;
+}
+.btn-primary:hover { background: linear-gradient(135deg, #4cc47c, #33a0a6); }
+.btn-chip { flex: 1; }
+
+/* ---- Object picker ---- */
+.label { margin: 12px 0 6px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.picker { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.picker .btn { padding: 8px 4px; font-size: 13px; border-radius: 12px; }
+.picker .btn[aria-pressed="true"] { background: rgba(73, 194, 122, 0.28); border-color: var(--accent); }
+.btn-file { display: block; margin-top: 8px; text-align: center; font-size: 13px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+#file-glb:focus-visible + .btn-file { outline: 3px solid #9fe3b9; outline-offset: 2px; }
+
+/* ---- Gesture hint (bottom centre) ---- */
+.hint {
+  position: fixed;
+  left: 50%; bottom: calc(86px + var(--safe-b));
+  transform: translateX(-50%);
+  max-width: calc(100vw - 32px);
+  padding: 8px 14px;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+  text-align: center;
+  pointer-events: none;
+}
+.hint p { margin: 0; }
+
+/* ---- Hand skeleton preview (top right) ---- */
+.hand-preview {
+  position: fixed;
+  right: 20px; top: 70px;
+  width: 200px; height: 150px;
+  background: rgba(8, 12, 26, 0.7);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+/* ---- Credits (bottom) ---- */
+.credits {
+  position: fixed;
+  left: 20px; right: 20px; bottom: calc(12px + var(--safe-b));
+  font-size: 11px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.credits p { margin: 2px 0; }
+.credits strong { color: var(--ink); }
+.privacy { color: #9fe3b9; }
+.noscript { position: fixed; inset: 40% 0 auto; text-align: center; }
+
+/* ---- Fire state tint (set on <body> by main.js) ---- */
+body.is-burning .title { color: var(--fire); }
+
+/* ---- Phones: stack the panel at the top, hide the preview's size ---- */
+@media (max-width: 640px) {
+  .topbar { top: 12px; left: 14px; right: 14px; }
+  .title { font-size: 18px; }
+  .panel { left: 14px; right: 14px; top: 48px; width: auto; padding: 10px; }
+  .status { margin: 6px 0; min-height: 0; font-size: 12px; }
+  .btn { padding: 8px 12px; }
+  .label { display: none; }
+  .picker { margin-top: 8px; }
+  .picker .btn { font-size: 12px; padding: 7px 2px; }
+  .btn-file { display: none; }   /* phones: built-in objects only, keeps the panel small */
+  .hand-preview { top: auto; bottom: calc(150px + var(--safe-b)); right: 14px; width: 120px; height: 90px; }
+  .hint { bottom: calc(96px + var(--safe-b)); font-size: 12px; border-radius: 14px; }
+  .credits { left: 14px; right: 14px; font-size: 10px; }
+}
+
+/* ---- Respect reduced motion: no button animation ---- */
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}

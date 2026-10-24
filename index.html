@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ===== Document meta ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mahmoud Al Jounaidy · Shaf3ool — Software, Web & Design</title>
+  <meta name="description" content="Portfolio of Mahmoud Al Jounaidy (Shaf3ool · Web Studio), software developer and web designer in Algiers: Stocker point-of-sale system, concept websites, C++, JavaScript, Python.">
+  <meta name="theme-color" content="#141414">
+  <!-- Social preview card -->
+  <meta property="og:title" content="Mahmoud Al Jounaidy · Shaf3ool">
+  <meta property="og:description" content="Software × Web Dev & Designer · Algiers">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shaf3ool.github.io/">
+  <meta property="og:image" content="https://shaf3ool.github.io/assets/img/og.jpg">
+  <link rel="icon" type="image/svg+xml" href="assets/img/shaf3ool-seal.svg">
+  <!-- Fonts are self-hosted; preload the two used above the fold -->
+  <link rel="preload" href="assets/fonts/serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/sans.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Styles, split by layer -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <!-- Behaviour (ES modules, deferred by default) -->
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main"><span data-i18n="skip">Skip to content</span></a>
+
+  <!-- ===== Header / navigation ===== -->
+  <header class="nav" id="top">
+    <a class="nav__brand" href="#top" aria-label="Shaf3ool — back to top">
+      <img src="assets/img/shaf3ool-wordmark.svg" alt="Shaf3ool" width="122" height="25">
+    </a>
+    <nav class="nav__links" id="nav-links" aria-label="Main">
+      <a href="#stocker">Stocker</a>
+      <a href="#work"><span data-i18n="nav_work">Work</span></a>
+      <a href="#about"><span data-i18n="nav_about">About</span></a>
+      <a href="#contact"><span data-i18n="nav_contact">Contact</span></a>
+    </nav>
+    <!-- Language switch: EN ⇄ FR -->
+    <button class="lang" id="lang-toggle" type="button" aria-label="Switch language / Changer de langue">
+      <span data-lang="en">EN</span><span class="lang__sep">/</span><span data-lang="fr">FR</span>
+    </button>
+    <!-- Mobile menu button -->
+    <button class="nav__burger" id="nav-burger" type="button" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span class="sr">Menu</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- ===== Hero ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero__seal" src="assets/img/shaf3ool-seal.svg" alt="" width="220" height="220">
+      <p class="eyebrow reveal"><span data-i18n="hero_eyebrow">Shaf3ool · Web Studio — Algiers</span></p>
+      <h1 class="hero__title reveal" id="hero-title">Mahmoud<br><em>Al Jounaidy</em></h1>
+      <p class="hero__lead reveal"><span data-i18n-html="hero_lead">Software × Web Dev &amp; Designer. I build systems in C++ and sites people remember, from the stock room to the scroll.</span></p>
+      <div class="hero__cta reveal">
+        <a class="btn btn--accent" href="#stocker"><span data-i18n="cta_work">See the work</span></a>
+        <a class="btn btn--ghost" href="https://wa.me/213657567567" target="_blank" rel="noopener"><span data-i18n="cta_talk">Start a project</span></a>
+      </div>
+      <!-- Quick facts strip -->
+      <ul class="hero__facts reveal">
+        <li><strong>C++17</strong> <span data-i18n-html="fact_1">systems &amp; tools</span></li>
+        <li><strong>JS · HTML · CSS</strong> <span data-i18n-html="fact_2">web &amp; offline apps</span></li>
+        <li><strong>Python · C#</strong> <span data-i18n-html="fact_3">automation &amp; AI tools</span></li>
+        <li><strong><span data-i18n="fact_4k">4 languages</span></strong> <span data-i18n="fact_4">spoken</span></li>
+      </ul>
+    </section>
+
+    <!-- ===== Marquee of disciplines ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Software</span><i>✦</i><span>Web design</span><i>✦</i><span>Point of sale</span><i>✦</i><span>C++17</span><i>✦</i><span>Branding</span><i>✦</i><span>Offline-first</span><i>✦</i><span>Motion</span><i>✦</i>
+        <span>Software</span><i>✦</i><span>Web design</span><i>✦</i><span>Point of sale</span><i>✦</i><span>C++17</span><i>✦</i><span>Branding</span><i>✦</i><span>Offline-first</span><i>✦</i><span>Motion</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ===== Flagship: Stocker ===== -->
+    <section class="stocker" id="stocker" aria-labelledby="stocker-title">
+      <div class="wrap">
+        <p class="eyebrow reveal"><span data-i18n="st_eyebrow">01 — Flagship product</span></p>
+        <div class="stocker__head">
+          <h2 class="stocker__logo reveal" id="stocker-title">
+            <img src="assets/img/stocker-symbol.svg" alt="" width="70" height="71">
+            <img src="assets/img/stocker-wordmark.svg" alt="Stocker" width="250" height="60">
+          </h2>
+          <p class="stocker__lead reveal" data-i18n-html="st_lead">A complete stock and point-of-sale system for Algerian shops, designed and built from scratch. It runs fully offline on a phone or a PC, speaks three languages, and is licensed per machine in two editions: <em>Basic</em> and <em>Pro</em>.</p>
+        </div>
+
+        <!-- Real screenshots of the app (images only; the system itself is never published) -->
+        <figure class="stocker__strip reveal">
+          <img src="assets/img/stocker-screens.webp" alt="Seven screens of the Stocker app on a phone: licence and activation, menu, stock transfer, dashboard, barcode labels, sales search and an invoice" width="1500" height="458" loading="lazy" decoding="async">
+          <figcaption data-i18n="st_cap">Real screens from the app, English interface, with demo shop data.</figcaption>
+        </figure>
+
+        <!-- Key numbers, taken from the codebase -->
+        <ul class="stats">
+          <li class="reveal"><b>~8,600</b><span data-i18n="stat_1">lines of C++17 core, 35 files</span></li>
+          <li class="reveal"><b>0</b><span data-i18n="stat_2">compiler warnings, automated tests</span></li>
+          <li class="reveal"><b>3</b><span data-i18n="stat_3">languages: Arabic (RTL), French, English</span></li>
+          <li class="reveal"><b>100%</b><span data-i18n="stat_4">offline, no internet needed</span></li>
+        </ul>
+
+        <!-- Feature grid -->
+        <ul class="feats">
+          <li class="feat reveal">
+            <h4 class="feat__title" data-i18n="f1_t">Sell fast</h4>
+            <p class="feat__body" data-i18n="f1_b">A touch till on PC with barcode-scanner support and keyboard shortcuts; receipts for 58 mm and 80 mm thermal printers.</p>
+          </li>
+          <li class="feat reveal">
+            <h4 class="feat__title" data-i18n="f2_t">Stock that fits a real shop</h4>
+            <p class="feat__body" data-i18n="f2_b">Sizes × colours inventory, barcode labels, purchase orders and suppliers, all with product photos.</p>
+          </li>
+          <li class="feat reveal">
+            <h4 class="feat__title" data-i18n="f3_t">Customers & credit</h4>
+            <p class="feat__body" data-i18n="f3_b">Supplier and customer credit, loyalty points, VAT invoices and profit-and-loss reports.</p>
+          </li>
+          <li class="feat reveal">
+            <h4 class="feat__title" data-i18n="f4_t">One file, any device</h4>
+            <p class="feat__body" data-i18n="f4_b">An offline single-file app for phone and PC. Nothing to install; backup and restore built in.</p>
+          </li>
+          <li class="feat reveal">
+            <h4 class="feat__title" data-i18n="f5_t">Shop hub (Pro)</h4>
+            <p class="feat__body" data-i18n="f5_b">A C++ LAN hub lets several phones and PCs share one stock over the shop Wi-Fi, with per-device isolation, an admin view and a customer display.</p>
+          </li>
+          <li class="feat reveal">
+            <h4 class="feat__title" data-i18n="f6_t">Licensed per machine</h4>
+            <p class="feat__body" data-i18n="f6_b">Offline activation with Ed25519-signed keys tied to the machine ID and shop name, plus a key generator for Basic and Pro editions.</p>
+          </li>
+        </ul>
+
+        <!-- Editions -->
+        <div class="editions">
+          <div class="edition reveal">
+            <h4 data-i18n="ed_b_t">Basic</h4>
+            <p data-i18n="ed_b">One device. The full app for a single shop counter, 14-day free trial with everything open.</p>
+          </div>
+          <div class="edition edition--pro reveal">
+            <h4 data-i18n="ed_p_t">Pro</h4>
+            <p data-i18n="ed_p">Several devices through the shop hub. Same file, upgraded by key: nothing to reinstall, data stays.</p>
+          </div>
+        </div>
+        <p class="stocker__note reveal" data-i18n="st_more">Also delivered: user guides in English and Arabic, a hub setup guide and a seller guide. Being commercialised in Algeria.</p>
+
+        <!-- Phone close-ups -->
+        <div class="phones" aria-hidden="true">
+          <img class="reveal" src="assets/img/stocker-sell.webp" alt="" width="340" height="680" loading="lazy" decoding="async">
+          <img class="reveal" src="assets/img/stocker-stock.webp" alt="" width="340" height="680" loading="lazy" decoding="async">
+          <img class="reveal" src="assets/img/stocker-receipt.webp" alt="" width="340" height="680" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Concept websites ===== -->
+    <section class="work" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <p class="eyebrow reveal"><span data-i18n="w_eyebrow">02 — Shaf3ool · Web Studio</span></p>
+        <h2 class="h2 reveal" id="work-title"><span data-i18n-html="w_title">Concept sites for <em>real</em> Algerian businesses</span></h2>
+        <p class="lead reveal" data-i18n="w_lead">Each one is an unsolicited concept: a fully designed, mobile-first website built for a real café, restaurant or pâtisserie from its public information, to show what its online presence could look like. They are demos, not paid client work.</p>
+        <div class="cases">
+        <!-- Featured concept #1: Le Roi de la Loubia -->
+        <article class="case reveal">
+          <a class="case__media" href="demos/roi-de-la-loubia/" target="_blank" rel="noopener" aria-label="Le Roi de la Loubia — open the live concept site">
+            <img class="case__desk" src="assets/img/roi-de-la-loubia-demo-d.webp" alt="Desktop view of the Le Roi de la Loubia concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/roi-de-la-loubia-demo-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">01</span>
+            <h3 class="case__title">Le Roi de la Loubia</h3>
+            <p class="case__sub"><span data-i18n="type_restaurant_trad">Traditional restaurant</span> · <span data-i18n="city_algiers">Algiers</span></p>
+            <a class="case__link" href="demos/roi-de-la-loubia/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <!-- Featured concept #2: La Brasa -->
+        <article class="case reveal">
+          <a class="case__media" href="demos/labrasa/" target="_blank" rel="noopener" aria-label="La Brasa — open the live concept site">
+            <img class="case__desk" src="assets/img/labrasa-demo-d.webp" alt="Desktop view of the La Brasa concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/labrasa-demo-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">02</span>
+            <h3 class="case__title">La Brasa</h3>
+            <p class="case__sub"><span data-i18n="type_grill">Grill house</span> · <span data-i18n="city_oran">Oran</span></p>
+            <a class="case__link" href="demos/labrasa/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <!-- Featured concept #3: Café Tantonville -->
+        <article class="case reveal">
+          <a class="case__media" href="demos/cafe-tantonville/" target="_blank" rel="noopener" aria-label="Café Tantonville — open the live concept site">
+            <img class="case__desk" src="assets/img/cafe-tantonville-demo-d.webp" alt="Desktop view of the Café Tantonville concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/cafe-tantonville-demo-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">03</span>
+            <h3 class="case__title">Café Tantonville</h3>
+            <p class="case__sub"><span data-i18n="type_cafe_hist">Historic café</span> · <span data-i18n="city_algiers">Algiers</span></p>
+            <a class="case__link" href="demos/cafe-tantonville/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <!-- Featured concept #4: Café del Mar -->
+        <article class="case reveal">
+          <a class="case__media" href="demos/cafe-delmar/" target="_blank" rel="noopener" aria-label="Café del Mar — open the live concept site">
+            <img class="case__desk" src="assets/img/cafe-delmar-demo-d.webp" alt="Desktop view of the Café del Mar concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/cafe-delmar-demo-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">04</span>
+            <h3 class="case__title">Café del Mar</h3>
+            <p class="case__sub"><span data-i18n="type_cafe_sea">Seafront café</span> · <span data-i18n="city_oran">Oran</span></p>
+            <a class="case__link" href="demos/cafe-delmar/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <!-- Featured concept #5: Kaadet Zman -->
+        <article class="case reveal">
+          <a class="case__media" href="demos/kaadet-zman/" target="_blank" rel="noopener" aria-label="Kaadet Zman — open the live concept site">
+            <img class="case__desk" src="assets/img/kaadet-zman-demo-d.webp" alt="Desktop view of the Kaadet Zman concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/kaadet-zman-demo-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">05</span>
+            <h3 class="case__title">Kaadet Zman</h3>
+            <p class="case__sub"><span data-i18n="type_restaurant_trad">Traditional restaurant</span> · <span data-i18n="city_constantine">Constantine</span></p>
+            <a class="case__link" href="demos/kaadet-zman/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <!-- Featured concept #6: Pâtisserie Perla -->
+        <article class="case reveal">
+          <a class="case__media" href="demos/perla/" target="_blank" rel="noopener" aria-label="Pâtisserie Perla — open the live concept site">
+            <img class="case__desk" src="assets/img/perla-demo-d.webp" alt="Desktop view of the Pâtisserie Perla concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/perla-demo-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">06</span>
+            <h3 class="case__title">Pâtisserie Perla</h3>
+            <p class="case__sub"><span data-i18n="type_patisserie">Pâtisserie</span> · <span data-i18n="city_blida">Blida</span></p>
+            <a class="case__link" href="demos/perla/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <!-- Featured concept #7: Poisson d’Or -->
+        <article class="case reveal">
+          <a class="case__media" href="demos/poisson-dor/" target="_blank" rel="noopener" aria-label="Poisson d’Or — open the live concept site">
+            <img class="case__desk" src="assets/img/poisson-dor-demo-d.webp" alt="Desktop view of the Poisson d’Or concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/poisson-dor-demo-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">07</span>
+            <h3 class="case__title">Poisson d’Or</h3>
+            <p class="case__sub"><span data-i18n="type_seafood">Seafood restaurant</span> · <span data-i18n="city_bordj_el_bahri">Bordj El Bahri</span></p>
+            <a class="case__link" href="demos/poisson-dor/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <!-- Featured concept #8: Oralya Studio -->
+        <article class="case reveal">
+          <a class="case__media" href="oralya/" target="_blank" rel="noopener" aria-label="Oralya Studio — open the live concept site">
+            <img class="case__desk" src="assets/img/oralya-studio-d.webp" alt="Desktop view of the Oralya Studio concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/oralya-studio-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">08</span>
+            <h3 class="case__title">Oralya Studio</h3>
+            <p class="case__sub"><span data-i18n="type_cards">Invitation-card studio</span> · <span data-i18n="city_online_brand">Online brand</span></p>
+            <a class="case__link" href="oralya/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <!-- Featured concept #9: Restaurant Bladi -->
+        <article class="case reveal">
+          <a class="case__media" href="demos/bladi/" target="_blank" rel="noopener" aria-label="Restaurant Bladi — open the live concept site">
+            <img class="case__desk" src="assets/img/bladi-demo-d.webp" alt="Desktop view of the Restaurant Bladi concept site" width="960" height="600" loading="lazy" decoding="async">
+            <img class="case__phone" src="assets/img/bladi-demo-m.webp" alt="" width="260" height="520" loading="lazy" decoding="async">
+          </a>
+          <div class="case__meta">
+            <span class="case__num">09</span>
+            <h3 class="case__title">Restaurant Bladi</h3>
+            <p class="case__sub"><span data-i18n="type_restaurant">Restaurant</span> · <span data-i18n="city_oran">Oran</span></p>
+            <a class="case__link" href="demos/bladi/" target="_blank" rel="noopener"><span data-i18n="view_live">View live concept</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        </div>
+
+        <h3 class="h3 reveal"><span data-i18n="w_more">More concepts</span></h3>
+        <div class="minis">
+        <a class="mini reveal" href="demos/lebaal/" target="_blank" rel="noopener">
+          <img src="assets/img/lebaal-demo-d.webp" alt="Desktop view of the Pâtisserie Lebaal concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Pâtisserie Lebaal</span>
+          <span class="mini__sub"><span data-i18n="type_patisserie">Pâtisserie</span> · <span data-i18n="city_batna">Batna</span></span>
+        </a>
+        <a class="mini reveal" href="demos/allo-shawarma/" target="_blank" rel="noopener">
+          <img src="assets/img/allo-shawarma-demo-d.webp" alt="Desktop view of the Allo Shawarma concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Allo Shawarma</span>
+          <span class="mini__sub"><span data-i18n="type_shawarma">Shawarma house</span> · <span data-i18n="city_algiers">Algiers</span></span>
+        </a>
+        <a class="mini reveal" href="demos/cafe-malakoff/" target="_blank" rel="noopener">
+          <img src="assets/img/cafe-malakoff-demo-d.webp" alt="Desktop view of the Café Malakoff concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Café Malakoff</span>
+          <span class="mini__sub"><span data-i18n="type_cafe_hist">Historic café</span> · <span data-i18n="city_algiers">Algiers</span></span>
+        </a>
+        <a class="mini reveal" href="demos/yahala/" target="_blank" rel="noopener">
+          <img src="assets/img/yahala-demo-d.webp" alt="Desktop view of the Shawarma Ya Hala concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Shawarma Ya Hala</span>
+          <span class="mini__sub"><span data-i18n="type_shawarma">Shawarma house</span> · <span data-i18n="city_oran">Oran</span></span>
+        </a>
+        <a class="mini reveal" href="demos/mekki/" target="_blank" rel="noopener">
+          <img src="assets/img/mekki-demo-d.webp" alt="Desktop view of the Chez Mekki concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Chez Mekki</span>
+          <span class="mini__sub"><span data-i18n="type_butcher">Butcher & grill</span> · <span data-i18n="city_oran">Oran</span></span>
+        </a>
+        <a class="mini reveal" href="demos/glacier-venezia/" target="_blank" rel="noopener">
+          <img src="assets/img/glacier-venezia-demo-d.webp" alt="Desktop view of the Venezia concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Venezia</span>
+          <span class="mini__sub"><span data-i18n="type_glacier">Ice-cream & pastry</span> · <span data-i18n="city_algiers">Algiers</span></span>
+        </a>
+        <a class="mini reveal" href="demos/patisserie-delice/" target="_blank" rel="noopener">
+          <img src="assets/img/patisserie-delice-demo-d.webp" alt="Desktop view of the Pâtisserie Délice concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Pâtisserie Délice</span>
+          <span class="mini__sub"><span data-i18n="type_patisserie">Pâtisserie</span> · <span data-i18n="city_constantine">Constantine</span></span>
+        </a>
+        <a class="mini reveal" href="demos/moussa/" target="_blank" rel="noopener">
+          <img src="assets/img/moussa-demo-d.webp" alt="Desktop view of the Boulangerie Moussa concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Boulangerie Moussa</span>
+          <span class="mini__sub"><span data-i18n="type_bakery">Bakery</span> · <span data-i18n="city_oran">Oran</span></span>
+        </a>
+        <a class="mini reveal" href="demos/kunafa-el-aniss/" target="_blank" rel="noopener">
+          <img src="assets/img/kunafa-el-aniss-demo-d.webp" alt="Desktop view of the Kunafa El Aniss concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Kunafa El Aniss</span>
+          <span class="mini__sub"><span data-i18n="type_dessert">Kunafa & desserts</span> · <span data-i18n="city_boudouaou">Boudouaou</span></span>
+        </a>
+        <a class="mini reveal" href="demos/mister-shawarma/" target="_blank" rel="noopener">
+          <img src="assets/img/mister-shawarma-demo-d.webp" alt="Desktop view of the Mister Shawarma concept site" width="600" height="375" loading="lazy" decoding="async">
+          <span class="mini__name">Mister Shawarma</span>
+          <span class="mini__sub"><span data-i18n="type_shawarma">Shawarma house</span> · <span data-i18n="city_algiers">Algiers</span></span>
+        </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Other builds ===== -->
+    <section class="builds" aria-labelledby="builds-title">
+      <div class="wrap">
+        <p class="eyebrow reveal"><span data-i18n="b_eyebrow">03 — Other builds</span></p>
+        <h2 class="h2 reveal" id="builds-title"><span data-i18n-html="b_title">Software that <em>solves</em> something</span></h2>
+        <div class="build-list">
+          <article class="build reveal">
+            <span class="build__year">2025</span>
+            <h3 data-i18n="b1_t">USTHB student records web app</h3>
+            <p class="build__tag" data-i18n="b1_tag">Volunteer · USTHB, Algiers</p>
+            <p data-i18n="b1">An interactive website for the university that structures a database of 1,000+ new students and retrieves any record by student ID (matricule).</p>
+          </article>
+          <article class="build reveal">
+            <span class="build__year">2025</span>
+            <h3 data-i18n="b2_t">AI data-organising tool</h3>
+            <p class="build__tag" data-i18n="b2_tag">Python · automation</p>
+            <p data-i18n="b2">Reads raw input data, organises and stores it, and exports a clean Excel file ready to share.</p>
+          </article>
+          <article class="build reveal">
+            <span class="build__year">2025</span>
+            <h3 data-i18n="b3_t">One-page e-commerce site</h3>
+            <p class="build__tag" data-i18n="b3_tag">Freelance · international invitation-card brand</p>
+            <p data-i18n="b3">A custom storefront showcasing 20+ products for an international invitation-card brand.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About + experience ===== -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap about__grid">
+        <div class="about__intro">
+          <p class="eyebrow reveal"><span data-i18n="a_eyebrow">04 — About</span></p>
+          <h2 class="h2 reveal" id="about-title"><span data-i18n-html="a_title">Engineer by training, <em>builder</em> by habit</span></h2>
+          <p class="reveal" data-i18n="a_p1">I’m Mahmoud, a second-year Mechanical Engineering student at USTHB in Algiers and a self-taught software developer, strongest in C++. Shaf3ool is my studio name, the gamer tag I’ve carried for years, now on websites, systems and brands.</p>
+          <p class="reveal" data-i18n="a_p2">Alongside code I’ve taught C++ online, interpreted for foreign companies at trade fairs and run a retail shop, so I build for real counters, real customers and real deadlines.</p>
+        </div>
+        <!-- Experience timeline -->
+        <ol class="timeline">
+          <li class="reveal"><span class="tl__when">2026 —</span><h4 data-i18n="e1_t">Founder · Shaf3ool Web Studio</h4><p data-i18n="e1">Concept websites, branding and systems for local businesses.</p></li>
+          <li class="reveal"><span class="tl__when">2026 —</span><h4 data-i18n="e2_t">Creator · Stocker</h4><p data-i18n="e2">Stock and point-of-sale product, Basic and Pro editions.</p></li>
+          <li class="reveal"><span class="tl__when">2026</span><h4 data-i18n-html="e3_t">C++ tutor &amp; content creator</h4><p data-i18n="e3">Taught C++ online to ~20 students; C++ videos for a YouTube channel.</p></li>
+          <li class="reveal"><span class="tl__when">2025</span><h4 data-i18n="e4_t">Freelance software developer</h4><p data-i18n="e4">Custom applications, databases, websites and video games to client requirements.</p></li>
+          <li class="reveal"><span class="tl__when">2025</span><h4 data-i18n="e5_t">Freelance interpreter</h4><p data-i18n="e5">English–German and English–Arabic for foreign exhibitors, incl. German and Chinese companies, at construction trade fairs in Algeria.</p></li>
+          <li class="reveal"><span class="tl__when"><span data-i18n="now">Current</span></span><h4 data-i18n-html="e6_t">Owner &amp; manager · clothing and shoe shop</h4><p data-i18n="e6">Sales, customer service and inventory, day to day.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Skills, languages, education ===== -->
+    <section class="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <p class="eyebrow reveal"><span data-i18n="s_eyebrow">05 — Toolbox</span></p>
+        <h2 class="h2 reveal" id="skills-title"><span data-i18n-html="s_title">Skills, languages <em>&amp;</em> education</span></h2>
+        <div class="cols">
+          <!-- Technical skills -->
+          <div class="col reveal">
+            <h3 data-i18n="s_code">Code</h3>
+            <ul class="chips">
+              <li>C++17</li><li>C#</li><li>Python</li><li>JavaScript</li><li>HTML</li><li>CSS</li>
+            </ul>
+            <h3 data-i18n="s_core">Core</h3>
+            <ul class="list">
+              <li><span data-i18n-html="c1">Algorithms &amp; problem solving</span></li>
+              <li><span data-i18n-html="c2">Modular design &amp; automated testing</span></li>
+              <li><span data-i18n="c3">Client–server sync over LAN</span></li>
+              <li><span data-i18n="c4">Ed25519 digital signatures</span></li>
+              <li><span data-i18n="c5">Offline-first web apps</span></li>
+              <li><span data-i18n-html="c6">Multilingual &amp; right-to-left interfaces</span></li>
+              <li><span data-i18n-html="c7">Web design &amp; brand identity</span></li>
+            </ul>
+          </div>
+          <!-- Spoken languages with level bars -->
+          <div class="col reveal">
+            <h3 data-i18n="s_lang">Languages</h3>
+            <ul class="langs">
+              <li><span><span data-i18n="l_ar">Arabic</span></span><em><span data-i18n="lv_native">Native</span></em><i style="--w:100%"></i></li>
+              <li><span><span data-i18n="l_en">English</span></span><em>C2</em><i style="--w:95%"></i></li>
+              <li><span><span data-i18n="l_de">German</span></span><em>B1</em><i style="--w:55%"></i></li>
+              <li><span><span data-i18n="l_kab">Kabyle</span></span><em><span data-i18n="lv_under">Understands</span></em><i style="--w:30%"></i></li>
+            </ul>
+          </div>
+          <!-- Education & certification -->
+          <div class="col reveal">
+            <h3 data-i18n="s_edu">Education</h3>
+            <ul class="edu">
+              <li><b>USTHB, Algiers</b><span data-i18n="ed1">Mechanical Engineering (Licence, Construction mécanique), 2nd year</span></li>
+              <li><b>MIT OpenCourseWare</b><span data-i18n-html="ed2">Self-study, ongoing: electronics, control &amp; automation, computer science</span></li>
+              <li><b><span data-i18n="ed3_t">Baccalaureate</span></b><span data-i18n="ed3">Mathematics stream · 2024</span></li>
+              <li><b><span data-i18n="ed4_t">Community First Aider Certificate</span></b><span data-i18n="ed4">2025, officially registered</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Currently exploring -->
+        <div class="now reveal">
+          <h3 data-i18n="n_t">Now exploring</h3>
+          <p data-i18n="n_b">3D in Blender, motion design, scroll-animated websites and gesture-controlled 3D on the web.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <p class="eyebrow reveal"><span data-i18n="ct_eyebrow">06 — Contact</span></p>
+        <h2 class="contact__title reveal" id="contact-title"><span data-i18n-html="ct_title">Let’s build <em>something</em>.</span></h2>
+        <p class="lead reveal" data-i18n="ct_lead">Websites, systems, brands. Algiers-based, working worldwide in English, Arabic and German.</p>
+        <ul class="contact__list">
+          <li class="reveal"><a href="https://wa.me/213657567567" target="_blank" rel="noopener"><span>WhatsApp</span><b>+213 657 567 567</b></a></li>
+          <li class="reveal"><a href="mailto:shafoolstudio@gmail.com"><span>Email</span><b>shafoolstudio@gmail.com</b></a></li>
+          <li class="reveal"><a href="https://www.instagram.com/shaf.3ool/" target="_blank" rel="noopener"><span>Instagram</span><b>@shaf.3ool</b></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="foot">
+    <img src="assets/img/shaf3ool-seal-white.svg" alt="" width="48" height="48">
+    <p>© <span id="year">2026</span> Mahmoud Al Jounaidy · Shaf3ool</p>
+    <a href="#top"><span data-i18n="to_top">Back to top ↑</span></a>
+  </footer>
+</body>
+</html>

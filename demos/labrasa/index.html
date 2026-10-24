@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<title>La Brasa · Burgers & sandwiches · Akid Lotfi, Oran · Démo</title>
+<meta name="description" content="La Brasa, burgers et sandwiches à Akid Lotfi, Oran : smash burger, barbacoa, burger aux crevettes, poutines. Pain fait maison. Ouvert jusqu’à 1h.">
+<meta property="og:title" content="La Brasa · Burgers &amp; sandwiches · Akid Lotfi, Oran · Démo">
+<meta property="og:description" content="La Brasa, burgers et sandwiches à Akid Lotfi, Oran : smash burger, barbacoa, burger aux crevettes, poutines. Pain fait maison. Ouvert jusqu’à 1h.">
+<meta property="og:image" content="images/hero.webp">
+<meta name="theme-color" content="#120E0D">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&family=Lalezar&family=Cairo:wght@400;600;700;800&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{overflow-x:hidden;position:relative;background:var(--bg);color:var(--fg);font-family:var(--fb);line-height:1.6}
+html[lang=ar] body{font-family:var(--fba);line-height:1.8}
+img{display:block;max-width:100%;height:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+html[lang=ar] .fr{display:none!important}
+html[lang=fr] .ar{display:none!important}
+:lang(ar){letter-spacing:0!important}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+/* demo protection */
+.watermark{position:fixed;inset:0;z-index:90;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22440%22%20height%3D%22280%22%3E%3Cg%20transform%3D%22rotate%28-28%20220%20140%29%22%3E%3Ctext%20x%3D%2220%22%20y%3D%22150%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22700%22%20fill%3D%22%2523ffffff%22%3ED%C3%89MO%20%C2%B7%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%3C/text%3E%3C/g%3E%3C/svg%3E");background-size:440px 280px;opacity:var(--wm-op,.06)}
+.ribbon{position:fixed;top:22px;inset-inline-end:-46px;z-index:95;transform:rotate(45deg);background:var(--rib-bg,#e5484d);color:var(--rib-fg,#fff);font:700 11px/1 system-ui,sans-serif;padding:7px 54px;box-shadow:0 6px 18px rgba(0,0,0,.28);pointer-events:none;white-space:nowrap;letter-spacing:.5px}
+html[dir=rtl] .ribbon{transform:rotate(-45deg)}
+dialog.demo{margin:auto;border:0;border-radius:22px;padding:30px 26px 24px;max-width:340px;width:calc(100% - 40px);text-align:center;background:#fff;color:#141414;box-shadow:0 30px 80px rgba(0,0,0,.4);font-family:system-ui,'Cairo',sans-serif}
+dialog.demo::backdrop{background:rgba(10,8,6,.62);backdrop-filter:blur(4px)}
+dialog.demo .lock{width:54px;height:54px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:#f3f0ea;font-size:24px}
+dialog.demo h3{font-size:19px;line-height:1.35;margin-bottom:2px}
+dialog.demo h3+h3{font-size:15px;color:#666;font-weight:600;margin-bottom:12px}
+dialog.demo p{font-size:14px;line-height:1.6;color:#444;margin-bottom:18px}
+dialog.demo .ok{background:#141414;color:#fff;border-radius:999px;padding:12px 30px;font-weight:700}
+.demo-note{display:inline-flex;align-items:center;gap:8px;font-size:12px;opacity:.75}
+.act[aria-disabled=true]{cursor:pointer}
+.credit{font-size:12.5px;opacity:.85}
+
+.nav .navr{margin-inline-end:52px}
+@media(min-width:760px){.nav .navr{margin-inline-end:56px}}
+
+.smap{position:relative;display:block;width:100%;min-height:300px;height:100%;overflow:hidden;padding:0;text-align:start}
+.smap .mimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--map-filter,none);transition:transform 1.2s}
+.smap:hover .mimg{transform:scale(1.04)}
+.smap .pin{position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-34px 0 0 -17px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--pin,#e5484d);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.smap .pin::after{content:"";position:absolute;inset:10px;border-radius:50%;background:#fff}
+.smap .pulse{position:absolute;left:50%;top:50%;width:80px;height:80px;margin:-40px;border-radius:50%;background:var(--pin,#e5484d);opacity:.18;animation:pl 2.4s ease-out infinite}
+@keyframes pl{from{transform:scale(.3);opacity:.35}to{transform:scale(1.6);opacity:0}}
+.smap .mlabel{position:absolute;inset-inline-start:14px;bottom:14px;display:inline-flex;gap:8px;align-items:center;background:var(--ml-bg,#111);color:var(--ml-fg,#fff);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:700}
+.smap .osm{position:absolute;inset-inline-end:8px;bottom:6px;font-size:10px;opacity:.7;background:rgba(255,255,255,.7);color:#222;padding:1px 5px;border-radius:4px}
+
+
+.nav .navr{margin-inline-end:52px}
+@media(min-width:760px){.nav .navr{margin-inline-end:56px}}
+.langs{display:inline-flex;align-items:center;gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line);direction:ltr;flex:none}
+.langs button{min-width:36px;height:32px;padding:0 9px;border-radius:999px;font:700 12px/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;opacity:.75;transition:background .2s,color .2s,opacity .2s}
+.langs button[lang=ar]{font-family:Cairo,system-ui,sans-serif;font-size:15px;letter-spacing:0}
+.langs button[aria-pressed=true]{opacity:1;background:var(--acc);color:var(--accfg)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+.disp{font-family:var(--fd);font-weight:var(--fdw,700);line-height:1;letter-spacing:var(--fdls,-.5px);text-transform:var(--fdtt,none)}
+html[lang=ar] .disp{font-family:var(--fda);font-weight:var(--fdaw,700);line-height:1.25;letter-spacing:0;text-transform:none}
+.kick{font-family:var(--fk,var(--fb));font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--acc);display:flex;align-items:center;gap:12px}
+.kick::before{content:"";width:28px;height:1.5px;background:currentColor}
+html[lang=ar] .kick{font-family:var(--fba);letter-spacing:0;font-size:14px}
+/* nav */
+.nav{position:fixed;top:0;inset-inline:0;z-index:60;transition:background .3s,backdrop-filter .3s;color:var(--navfg,#fff)}
+.nav.scrolled{background:var(--navbg);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);color:var(--fg)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--fd);font-weight:var(--fdw,700);font-size:22px;letter-spacing:var(--fdls,0);text-transform:var(--fdtt,none);white-space:nowrap}
+.logo .mk{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--acc);color:var(--accfg);font-size:15px;font-weight:800;flex:none}
+.links{display:none;gap:26px;font-size:14px;font-weight:600}
+.links a{opacity:.8}.links a:hover{opacity:1}
+.navr{display:flex;align-items:center;gap:10px}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--rad-btn,999px);padding:14px 22px;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .3s;white-space:nowrap}
+.pill.p{background:var(--acc);color:var(--accfg)}
+.pill.p:hover{transform:translateY(-1px);box-shadow:0 10px 30px var(--glow,rgba(0,0,0,.3))}
+.pill.o{border:1.5px solid currentColor;opacity:.92}
+.nav .pill{display:none}
+@media(min-width:900px){.links{display:flex}.nav .pill{display:inline-flex;padding:11px 18px;font-size:14px}}
+/* hero */
+.hero{position:relative;min-height:94svh;display:flex;align-items:flex-end;overflow:hidden;padding:120px 0 96px;color:#fff}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-pos,50% 50%);animation:zoom 1.8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes zoom{from{transform:scale(1.08)}to{transform:none}}
+.hero::after{content:"";position:absolute;inset:0;background:var(--hero-grad,linear-gradient(0deg,rgba(0,0,0,.92) 6%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.25) 75%,rgba(0,0,0,.5) 100%))}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero .kick{color:var(--hero-kick,var(--acc2))}
+.hero h1{font-size:clamp(54px,14vw,132px);margin:16px 0 14px;text-wrap:balance}
+html[lang=ar] .hero h1{font-size:clamp(48px,12vw,112px)}
+.hero h1 em{font-style:var(--em-style,italic);color:var(--acc2)}
+.hero .sub{font-size:clamp(17px,2.2vw,21px);max-width:600px;opacity:.92}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 28px}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);backdrop-filter:blur(8px);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600}
+.chip b{color:var(--acc2)}
+.chip svg{color:var(--acc2)}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.hero .pill.o{color:#fff}
+/* marquee */
+.marq{background:var(--acc);color:var(--accfg);overflow:hidden;white-space:nowrap;padding:15px 0;position:relative;z-index:3}
+.marq .tr{display:inline-flex;gap:30px;animation:mq 34s linear infinite;font-family:var(--fd);font-weight:var(--fdw,700);font-size:22px;text-transform:var(--fdtt,none)}
+html[lang=ar] .marq .tr{font-family:var(--fda);font-size:22px}
+html[dir=rtl] .marq .tr{animation-direction:reverse}
+.marq .tr span::after{content:var(--marq-sep,"✦");margin-inline-start:30px;opacity:.7}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:88px 0}
+.h2{font-size:clamp(40px,8vw,76px);margin-top:14px;text-wrap:balance}
+html[lang=ar] .h2{font-size:clamp(36px,7vw,64px)}
+.h2 em{font-style:var(--em-style,italic);color:var(--acc)}
+.lead{color:var(--mut);max-width:620px;margin-top:16px;font-size:17.5px}
+/* about */
+.about .grid{display:grid;gap:40px;align-items:center}
+.about .ph{position:relative;border-radius:var(--rad,24px);overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.about .ph img{width:100%;height:100%;object-fit:cover}
+.about .ph .tag{position:absolute;bottom:16px;inset-inline-start:16px;background:var(--bg);color:var(--fg);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
+.about p.t{font-size:17px;margin-top:16px;color:var(--fg2,var(--fg));opacity:.9}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.stat{border:1px solid var(--line);border-radius:18px;padding:16px 12px;text-align:center;background:var(--card2,transparent)}
+.stat b{display:block;font-family:var(--fd);font-weight:var(--fdw,700);font-size:clamp(26px,5vw,36px);color:var(--acc);line-height:1.1}
+.stat span{font-size:12.5px;color:var(--mut);display:block;margin-top:4px;line-height:1.35}
+@media(min-width:900px){.about .grid{grid-template-columns:1fr 1.05fr;gap:70px}}
+/* signatures */
+.sigs{background:var(--bg2)}
+.sig{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px 20px 12px;margin-inline:-20px;scrollbar-width:none}
+.sig::-webkit-scrollbar{display:none}
+.tile{flex:0 0 80%;scroll-snap-align:start;background:var(--card);color:var(--cardfg);border-radius:var(--rad,24px);overflow:hidden;position:relative;display:flex;flex-direction:column}
+.tile img{width:100%;aspect-ratio:4/3.4;object-fit:cover}
+.tile .b{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tile h3{font-size:28px}
+html[lang=ar] .tile h3{font-size:26px}
+.tile p{font-size:14.5px;opacity:.75}
+.tile .price{margin-top:auto;padding-top:8px;font-weight:800;color:var(--acc);font-size:17px}
+.tile .badge{position:absolute;top:14px;inset-inline-start:14px;background:var(--acc);color:var(--accfg);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700}
+@media(min-width:900px){.sig{display:grid;grid-template-columns:repeat(var(--sigcols,3),1fr);overflow:visible;margin:0;padding:40px 0 0}.tile{flex:none}}
+/* menu */
+.cats{display:grid;gap:22px;margin-top:40px}
+.cat{background:var(--card2,transparent);border:1px solid var(--line);border-radius:var(--rad,24px);padding:26px 22px}
+.cat h3{font-size:30px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+html[lang=ar] .cat h3{font-size:28px}
+.cat .note{font-size:13.5px;color:var(--mut);margin-top:6px}
+.rows{list-style:none;margin-top:12px}
+.row{padding:13px 0;border-bottom:1px dashed var(--line)}
+.row:last-child{border-bottom:0}
+.rl{display:flex;align-items:baseline;gap:10px}
+.nm{font-weight:700;font-size:16.5px}
+.dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px);min-width:14px}
+.pr{font-weight:800;color:var(--acc);white-space:nowrap;font-size:15.5px}
+.ds{color:var(--mut);font-size:14px;margin-top:2px}
+.mnote{margin-top:22px;font-size:13.5px;color:var(--mut);border-inline-start:2px solid var(--acc);padding-inline-start:12px}
+@media(min-width:900px){.cats{grid-template-columns:repeat(2,1fr)}}
+/* gallery */
+.gal{background:var(--bg2)}
+.grid-g{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:36px}
+.grid-g figure{border-radius:calc(var(--rad,24px) * .7);overflow:hidden;aspect-ratio:1}
+.grid-g figure.w{grid-column:span 2;aspect-ratio:2/1.15}
+.grid-g img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+.grid-g figure:hover img{transform:scale(1.05)}
+@media(min-width:900px){.grid-g{grid-template-columns:repeat(4,1fr);gap:14px}.grid-g figure.t{grid-row:span 2;aspect-ratio:auto}}
+.credit-src{font-size:12.5px;color:var(--mut);margin-top:14px}
+/* reviews */
+.rating{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:22px}
+.rating .big{font-family:var(--fd);font-weight:var(--fdw,700);font-size:64px;line-height:1;color:var(--acc)}
+.stars{display:inline-flex;gap:2px;color:var(--star,#F5B301)}
+.revs{display:grid;gap:16px;margin-top:36px}
+.rev{background:var(--card2,transparent);border:1px solid var(--line);border-radius:var(--rad,24px);padding:24px 22px;display:flex;flex-direction:column;gap:12px}
+.rev q{font-size:16.5px;quotes:"« " " »"}
+html[lang=ar] .rev q{quotes:"« " " »"}
+.rev .who{font-size:13px;color:var(--mut);margin-top:auto}
+@media(min-width:900px){.revs{grid-template-columns:repeat(3,1fr)}}
+/* info */
+.info .grid{display:grid;gap:22px;margin-top:40px}
+.box{border:1px solid var(--line);border-radius:var(--rad,24px);padding:26px 22px;background:var(--card2,transparent)}
+.box h3{font-size:26px;margin-bottom:12px}
+html[lang=ar] .box h3{font-size:24px}
+.hrs{width:100%;border-collapse:collapse;font-size:15px}
+.hrs td{padding:9px 4px;border-bottom:1px dashed var(--line)}
+.hrs td:last-child{text-align:end;font-weight:700}
+.hrs tr.today td{color:var(--acc)}
+.hrs tr.today td:first-child::after{content:" •";}
+.cl{display:flex;flex-direction:column;gap:14px;font-size:15.5px}
+.cl .ln{display:flex;gap:12px;align-items:flex-start}
+.cl .ln svg{flex:none;margin-top:3px;color:var(--acc)}
+.cl .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.mapbox{border-radius:var(--rad,24px);overflow:hidden;min-height:320px;border:1px solid var(--line)}
+@media(min-width:900px){.info .grid{grid-template-columns:1fr 1fr 1.2fr}}
+/* cta */
+.cta{position:relative;overflow:hidden;color:#fff;text-align:center;padding:110px 0}
+.cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta::after{content:"";position:absolute;inset:0;background:var(--cta-ov,rgba(0,0,0,.66))}
+.cta .wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px}
+.cta .h2 em{color:var(--acc2)}
+footer{background:var(--fbg,var(--bg2));padding:56px 0 120px;border-top:1px solid var(--line)}
+footer .giant{font-family:var(--fd);font-weight:var(--fdw,700);font-size:clamp(46px,13vw,150px);line-height:.95;opacity:.13;text-transform:var(--fdtt,none);white-space:nowrap;overflow:hidden}
+footer .fl{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between;align-items:center;margin-top:18px;font-size:13.5px;color:var(--mut)}
+@media(min-width:900px){footer{padding-bottom:56px}}
+/* bottom bar */
+.bar{position:fixed;bottom:0;inset-inline:0;z-index:70;display:grid;grid-template-columns:repeat(var(--barcols,3),1fr);gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--navbg);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.bar button{display:flex;align-items:center;justify-content:center;gap:7px;border-radius:14px;padding:12px 6px;font-weight:700;font-size:14px;border:1px solid var(--line);color:var(--fg)}
+.bar button.p{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+@media(min-width:900px){.bar{display:none}}
+
+:root{--wm-op:0.05;--rib-bg:#E8412F;--rib-fg:#fff;--bg:#120E0D;--bg2:#1B1513;--fg:#F6EEE4;--mut:#B3A499;--acc:#E8412F;--accfg:#fff;--acc2:#FFC53D;--line:rgba(246,238,228,.14);--card:#F6EEE4;--cardfg:#16110F;--card2:rgba(255,255,255,.03);--navbg:rgba(18,14,13,.86);--fd:Anton,Impact,sans-serif;--fdw:400;--fdls:.3px;--fdtt:uppercase;--fb:Inter,system-ui,sans-serif;--fda:Lalezar,Cairo,sans-serif;--fdaw:400;--fba:Cairo,system-ui,sans-serif;--rad:20px;--glow:rgba(232,65,47,.5);--em-style:normal;--map-filter:grayscale(1) invert(.92) contrast(.9);--pin:#E8412F;--ml-bg:#E8412F;--hero-pos:45% 50%;--marq-sep:'🔥'}
+.hero h1{font-size:clamp(72px,19vw,190px);line-height:.9} .marq{background:#FFC53D;color:#16110F} .tile .price{color:#E8412F} .board{margin-top:28px;border-radius:20px;overflow:hidden;border:1px solid var(--line)} .board img{width:100%} .hero{--hero-pos:50% 40%}
+</style>
+</head>
+<body data-title-fr="La Brasa · Burgers &amp; sandwiches · Akid Lotfi, Oran · Démo" data-title-ar="لابرازا · برغر وسندويتشات · العقيد لطفي، وهران · نموذج تجريبي">
+<div class="watermark" aria-hidden="true"></div>
+<div class="ribbon" aria-hidden="true">DÉMO · نموذج</div>
+<header class="nav"><div class="wrap">
+ <a href="#top" class="logo"><span class="mk">🔥</span>La Brasa</a>
+ <nav class="links"><a href="#histoire"><span class="fr" lang="fr">La Brasa</span><span class="ar" lang="ar">لابرازا</span></a><a href="#menu"><span class="fr" lang="fr">Menu</span><span class="ar" lang="ar">المنيو</span></a><a href="#galerie"><span class="fr" lang="fr">Galerie</span><span class="ar" lang="ar">الصور</span></a><a href="#infos"><span class="fr" lang="fr">Infos</span><span class="ar" lang="ar">معلومات</span></a></nav>
+ <div class="navr"><div class="langs" role="group" aria-label="Langue · اللغة"><button type="button" data-l="fr" lang="fr" aria-label="Français">FR</button><button type="button" data-l="ar" lang="ar" aria-label="العربية">ع</button></div><button class="pill p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg><span class="fr" lang="fr">Commander</span><span class="ar" lang="ar">اطلب الآن</span></button></div>
+</div></header>
+<main id="top">
+<section class="hero">
+ <img src="images/hero.webp" alt="Burger Barbacoa de La Brasa" class="bg" fetchpriority="high">
+ <div class="wrap">
+  <div class="kick reveal"><span class="fr" lang="fr">Akid Lotfi · Oran</span><span class="ar" lang="ar">العقيد لطفي · وهران</span></div>
+  <h1 class="disp reveal"><span class="fr" lang="fr">Street vibes,<br><em>luxe taste.</em></span><span class="ar" lang="ar">نكهة الشارع،<br><em>بذوق فاخر.</em></span></h1>
+  <p class="sub reveal"><span class="fr" lang="fr">Des burgers qui marquent : smash, barbacoa, crevettes… sur pain fait maison. Viens goûter la différence.</span><span class="ar" lang="ar">برغر ما يتنساش: سماش، باربكوا، قمبري… في خبز البيت. أرواح ذوق الفرق.</span></p>
+  <div class="chips reveal"><span class="chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><b class="ltr">4,3</b><span class="fr" lang="fr">· 224 avis Google</span><span class="ar" lang="ar">· 224 تقييم Google</span></span><span class="chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="fr" lang="fr">Tous les jours jusqu’à 1h</span><span class="ar" lang="ar">كل يوم حتى الواحدة ليلاً</span></span><span class="chip"><b class="ltr">14K</b><span class="fr" lang="fr">sur Instagram</span><span class="ar" lang="ar">على إنستغرام</span></span></div>
+  <div class="ctas reveal"><button class="pill p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg><span class="fr" lang="fr">Commander</span><span class="ar" lang="ar">اطلب الآن</span></button><a class="pill o" href="#menu"><span class="fr" lang="fr">Voir le menu</span><span class="ar" lang="ar">شوف المنيو</span></a></div>
+ </div>
+</section>
+<div class="marq" aria-hidden="true"><div class="tr"><span><span class="fr" lang="fr">Smash burger</span><span class="ar" lang="ar">سماش برغر</span></span><span><span class="fr" lang="fr">Barbacoa</span><span class="ar" lang="ar">باربكوا</span></span><span><span class="fr" lang="fr">Burger aux crevettes</span><span class="ar" lang="ar">برغر بالقمبري</span></span><span><span class="fr" lang="fr">Poutines</span><span class="ar" lang="ar">بوتين</span></span><span><span class="fr" lang="fr">Pain fait maison</span><span class="ar" lang="ar">خبز البيت</span></span><span><span class="fr" lang="fr">Smash burger</span><span class="ar" lang="ar">سماش برغر</span></span><span><span class="fr" lang="fr">Barbacoa</span><span class="ar" lang="ar">باربكوا</span></span><span><span class="fr" lang="fr">Burger aux crevettes</span><span class="ar" lang="ar">برغر بالقمبري</span></span><span><span class="fr" lang="fr">Poutines</span><span class="ar" lang="ar">بوتين</span></span><span><span class="fr" lang="fr">Pain fait maison</span><span class="ar" lang="ar">خبز البيت</span></span><span><span class="fr" lang="fr">Smash burger</span><span class="ar" lang="ar">سماش برغر</span></span><span><span class="fr" lang="fr">Barbacoa</span><span class="ar" lang="ar">باربكوا</span></span><span><span class="fr" lang="fr">Burger aux crevettes</span><span class="ar" lang="ar">برغر بالقمبري</span></span><span><span class="fr" lang="fr">Poutines</span><span class="ar" lang="ar">بوتين</span></span><span><span class="fr" lang="fr">Pain fait maison</span><span class="ar" lang="ar">خبز البيت</span></span><span><span class="fr" lang="fr">Smash burger</span><span class="ar" lang="ar">سماش برغر</span></span><span><span class="fr" lang="fr">Barbacoa</span><span class="ar" lang="ar">باربكوا</span></span><span><span class="fr" lang="fr">Burger aux crevettes</span><span class="ar" lang="ar">برغر بالقمبري</span></span><span><span class="fr" lang="fr">Poutines</span><span class="ar" lang="ar">بوتين</span></span><span><span class="fr" lang="fr">Pain fait maison</span><span class="ar" lang="ar">خبز البيت</span></span></div></div>
+<section class="about" id="histoire"><div class="wrap grid">
+ <div class="ph reveal"><img src="images/facade.webp" alt="La devanture de La Brasa" loading="lazy"><span class="tag"><span class="fr" lang="fr">De retour depuis le 4 octobre</span><span class="ar" lang="ar">رجعنا من 4 أكتوبر</span></span></div>
+ <div class="reveal"><div class="kick"><span class="fr" lang="fr">La Brasa</span><span class="ar" lang="ar">لابرازا</span></div><h2 class="disp h2"><span class="fr" lang="fr">Le goût <em>qui fait parler</em></span><span class="ar" lang="ar">الذوق <em>اللي يخلّي الناس تهدر</em></span></h2>
+  <p class="t"><span class="fr" lang="fr">Sur le boulevard Akid Lotfi, La Brasa fait des burgers et des sandwiches généreux, bien garnis et pleins de goût. Le secret que nos clients remarquent en premier : le pain, fait maison, moelleux et frais.</span><span class="ar" lang="ar">في شارع العقيد لطفي، لابرازا تحضّر برغر وسندويتشات سخية ومعمّرة بالنكهة. والسر اللي يلاحظوه الزبائن أول حاجة: الخبز، صنع البيت، طري وطازج.</span></p><p class="t"><span class="fr" lang="fr">Après des travaux d’aménagement, on a rouvert le 4 octobre 2026 pour toujours mieux vous accueillir. Sur place, à emporter ou en livraison.</span><span class="ar" lang="ar">بعد أشغال التهيئة، رجعنا فتحنا في 4 أكتوبر 2026 باش نستقبلوكم خير. في المحل، للأخذ ولا بالتوصيل.</span></p>
+  <div class="stats"><div class="stat"><b class="ltr">4,3★</b><span class="fr" lang="fr">224 avis Google</span><span class="ar" lang="ar">224 تقييم Google</span></div><div class="stat"><b class="ltr">14K</b><span class="fr" lang="fr">abonnés Instagram</span><span class="ar" lang="ar">متابع إنستغرام</span></div><div class="stat"><b class="ltr">7/7</b><span class="fr" lang="fr">jusqu’à 1h du matin</span><span class="ar" lang="ar">حتى الواحدة ليلاً</span></div></div>
+ </div>
+</div></section>
+<section class="sigs" id="signatures"><div class="wrap">
+ <div class="kick reveal"><span class="fr" lang="fr">Les incontournables</span><span class="ar" lang="ar">لازم تذوقهم</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Nos <em>signatures</em></span><span class="ar" lang="ar"><em>توقيعنا</em></span></h2>
+ <div class="sig">
+<article class="tile reveal"><span class=badge><span class="fr" lang="fr">Le préféré</span><span class="ar" lang="ar">المفضّل</span></span><img src="images/smash.webp" alt="Smash Burger" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Smash Burger</span><span class="ar" lang="ar">سماش برغر</span></h3><p><span class="fr" lang="fr">Double steak haché, gruyère, sauce Labrasa, oignons caramélisés.</span><span class="ar" lang="ar">ستيك مفروم مضاعف، جبن غرويير، صلصة لابرازا، بصل مكرمل.</span></p></div></article>
+<article class="tile reveal"><img src="images/barbacoa.webp" alt="Barbacoa" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Barbacoa</span><span class="ar" lang="ar">باربكوا</span></h3><p><span class="fr" lang="fr">Viande effilochée fondante, fromage, tomate et salade, sur pain marqué au fer.</span><span class="ar" lang="ar">لحم مفتّت طري، جبن، طماطم وخس، في خبز موسوم.</span></p></div></article>
+<article class="tile reveal"><img src="images/poutine.webp" alt="Poutine Suprême" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Poutine Suprême</span><span class="ar" lang="ar">بوتين سوبريم</span></h3><p><span class="fr" lang="fr">Poulet grillé, frites, cheddar, sauce fromage.</span><span class="ar" lang="ar">دجاج مشوي، فريت، شيدر، صلصة الجبن.</span></p><span class=price><span class=ltr>900 DA</span></span></div></article>
+<article class="tile reveal"><img src="images/escalope.webp" alt="Sandwich escalope" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Sandwich escalope</span><span class="ar" lang="ar">سندويتش إسكالوب</span></h3><p><span class="fr" lang="fr">Escalope grillée, fromage fondu, tomate, salade, pain au sésame.</span><span class="ar" lang="ar">إسكالوب مشوي، جبن ذايب، طماطم، خس، خبز بالسمسم.</span></p></div></article>
+<article class="tile reveal"><img src="images/fries-burger.webp" alt="Fries Burger" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Fries Burger</span><span class="ar" lang="ar">فرايز برغر</span></h3><p><span class="fr" lang="fr">Poulet croustillant, fromage, tomate, salade… et les frites dedans.</span><span class="ar" lang="ar">دجاج مقرمش، جبن، طماطم، خس… والفريت داخل.</span></p></div></article>
+<article class="tile reveal"><img src="images/crevettes.webp" alt="Burger aux crevettes" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Burger aux crevettes</span><span class="ar" lang="ar">برغر بالقمبري</span></h3><p><span class="fr" lang="fr">La nouveauté qui fait parler sur Instagram.</span><span class="ar" lang="ar">الجديد اللي راه يهدرو عليه في إنستغرام.</span></p></div></article>
+</div></div></section>
+<section class="menu" id="menu"><div class="wrap"><div class="kick reveal"><span class="fr" lang="fr">La carte</span><span class="ar" lang="ar">المنيو</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Burgers, <em>poutines</em> & co</span><span class="ar" lang="ar">برغر، <em>بوتين</em> وأكثر</span></h2>
+<p class="lead reveal"><span class="fr" lang="fr">Prix des poutines tels qu’affichés au comptoir. Pour le reste de la carte, demandez au comptoir ou sur WhatsApp.</span><span class="ar" lang="ar">أسعار البوتين كيما مكتوبة في المحل. باقي المنيو اسألو في المحل ولا في الواتساب.</span></p>
+<div class="cats">
+<div class="cat reveal"><h3 class="disp"><span class="fr" lang="fr">Poutines</span><span class="ar" lang="ar">بوتين</span></h3>
+<ul class="rows">
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Buffalo</span><span class="ar" lang="ar">بوفالو</span></span><span class=dots></span><span class=pr><span class=ltr>900 DA</span></span></div><div class=ds><span class="fr" lang="fr">Viande hachée, frites, cheddar, sauce fromage</span><span class="ar" lang="ar">لحم مفروم، فريت، شيدر، صلصة الجبن</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Bacon Bomb</span><span class="ar" lang="ar">بيكن بومب</span></span><span class=dots></span><span class=pr><span class=ltr>850 DA</span></span></div><div class=ds><span class="fr" lang="fr">Bacon, frites, cheddar, sauce fromage</span><span class="ar" lang="ar">بيكن، فريت، شيدر، صلصة الجبن</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Suprême</span><span class="ar" lang="ar">سوبريم</span></span><span class=dots></span><span class=pr><span class=ltr>900 DA</span></span></div><div class=ds><span class="fr" lang="fr">Poulet grillé, frites, cheddar, sauce fromage</span><span class="ar" lang="ar">دجاج مشوي، فريت، شيدر، صلصة الجبن</span></div></li>
+</ul></div>
+<div class="cat reveal"><h3 class="disp"><span class="fr" lang="fr">Burgers</span><span class="ar" lang="ar">برغر</span></h3>
+<ul class="rows">
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Smash</span><span class="ar" lang="ar">سماش</span></span></div><div class=ds><span class="fr" lang="fr">Double steak haché, gruyère, sauce Labrasa, oignons caramélisés</span><span class="ar" lang="ar">ستيك مضاعف، غرويير، صلصة لابرازا، بصل مكرمل</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Barbacoa</span><span class="ar" lang="ar">باربكوا</span></span></div><div class=ds><span class="fr" lang="fr">Viande effilochée, fromage, tomate, salade</span><span class="ar" lang="ar">لحم مفتّت، جبن، طماطم، خس</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Forestier</span><span class="ar" lang="ar">فورستيي</span></span></div><div class=ds><span class="fr" lang="fr">Le conseil de nos habitués</span><span class="ar" lang="ar">نصيحة زبائننا</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Burger aux crevettes</span><span class="ar" lang="ar">برغر بالقمبري</span></span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Fries Burger</span><span class="ar" lang="ar">فرايز برغر</span></span></div><div class=ds><span class="fr" lang="fr">Poulet croustillant et frites dans le burger</span><span class="ar" lang="ar">دجاج مقرمش والفريت داخل البرغر</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Classique</span><span class="ar" lang="ar">كلاسيك</span></span></div></li>
+</ul></div>
+<div class="cat reveal"><h3 class="disp"><span class="fr" lang="fr">Sandwiches</span><span class="ar" lang="ar">سندويتشات</span></h3>
+<ul class="rows">
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Escalope</span><span class="ar" lang="ar">إسكالوب</span></span></div><div class=ds><span class="fr" lang="fr">Escalope grillée, fromage, tomate, salade</span><span class="ar" lang="ar">إسكالوب مشوي، جبن، طماطم، خس</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Smokey Chicken</span><span class="ar" lang="ar">سموكي تشيكن</span></span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Poulet méchoui</span><span class="ar" lang="ar">دجاج مشوي</span></span></div></li>
+</ul></div>
+<div class="cat reveal"><h3 class="disp"><span class="fr" lang="fr">Bowls & salades</span><span class="ar" lang="ar">بول وسلطات</span></h3>
+<ul class="rows">
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Bowl Buffalo</span><span class="ar" lang="ar">بول بوفالو</span></span></div><div class=ds><span class="fr" lang="fr">Pour les gros appétits</span><span class="ar" lang="ar">للي جيعانين بزاف</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Salade César</span><span class="ar" lang="ar">سلطة سيزار</span></span></div></li>
+</ul></div>
+</div>
+<p class="mnote reveal"><span class="fr" lang="fr">Plats relevés sur les réseaux de La Brasa et les avis clients ; prix des burgers et sandwiches à confirmer.</span><span class="ar" lang="ar">الأطباق من صفحات لابرازا وتقييمات الزبائن؛ أسعار البرغر والسندويتشات لازم تتأكد.</span></p>
+</div></section>
+<section class="gal" id="galerie"><div class="wrap"><div class="kick reveal"><span class="fr" lang="fr">Galerie</span><span class="ar" lang="ar">الصور</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Chez <em>La Brasa</em></span><span class="ar" lang="ar">عند <em>لابرازا</em></span></h2><div class="grid-g">
+<figure class="reveal "><img src="images/plateau.webp" alt="La Brasa" loading="lazy"></figure>
+<figure class="reveal "><img src="images/boxes.webp" alt="La Brasa" loading="lazy"></figure>
+<figure class="reveal w"><img src="images/interieur.webp" alt="La Brasa" loading="lazy"></figure>
+<figure class="reveal "><img src="images/trio.webp" alt="La Brasa" loading="lazy"></figure>
+<figure class="reveal "><img src="images/barbacoa.webp" alt="La Brasa" loading="lazy"></figure>
+<figure class="reveal w"><img src="images/sandwich.webp" alt="La Brasa" loading="lazy"></figure>
+</div><p class="credit-src"><span class="fr" lang="fr">Photos publiées par La Brasa et ses clients sur Instagram et Google Maps.</span><span class="ar" lang="ar">صور منشورة من لابرازا وزبائنها على إنستغرام وGoogle Maps.</span></p></div></section>
+<section class="reviews" id="avis"><div class="wrap"><div class="kick reveal"><span class="fr" lang="fr">Ils en parlent</span><span class="ar" lang="ar">قالو علينا</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Ce qu’ils <em>en disent</em></span><span class="ar" lang="ar">واش <em>قالو</em></span></h2>
+<div class="rating reveal"><span class="big ltr">4,3</span><div><span class="stars"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><div style="font-size:14px;color:var(--mut);margin-top:4px"><span class="fr" lang="fr">224 avis sur Google Maps</span><span class="ar" lang="ar">224 تقييم على Google Maps</span></div></div></div>
+<div class="revs">
+<figure class="rev reveal"><span class="stars"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><q><span class="fr" lang="fr">Labrasa c’est une valeur sûre ! Les sandwichs et les hamburgers sont super bons, bien garnis et pleins de goût. Mais le vrai plus c’est le pain… fait maison et ça se sent direct !</span><span class="ar" lang="ar">لابرازا مضمونة! السندويتشات والبرغر بنين بزاف، معمّرين ومليانين نكهة. بصح الحاجة الكبيرة هي الخبز… صنع البيت وتحسّ بيه ديراكت!</span></q><figcaption class="who"><span class="fr" lang="fr">Avis Google · 5★</span><span class="ar" lang="ar">تقييم Google · 5★</span></figcaption></figure>
+<figure class="rev reveal"><span class="stars"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><q><span class="fr" lang="fr">Un goût incroyable et des prix raisonnables comparé à d’autres. Je vous conseille de goûter le forestier ou le Smash.</span><span class="ar" lang="ar">ذوق خيالي وأسعار معقولة مقارنة بالآخرين. ننصحكم تذوقو الفورستيي ولا السماش.</span></q><figcaption class="who"><span class="fr" lang="fr">Avis Google · 5★</span><span class="ar" lang="ar">تقييم Google · 5★</span></figcaption></figure>
+<figure class="rev reveal"><span class="stars"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><q><span class="fr" lang="fr">Super. J’ai super bien mangé et je reviendrai avec plaisir.</span><span class="ar" lang="ar">ممتاز. كليت مليح بزاف ونرجع بكل فرح.</span></q><figcaption class="who"><span class="fr" lang="fr">Avis Google · 5★</span><span class="ar" lang="ar">تقييم Google · 5★</span></figcaption></figure>
+</div></div></section>
+<section class="info" id="infos"><div class="wrap"><div class="kick reveal"><span class="fr" lang="fr">Infos pratiques</span><span class="ar" lang="ar">معلومات</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Passe <em>nous voir</em></span><span class="ar" lang="ar"><em>أرواح</em> عندنا</span></h2><div class="grid">
+<div class="box reveal"><h3 class="disp"><span class="fr" lang="fr">Horaires</span><span class="ar" lang="ar">الأوقات</span></h3><table class="hrs">
+<tr data-day="6"><td><span class="fr" lang="fr">Samedi</span><span class="ar" lang="ar">السبت</span></td><td><span class="fr" lang="fr">11:00 – 01:00</span><span class="ar" lang="ar">11:00 – 01:00</span></td></tr>
+<tr data-day="0"><td><span class="fr" lang="fr">Dimanche</span><span class="ar" lang="ar">الأحد</span></td><td><span class="fr" lang="fr">11:00 – 01:00</span><span class="ar" lang="ar">11:00 – 01:00</span></td></tr>
+<tr data-day="1"><td><span class="fr" lang="fr">Lundi</span><span class="ar" lang="ar">الاثنين</span></td><td><span class="fr" lang="fr">11:00 – 01:00</span><span class="ar" lang="ar">11:00 – 01:00</span></td></tr>
+<tr data-day="2"><td><span class="fr" lang="fr">Mardi</span><span class="ar" lang="ar">الثلاثاء</span></td><td><span class="fr" lang="fr">11:00 – 01:00</span><span class="ar" lang="ar">11:00 – 01:00</span></td></tr>
+<tr data-day="3"><td><span class="fr" lang="fr">Mercredi</span><span class="ar" lang="ar">الأربعاء</span></td><td><span class="fr" lang="fr">11:00 – 01:00</span><span class="ar" lang="ar">11:00 – 01:00</span></td></tr>
+<tr data-day="4"><td><span class="fr" lang="fr">Jeudi</span><span class="ar" lang="ar">الخميس</span></td><td><span class="fr" lang="fr">11:00 – 01:00</span><span class="ar" lang="ar">11:00 – 01:00</span></td></tr>
+<tr data-day="5"><td><span class="fr" lang="fr">Vendredi</span><span class="ar" lang="ar">الجمعة</span></td><td><span class="fr" lang="fr">15:00 – 01:00</span><span class="ar" lang="ar">15:00 – 01:00</span></td></tr>
+</table>
+<p class="note" style="font-size:13px;color:var(--mut);margin-top:10px"><span class="fr" lang="fr">Horaires indiqués sur Google Maps.</span><span class="ar" lang="ar">الأوقات كما في Google Maps.</span></p>
+</div>
+<div class="box reveal"><h3 class="disp"><span class="fr" lang="fr">Nous trouver</span><span class="ar" lang="ar">العنوان</span></h3><div class="cl">
+<div class="ln"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><div><span class="fr" lang="fr">Boulevard Akid Lotfi, en face de Coralia, Oran</span><span class="ar" lang="ar">شارع العقيد لطفي، مقابل كوراليا، وهران</span></div></div>
+<div class="ln"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><div><span class="ltr">0553 76 21 17</span></div></div>
+<div class="ln"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><div><span class="ltr">@la_brasaoran_</span></div></div>
+<div class="btns"><button class="pill p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</button><button class="pill o act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="fr" lang="fr">Appeler</span><span class="ar" lang="ar">اتصل</span></button><button class="pill o act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="fr" lang="fr">Itinéraire</span><span class="ar" lang="ar">الطريق</span></button></div></div></div>
+<div class="mapbox reveal"><button type="button" class="smap act" aria-label="Carte"><img class="mimg" src="images/map.webp" alt="" loading="lazy"><span class="pulse"></span><span class="pin"></span><span class="mlabel"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>La Brasa</span><span class="osm">© OpenStreetMap</span></button></div>
+</div></div></section>
+<section class="cta"><img src="images/interieur.webp" alt="" loading="lazy"><div class="wrap"><div class="kick reveal" style="color:var(--acc2)"><span class="fr" lang="fr">Faim ?</span><span class="ar" lang="ar">جعت؟</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Ton prochain burger <em>préféré</em> t’attend</span><span class="ar" lang="ar">البرغر <em>المفضّل</em> تاعك يستنّاك</span></h2><div class="ctas reveal" style="justify-content:center"><button class="pill p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</button><button class="pill o act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="fr" lang="fr">Itinéraire</span><span class="ar" lang="ar">الطريق</span></button></div></div></section>
+</main>
+<footer><div class="wrap"><div class="giant">La Brasa</div>
+ <div class="fl"><span>© 2026 La Brasa · Akid Lotfi, Oran</span><span class="demo-note"><span class="fr" lang="fr">Site de démonstration</span><span class="ar" lang="ar">موقع تجريبي</span></span><span class="credit" dir="ltr">Conçu par Mahmoud · <span class="ltr">0657567567</span></span></div>
+</div></footer>
+<div class="bar" style="--barcols:3"><button class="p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</button><button class=" act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="fr" lang="fr">Appeler</span><span class="ar" lang="ar">اتصل</span></button><button class=" act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="fr" lang="fr">Itinéraire</span><span class="ar" lang="ar">الطريق</span></button></div>
+<dialog id="demoDlg" class="demo"><div class="lock">🔒</div><h3 lang="fr">Disponible après activation</h3><h3 lang="ar">متاح بعد التفعيل</h3>
+<p><span lang="fr">Ce bouton sera activé quand le site sera mis en ligne à votre nom.</span><br><span lang="ar">هذا الزر يتفعّل عندما يوضع الموقع على الإنترنت باسمكم.</span></p>
+<button type="button" class="ok" id="dlgClose">OK</button></dialog>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), root=document.documentElement;
+  function setLang(l){root.lang=l;root.dir=(l==='ar')?'rtl':'ltr';try{localStorage.setItem('demo_lang',l)}catch(e){}
+    document.querySelectorAll('.langs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===l?'true':'false')});
+    document.title=(l==='ar'?document.body.dataset.titleAr:document.body.dataset.titleFr)}
+  var l=q.get('lang');if(!l){try{l=localStorage.getItem('demo_lang')}catch(e){}}
+  setLang(l==='ar'?'ar':'fr');
+  document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.l)})});
+  var dlg=document.getElementById('demoDlg');
+  document.querySelectorAll('.act').forEach(function(b){b.setAttribute('aria-disabled','true');b.addEventListener('click',function(e){e.preventDefault();if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','')})});
+  document.getElementById('dlgClose').addEventListener('click',function(){dlg.close?dlg.close():dlg.removeAttribute('open')});
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12}):null;
+  document.querySelectorAll('.reveal').forEach(function(el,i){if(io)io.observe(el);else el.classList.add('in')});
+  var d=new Date().getDay(); document.querySelectorAll('[data-day="'+d+'"]').forEach(function(r){r.classList.add('today')});
+  var nav=document.querySelector('.nav'); function sc(){if(nav)nav.classList.toggle('scrolled',scrollY>40)} addEventListener('scroll',sc,{passive:true}); sc();
+})();
+</script>
+</body>
+</html>

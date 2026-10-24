@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- ============================================================
+     Venezia · Premium (démo) — page d'accueil scroll-animée
+     Structure : nav · 3 scènes « séquence d'images » épinglées ·
+     carte · avis · infos · appel final · footer.
+     Moteur : GSAP ScrollTrigger + Lenis + canvas (js/*.js)
+     ============================================================ -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Venezia · Maître artisan glacier · Didouche Mourad (démo)</title>
+<meta name="description" content="Venezia, glacier artisanal au 2 rue Didouche Mourad, Alger : glaces, coupes, crêpes et pizzas. Version démo.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#120c09">
+<!-- Pas de favicon : évite une erreur 404 dans la console -->
+<link rel="icon" href="data:,">
+<!-- Polices : Bodoni Moda (titres, très contrasté, esprit italien) + Manrope (texte) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<!-- Première image de la scène 1 préchargée : affichage instantané du héros -->
+<link rel="preload" as="image" href="frames/pistache/f001.webp" fetchpriority="high">
+</head>
+<body>
+
+<!-- ===== Barre de navigation (fixe, minimaliste) ===== -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Venezia, haut de page">Venezia</a>
+  <nav class="links" aria-label="Sections">
+    <a href="#carte">La carte</a>
+    <a href="#avis">Avis</a>
+    <a href="#infos">Infos</a>
+  </nav>
+  <button class="pill pill--solid act" type="button">Commander</button>
+</header>
+
+<main id="top">
+
+  <!-- ===== Scène 1 : pistache (séquence épinglée) ===== -->
+  <section class="scene" data-scene="pistache" aria-label="Glaces artisanales">
+    <div class="scene__pin">
+      <canvas class="scene__canvas" aria-hidden="true"></canvas>
+      <div class="scene__copy">
+        <p class="eyebrow">Maître artisan glacier · Didouche Mourad</p>
+        <h1 class="display split">Réveillez<br><em>la pistache</em></h1>
+        <p class="lead">Glaces artisanales, coupes généreuses, crêpes et pizzas, au tout début de la rue Didouche Mourad.</p>
+        <div class="cta-row">
+          <a class="pill pill--solid" href="#carte">Voir la carte</a>
+          <span class="rating">★ 4,6 · 695 avis Google</span>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true"><span></span>Scroll</div>
+    </div>
+  </section>
+
+  <!-- ===== Scène 2 : chocolat ===== -->
+  <section class="scene scene--right" data-scene="chocolat" aria-label="Les coupes">
+    <div class="scene__pin">
+      <canvas class="scene__canvas" aria-hidden="true"></canvas>
+      <div class="scene__copy">
+        <p class="eyebrow">02 — Les coupes</p>
+        <h2 class="display split">Laissez<br><em>couler</em></h2>
+        <p class="lead">La Coupe Venezia, signature de la maison. La Pêche Melba. Des coupes servies généreuses, en salle jusqu’à minuit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Scène 3 : fruits ===== -->
+  <section class="scene" data-scene="fruits" aria-label="Sorbets">
+    <div class="scene__pin">
+      <canvas class="scene__canvas" aria-hidden="true"></canvas>
+      <div class="scene__copy">
+        <p class="eyebrow">03 — Sorbets &amp; parfums</p>
+        <h2 class="display split">Le goût<br><em>de l’été</em></h2>
+        <p class="lead">Sorbet pistache &amp; mûre, cerise, figue de barbarie… et même une vanille sans sucre ajouté, à la stévia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Bandeau défilant des parfums ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Pistache</span><i>✦</i><span>Cerise</span><i>✦</i><span>Figue de barbarie</span><i>✦</i><span>Pistache &amp; mûre</span><i>✦</i><span>Vanille stévia</span><i>✦</i><span>Coupe Venezia</span><i>✦</i><span>Pêche Melba</span><i>✦</i>
+      <span>Pistache</span><i>✦</i><span>Cerise</span><i>✦</i><span>Figue de barbarie</span><i>✦</i><span>Pistache &amp; mûre</span><i>✦</i><span>Vanille stévia</span><i>✦</i><span>Coupe Venezia</span><i>✦</i><span>Pêche Melba</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- ===== La carte (sans prix : prix en boutique) ===== -->
+  <section class="block" id="carte">
+    <p class="eyebrow reveal">La carte</p>
+    <h2 class="title reveal">Parfums, coupes <em>&amp; pizzas</em></h2>
+    <div class="menu">
+      <article class="menu__col reveal">
+        <img src="img/bac.webp" alt="Bacs de glaces artisanales dans la vitrine Venezia" width="640" height="480" loading="lazy" decoding="async">
+        <h3>Glaces artisanales</h3>
+        <ul>
+          <li><b>Sorbet pistache &amp; mûre</b><span>« Feu d’artifice » : fraîcheur et gourmandise</span></li>
+          <li><b>Cerise</b><span>Un incontournable de la vitrine</span></li>
+          <li><b>Figue de barbarie</b><span>Le goût de l’été</span></li>
+          <li><b>Vanille sans sucre ajouté</b><span>Sucrée naturellement à la stévia</span></li>
+        </ul>
+      </article>
+      <article class="menu__col reveal">
+        <img src="img/coupe.webp" alt="Coupe glacée au chocolat servie chez Venezia" width="640" height="480" loading="lazy" decoding="async">
+        <h3>Coupes &amp; douceurs</h3>
+        <ul>
+          <li><b>Coupe Venezia</b><span>La coupe signature de la maison</span></li>
+          <li><b>Pêche Melba</b><span>La grande classique</span></li>
+          <li><b>Crêpes</b><span>Pour le goûter</span></li>
+          <li><b>Gaufres</b><span>Pour le goûter</span></li>
+        </ul>
+      </article>
+      <article class="menu__col reveal">
+        <img src="img/panuzzo.webp" alt="Panuzzo cuit à la commande chez Venezia" width="640" height="480" loading="lazy" decoding="async">
+        <h3>Pizzas &amp; panuzzo</h3>
+        <ul>
+          <li><b>Pizza napolitaine</b><span>La classique</span></li>
+          <li><b>Pizza carne</b><span>À la viande</span></li>
+          <li><b>Pizza Venezia</b><span>La pizza de la maison</span></li>
+          <li><b>Panuzzo</b><span>Recommandé par nos clients</span></li>
+        </ul>
+      </article>
+    </div>
+    <p class="note reveal">Prix en boutique. La carte complète avec les prix sera ajoutée à la mise en ligne.</p>
+  </section>
+
+  <!-- ===== Avis Google (citations réelles) ===== -->
+  <section class="block block--alt" id="avis">
+    <div class="score reveal"><span class="score__num">4,6</span><span class="score__meta">★★★★★<br>sur 5 · 695 avis Google</span></div>
+    <div class="quotes">
+      <blockquote class="reveal">« Très bonnes glaces artisanales, avec un large choix de parfums, tous aussi délicieux les uns que les autres. Les portions sont généreuses et le personnel accueillant et souriant. »<cite>Client · avis Google</cite></blockquote>
+      <blockquote class="reveal">« L’accueil était au top, la prise de commande et le service très rapides. Des produits de très bonne qualité pour un montant très abordable. Je conseille les panuzzo ! »<cite>Client · avis Google</cite></blockquote>
+      <blockquote class="reveal">« Un grand merci à toute l’équipe ! J’avais oublié un objet après mon repas et ils ont eu la gentillesse de le garder précieusement jusqu’à mon retour. »<cite>Client · avis Google</cite></blockquote>
+    </div>
+  </section>
+
+  <!-- ===== Infos pratiques : horaires (jour courant surligné) + contact ===== -->
+  <section class="block" id="infos">
+    <p class="eyebrow reveal">Infos pratiques</p>
+    <h2 class="title reveal">Rue Didouche <em>Mourad</em></h2>
+    <div class="infos">
+      <div class="card reveal">
+        <h3>Horaires</h3>
+        <ul class="hours" id="hours">
+          <li data-day="6"><span>Samedi</span><span>10:00 – 00:00</span></li>
+          <li data-day="0"><span>Dimanche</span><span>10:00 – 00:00</span></li>
+          <li data-day="1"><span>Lundi</span><span>10:00 – 00:00</span></li>
+          <li data-day="2"><span>Mardi</span><span>10:00 – 00:00</span></li>
+          <li data-day="3"><span>Mercredi</span><span>10:00 – 00:00</span></li>
+          <li data-day="4"><span>Jeudi</span><span>10:00 – 00:00</span></li>
+          <li data-day="5"><span>Vendredi</span><span>14:00 – 00:00</span></li>
+        </ul>
+        <p class="note">Horaires Google Maps (mis à jour par l’établissement).</p>
+      </div>
+      <div class="card reveal">
+        <h3>Nous trouver</h3>
+        <p class="line">2, rue Didouche Mourad, Alger Centre</p>
+        <p class="line">020 08 36 73 <small>Commandes &amp; livraison</small></p>
+        <p class="line">@veneziadidouche <small>Nos créations du jour</small></p>
+        <div class="cta-row">
+          <button class="pill pill--solid act" type="button">Appeler</button>
+          <button class="pill act" type="button">Instagram</button>
+          <button class="pill act" type="button">Itinéraire</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Appel final ===== -->
+  <section class="final">
+    <h2 class="display split">Une coupe<br><em>ce soir ?</em></h2>
+    <p class="lead">Sur place jusqu’à minuit, ou livrée chez vous.</p>
+    <button class="pill pill--solid act" type="button">Commander · livraison</button>
+  </section>
+</main>
+
+<!-- ===== Pied de page ===== -->
+<footer class="foot">
+  <span class="brand">Venezia</span>
+  <span>© 2026 Venezia · 2 rue Didouche Mourad, Alger</span>
+  <span>Visuels animés créés pour la démo · photos de la carte : Venezia</span>
+  <span>Conçu par Mahmoud · Shaf3ool Web Studio · 0657 56 75 67</span>
+</footer>
+
+<!-- ===== Fenêtre « bouton de démo » ===== -->
+<dialog id="demoDlg" class="dlg">
+  <p class="dlg__lock" aria-hidden="true">🔒</p>
+  <h3>Disponible après activation</h3>
+  <p>Ce bouton sera activé quand le site sera mis en ligne à votre nom.</p>
+  <form method="dialog"><button class="pill pill--solid" type="submit">OK</button></form>
+</dialog>
+
+<!-- Bibliothèques (CDN) puis modules de la page -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" defer></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

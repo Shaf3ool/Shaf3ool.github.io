@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Restaurant Bladi · Cuisine algérienne authentique · Maraval, Oran · Démo</title>
+<meta name="description" content="Restaurant Bladi, cuisine algérienne authentique à Maraval, Oran : couscous, tajines, grillades et fruits de mer, formules et événements familiaux.">
+<meta property="og:title" content="Restaurant Bladi · Cuisine algérienne authentique · Maraval, Oran · Démo">
+<meta property="og:description" content="Restaurant Bladi, cuisine algérienne authentique à Maraval, Oran : couscous, tajines, grillades et fruits de mer, formules et événements familiaux.">
+<meta property="og:image" content="images/hero.webp">
+<meta name="theme-color" content="#F6EFE3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Manrope:wght@400;600;700;800&family=Amiri:wght@700&family=Tajawal:wght@400;500;700;800&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{overflow-x:hidden;position:relative;background:var(--bg);color:var(--fg);font-family:var(--fb);line-height:1.6}
+html[lang=ar] body{font-family:var(--fba);line-height:1.8}
+img{display:block;max-width:100%;height:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+html[lang=ar] .fr{display:none!important}
+html[lang=fr] .ar{display:none!important}
+:lang(ar){letter-spacing:0!important}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+/* demo protection */
+.watermark{position:fixed;inset:0;z-index:90;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22440%22%20height%3D%22280%22%3E%3Cg%20transform%3D%22rotate%28-28%20220%20140%29%22%3E%3Ctext%20x%3D%2220%22%20y%3D%22150%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22700%22%20fill%3D%22%2523ffffff%22%3ED%C3%89MO%20%C2%B7%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%3C/text%3E%3C/g%3E%3C/svg%3E");background-size:440px 280px;opacity:var(--wm-op,.06)}
+.ribbon{position:fixed;top:22px;inset-inline-end:-46px;z-index:95;transform:rotate(45deg);background:var(--rib-bg,#e5484d);color:var(--rib-fg,#fff);font:700 11px/1 system-ui,sans-serif;padding:7px 54px;box-shadow:0 6px 18px rgba(0,0,0,.28);pointer-events:none;white-space:nowrap;letter-spacing:.5px}
+html[dir=rtl] .ribbon{transform:rotate(-45deg)}
+dialog.demo{margin:auto;border:0;border-radius:22px;padding:30px 26px 24px;max-width:340px;width:calc(100% - 40px);text-align:center;background:#fff;color:#141414;box-shadow:0 30px 80px rgba(0,0,0,.4);font-family:system-ui,'Cairo',sans-serif}
+dialog.demo::backdrop{background:rgba(10,8,6,.62);backdrop-filter:blur(4px)}
+dialog.demo .lock{width:54px;height:54px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:#f3f0ea;font-size:24px}
+dialog.demo h3{font-size:19px;line-height:1.35;margin-bottom:2px}
+dialog.demo h3+h3{font-size:15px;color:#666;font-weight:600;margin-bottom:12px}
+dialog.demo p{font-size:14px;line-height:1.6;color:#444;margin-bottom:18px}
+dialog.demo .ok{background:#141414;color:#fff;border-radius:999px;padding:12px 30px;font-weight:700}
+.demo-note{display:inline-flex;align-items:center;gap:8px;font-size:12px;opacity:.75}
+.act[aria-disabled=true]{cursor:pointer}
+.credit{font-size:12.5px;opacity:.85}
+
+.nav .navr{margin-inline-end:52px}
+@media(min-width:760px){.nav .navr{margin-inline-end:56px}}
+
+.smap{position:relative;display:block;width:100%;min-height:300px;height:100%;overflow:hidden;padding:0;text-align:start}
+.smap .mimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--map-filter,none);transition:transform 1.2s}
+.smap:hover .mimg{transform:scale(1.04)}
+.smap .pin{position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-34px 0 0 -17px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--pin,#e5484d);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.smap .pin::after{content:"";position:absolute;inset:10px;border-radius:50%;background:#fff}
+.smap .pulse{position:absolute;left:50%;top:50%;width:80px;height:80px;margin:-40px;border-radius:50%;background:var(--pin,#e5484d);opacity:.18;animation:pl 2.4s ease-out infinite}
+@keyframes pl{from{transform:scale(.3);opacity:.35}to{transform:scale(1.6);opacity:0}}
+.smap .mlabel{position:absolute;inset-inline-start:14px;bottom:14px;display:inline-flex;gap:8px;align-items:center;background:var(--ml-bg,#111);color:var(--ml-fg,#fff);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:700}
+.smap .osm{position:absolute;inset-inline-end:8px;bottom:6px;font-size:10px;opacity:.7;background:rgba(255,255,255,.7);color:#222;padding:1px 5px;border-radius:4px}
+
+
+.nav .navr{margin-inline-end:52px}
+@media(min-width:760px){.nav .navr{margin-inline-end:56px}}
+.langs{display:inline-flex;align-items:center;gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line);direction:ltr;flex:none}
+.langs button{min-width:36px;height:32px;padding:0 9px;border-radius:999px;font:700 12px/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;opacity:.75;transition:background .2s,color .2s,opacity .2s}
+.langs button[lang=ar]{font-family:Cairo,system-ui,sans-serif;font-size:15px;letter-spacing:0}
+.langs button[aria-pressed=true]{opacity:1;background:var(--acc);color:var(--accfg)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+.disp{font-family:var(--fd);font-weight:var(--fdw,700);line-height:1;letter-spacing:var(--fdls,-.5px);text-transform:var(--fdtt,none)}
+html[lang=ar] .disp{font-family:var(--fda);font-weight:var(--fdaw,700);line-height:1.25;letter-spacing:0;text-transform:none}
+.kick{font-family:var(--fk,var(--fb));font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--acc);display:flex;align-items:center;gap:12px}
+.kick::before{content:"";width:28px;height:1.5px;background:currentColor}
+html[lang=ar] .kick{font-family:var(--fba);letter-spacing:0;font-size:14px}
+/* nav */
+.nav{position:fixed;top:0;inset-inline:0;z-index:60;transition:background .3s,backdrop-filter .3s;color:var(--navfg,#fff)}
+.nav.scrolled{background:var(--navbg);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);color:var(--fg)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--fd);font-weight:var(--fdw,700);font-size:22px;letter-spacing:var(--fdls,0);text-transform:var(--fdtt,none);white-space:nowrap}
+.logo .mk{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--acc);color:var(--accfg);font-size:15px;font-weight:800;flex:none}
+.links{display:none;gap:26px;font-size:14px;font-weight:600}
+.links a{opacity:.8}.links a:hover{opacity:1}
+.navr{display:flex;align-items:center;gap:10px}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--rad-btn,999px);padding:14px 22px;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .3s;white-space:nowrap}
+.pill.p{background:var(--acc);color:var(--accfg)}
+.pill.p:hover{transform:translateY(-1px);box-shadow:0 10px 30px var(--glow,rgba(0,0,0,.3))}
+.pill.o{border:1.5px solid currentColor;opacity:.92}
+.nav .pill{display:none}
+@media(min-width:900px){.links{display:flex}.nav .pill{display:inline-flex;padding:11px 18px;font-size:14px}}
+/* hero */
+.hero{position:relative;min-height:94svh;display:flex;align-items:flex-end;overflow:hidden;padding:120px 0 96px;color:#fff}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-pos,50% 50%);animation:zoom 1.8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes zoom{from{transform:scale(1.08)}to{transform:none}}
+.hero::after{content:"";position:absolute;inset:0;background:var(--hero-grad,linear-gradient(0deg,rgba(0,0,0,.92) 6%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.25) 75%,rgba(0,0,0,.5) 100%))}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero .kick{color:var(--hero-kick,var(--acc2))}
+.hero h1{font-size:clamp(54px,14vw,132px);margin:16px 0 14px;text-wrap:balance}
+html[lang=ar] .hero h1{font-size:clamp(48px,12vw,112px)}
+.hero h1 em{font-style:var(--em-style,italic);color:var(--acc2)}
+.hero .sub{font-size:clamp(17px,2.2vw,21px);max-width:600px;opacity:.92}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 28px}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);backdrop-filter:blur(8px);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600}
+.chip b{color:var(--acc2)}
+.chip svg{color:var(--acc2)}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.hero .pill.o{color:#fff}
+/* marquee */
+.marq{background:var(--acc);color:var(--accfg);overflow:hidden;white-space:nowrap;padding:15px 0;position:relative;z-index:3}
+.marq .tr{display:inline-flex;gap:30px;animation:mq 34s linear infinite;font-family:var(--fd);font-weight:var(--fdw,700);font-size:22px;text-transform:var(--fdtt,none)}
+html[lang=ar] .marq .tr{font-family:var(--fda);font-size:22px}
+html[dir=rtl] .marq .tr{animation-direction:reverse}
+.marq .tr span::after{content:var(--marq-sep,"✦");margin-inline-start:30px;opacity:.7}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:88px 0}
+.h2{font-size:clamp(40px,8vw,76px);margin-top:14px;text-wrap:balance}
+html[lang=ar] .h2{font-size:clamp(36px,7vw,64px)}
+.h2 em{font-style:var(--em-style,italic);color:var(--acc)}
+.lead{color:var(--mut);max-width:620px;margin-top:16px;font-size:17.5px}
+/* about */
+.about .grid{display:grid;gap:40px;align-items:center}
+.about .ph{position:relative;border-radius:var(--rad,24px);overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.about .ph img{width:100%;height:100%;object-fit:cover}
+.about .ph .tag{position:absolute;bottom:16px;inset-inline-start:16px;background:var(--bg);color:var(--fg);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
+.about p.t{font-size:17px;margin-top:16px;color:var(--fg2,var(--fg));opacity:.9}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.stat{border:1px solid var(--line);border-radius:18px;padding:16px 12px;text-align:center;background:var(--card2,transparent)}
+.stat b{display:block;font-family:var(--fd);font-weight:var(--fdw,700);font-size:clamp(26px,5vw,36px);color:var(--acc);line-height:1.1}
+.stat span{font-size:12.5px;color:var(--mut);display:block;margin-top:4px;line-height:1.35}
+@media(min-width:900px){.about .grid{grid-template-columns:1fr 1.05fr;gap:70px}}
+/* signatures */
+.sigs{background:var(--bg2)}
+.sig{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px 20px 12px;margin-inline:-20px;scrollbar-width:none}
+.sig::-webkit-scrollbar{display:none}
+.tile{flex:0 0 80%;scroll-snap-align:start;background:var(--card);color:var(--cardfg);border-radius:var(--rad,24px);overflow:hidden;position:relative;display:flex;flex-direction:column}
+.tile img{width:100%;aspect-ratio:4/3.4;object-fit:cover}
+.tile .b{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tile h3{font-size:28px}
+html[lang=ar] .tile h3{font-size:26px}
+.tile p{font-size:14.5px;opacity:.75}
+.tile .price{margin-top:auto;padding-top:8px;font-weight:800;color:var(--acc);font-size:17px}
+.tile .badge{position:absolute;top:14px;inset-inline-start:14px;background:var(--acc);color:var(--accfg);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700}
+@media(min-width:900px){.sig{display:grid;grid-template-columns:repeat(var(--sigcols,3),1fr);overflow:visible;margin:0;padding:40px 0 0}.tile{flex:none}}
+/* menu */
+.cats{display:grid;gap:22px;margin-top:40px}
+.cat{background:var(--card2,transparent);border:1px solid var(--line);border-radius:var(--rad,24px);padding:26px 22px}
+.cat h3{font-size:30px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+html[lang=ar] .cat h3{font-size:28px}
+.cat .note{font-size:13.5px;color:var(--mut);margin-top:6px}
+.rows{list-style:none;margin-top:12px}
+.row{padding:13px 0;border-bottom:1px dashed var(--line)}
+.row:last-child{border-bottom:0}
+.rl{display:flex;align-items:baseline;gap:10px}
+.nm{font-weight:700;font-size:16.5px}
+.dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px);min-width:14px}
+.pr{font-weight:800;color:var(--acc);white-space:nowrap;font-size:15.5px}
+.ds{color:var(--mut);font-size:14px;margin-top:2px}
+.mnote{margin-top:22px;font-size:13.5px;color:var(--mut);border-inline-start:2px solid var(--acc);padding-inline-start:12px}
+@media(min-width:900px){.cats{grid-template-columns:repeat(2,1fr)}}
+/* gallery */
+.gal{background:var(--bg2)}
+.grid-g{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:36px}
+.grid-g figure{border-radius:calc(var(--rad,24px) * .7);overflow:hidden;aspect-ratio:1}
+.grid-g figure.w{grid-column:span 2;aspect-ratio:2/1.15}
+.grid-g img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+.grid-g figure:hover img{transform:scale(1.05)}
+@media(min-width:900px){.grid-g{grid-template-columns:repeat(4,1fr);gap:14px}.grid-g figure.t{grid-row:span 2;aspect-ratio:auto}}
+.credit-src{font-size:12.5px;color:var(--mut);margin-top:14px}
+/* reviews */
+.rating{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:22px}
+.rating .big{font-family:var(--fd);font-weight:var(--fdw,700);font-size:64px;line-height:1;color:var(--acc)}
+.stars{display:inline-flex;gap:2px;color:var(--star,#F5B301)}
+.revs{display:grid;gap:16px;margin-top:36px}
+.rev{background:var(--card2,transparent);border:1px solid var(--line);border-radius:var(--rad,24px);padding:24px 22px;display:flex;flex-direction:column;gap:12px}
+.rev q{font-size:16.5px;quotes:"« " " »"}
+html[lang=ar] .rev q{quotes:"« " " »"}
+.rev .who{font-size:13px;color:var(--mut);margin-top:auto}
+@media(min-width:900px){.revs{grid-template-columns:repeat(3,1fr)}}
+/* info */
+.info .grid{display:grid;gap:22px;margin-top:40px}
+.box{border:1px solid var(--line);border-radius:var(--rad,24px);padding:26px 22px;background:var(--card2,transparent)}
+.box h3{font-size:26px;margin-bottom:12px}
+html[lang=ar] .box h3{font-size:24px}
+.hrs{width:100%;border-collapse:collapse;font-size:15px}
+.hrs td{padding:9px 4px;border-bottom:1px dashed var(--line)}
+.hrs td:last-child{text-align:end;font-weight:700}
+.hrs tr.today td{color:var(--acc)}
+.hrs tr.today td:first-child::after{content:" •";}
+.cl{display:flex;flex-direction:column;gap:14px;font-size:15.5px}
+.cl .ln{display:flex;gap:12px;align-items:flex-start}
+.cl .ln svg{flex:none;margin-top:3px;color:var(--acc)}
+.cl .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.mapbox{border-radius:var(--rad,24px);overflow:hidden;min-height:320px;border:1px solid var(--line)}
+@media(min-width:900px){.info .grid{grid-template-columns:1fr 1fr 1.2fr}}
+/* cta */
+.cta{position:relative;overflow:hidden;color:#fff;text-align:center;padding:110px 0}
+.cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta::after{content:"";position:absolute;inset:0;background:var(--cta-ov,rgba(0,0,0,.66))}
+.cta .wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px}
+.cta .h2 em{color:var(--acc2)}
+footer{background:var(--fbg,var(--bg2));padding:56px 0 120px;border-top:1px solid var(--line)}
+footer .giant{font-family:var(--fd);font-weight:var(--fdw,700);font-size:clamp(46px,13vw,150px);line-height:.95;opacity:.13;text-transform:var(--fdtt,none);white-space:nowrap;overflow:hidden}
+footer .fl{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between;align-items:center;margin-top:18px;font-size:13.5px;color:var(--mut)}
+@media(min-width:900px){footer{padding-bottom:56px}}
+/* bottom bar */
+.bar{position:fixed;bottom:0;inset-inline:0;z-index:70;display:grid;grid-template-columns:repeat(var(--barcols,3),1fr);gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--navbg);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.bar button{display:flex;align-items:center;justify-content:center;gap:7px;border-radius:14px;padding:12px 6px;font-weight:700;font-size:14px;border:1px solid var(--line);color:var(--fg)}
+.bar button.p{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+@media(min-width:900px){.bar{display:none}}
+
+:root{--wm-op:0.05;--rib-bg:#8C2F1B;--rib-fg:#fff;--bg:#F6EFE3;--bg2:#EEE3CF;--fg:#221A14;--mut:#6E6153;--acc:#8C2F1B;--accfg:#fff;--acc2:#E9B954;--line:rgba(34,26,20,.15);--card:#fffaf2;--cardfg:#221A14;--card2:rgba(255,250,242,.7);--navbg:rgba(246,239,227,.9);--fd:'Cormorant Garamond',Georgia,serif;--fdw:700;--fdls:-.5px;--fb:Manrope,system-ui,sans-serif;--fda:Amiri,serif;--fba:Tajawal,system-ui,sans-serif;--rad:22px;--glow:rgba(140,47,27,.35);--map-filter:sepia(.35) saturate(.9);--pin:#8C2F1B;--ml-bg:#221A14;--fbg:#221A14;--hero-pos:50% 60%}
+.hero h1{font-size:clamp(64px,16vw,150px)} footer{color:#F6EFE3} footer .fl{color:#cdbfad} .revs{grid-template-columns:1fr} @media(min-width:900px){.revs{grid-template-columns:repeat(2,1fr)}} .marq{background:#221A14;color:#E9B954} .formule{display:grid;gap:22px;align-items:center;margin-top:26px} .formule img{border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.2)} @media(min-width:900px){.formule{grid-template-columns:.8fr 1.2fr}}
+</style>
+</head>
+<body data-title-fr="Restaurant Bladi · Cuisine algérienne authentique · Maraval, Oran · Démo" data-title-ar="مطعم بلادي · المطبخ الجزائري الأصيل · مارافال، وهران · نموذج تجريبي">
+<div class="watermark" aria-hidden="true"></div>
+<div class="ribbon" aria-hidden="true">DÉMO · نموذج</div>
+<header class="nav"><div class="wrap">
+ <a href="#top" class="logo"><span class="mk">ب</span>Bladi</a>
+ <nav class="links"><a href="#histoire"><span class="fr" lang="fr">Notre maison</span><span class="ar" lang="ar">بيتنا</span></a><a href="#menu"><span class="fr" lang="fr">La carte</span><span class="ar" lang="ar">المنيو</span></a><a href="#galerie"><span class="fr" lang="fr">Galerie</span><span class="ar" lang="ar">الصور</span></a><a href="#infos"><span class="fr" lang="fr">Infos</span><span class="ar" lang="ar">معلومات</span></a></nav>
+ <div class="navr"><div class="langs" role="group" aria-label="Langue · اللغة"><button type="button" data-l="fr" lang="fr" aria-label="Français">FR</button><button type="button" data-l="ar" lang="ar" aria-label="العربية">ع</button></div><button class="pill p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg><span class="fr" lang="fr">Réserver</span><span class="ar" lang="ar">احجز طاولة</span></button></div>
+</div></header>
+<main id="top">
+<section class="hero">
+ <img src="images/hero.webp" alt="Le buffet traditionnel du Restaurant Bladi" class="bg" fetchpriority="high">
+ <div class="wrap">
+  <div class="kick reveal"><span class="fr" lang="fr">Maraval · Oran</span><span class="ar" lang="ar">مارافال · وهران</span></div>
+  <h1 class="disp reveal"><span class="fr" lang="fr">Bladi, <em>le goût de chez nous</em></span><span class="ar" lang="ar">بلادي، <em>بنّة بلادنا</em></span></h1>
+  <p class="sub reveal"><span class="fr" lang="fr">Cuisine algérienne authentique, servie avec soin : couscous, tajines, grillades et fruits de mer, dans un cadre familial et raffiné.</span><span class="ar" lang="ar">مطبخ جزائري أصيل يُقدَّم بعناية: كسكس، طواجن، مشاوي ومأكولات بحرية، في أجواء عائلية راقية.</span></p>
+  <div class="chips reveal"><span class="chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="fr" lang="fr">Ouvert 7j/7 · jusqu’à 23h30</span><span class="ar" lang="ar">مفتوح كل يوم · حتى 23:30</span></span><span class="chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="fr" lang="fr">Hôtel Bladi Suite, Maraval</span><span class="ar" lang="ar">فندق بلادي سويت، مارافال</span></span><span class="chip"><b class="ltr">42,8K</b><span class="fr" lang="fr">abonnés TikTok</span><span class="ar" lang="ar">متابع على تيك توك</span></span></div>
+  <div class="ctas reveal"><button class="pill p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg><span class="fr" lang="fr">Réserver</span><span class="ar" lang="ar">احجز طاولة</span></button><a class="pill o" href="#menu"><span class="fr" lang="fr">Voir la carte</span><span class="ar" lang="ar">شوف المنيو</span></a></div>
+ </div>
+</section>
+<div class="marq" aria-hidden="true"><div class="tr"><span><span class="fr" lang="fr">Couscous</span><span class="ar" lang="ar">كسكس</span></span><span><span class="fr" lang="fr">Tajine zitoune</span><span class="ar" lang="ar">طاجين الزيتون</span></span><span><span class="fr" lang="fr">Grillades</span><span class="ar" lang="ar">مشاوي</span></span><span><span class="fr" lang="fr">Fruits de mer</span><span class="ar" lang="ar">مأكولات بحرية</span></span><span><span class="fr" lang="fr">Formules</span><span class="ar" lang="ar">فورميلات</span></span><span><span class="fr" lang="fr">Fêtes & événements</span><span class="ar" lang="ar">أفراح ومناسبات</span></span><span><span class="fr" lang="fr">Couscous</span><span class="ar" lang="ar">كسكس</span></span><span><span class="fr" lang="fr">Tajine zitoune</span><span class="ar" lang="ar">طاجين الزيتون</span></span><span><span class="fr" lang="fr">Grillades</span><span class="ar" lang="ar">مشاوي</span></span><span><span class="fr" lang="fr">Fruits de mer</span><span class="ar" lang="ar">مأكولات بحرية</span></span><span><span class="fr" lang="fr">Formules</span><span class="ar" lang="ar">فورميلات</span></span><span><span class="fr" lang="fr">Fêtes & événements</span><span class="ar" lang="ar">أفراح ومناسبات</span></span><span><span class="fr" lang="fr">Couscous</span><span class="ar" lang="ar">كسكس</span></span><span><span class="fr" lang="fr">Tajine zitoune</span><span class="ar" lang="ar">طاجين الزيتون</span></span><span><span class="fr" lang="fr">Grillades</span><span class="ar" lang="ar">مشاوي</span></span><span><span class="fr" lang="fr">Fruits de mer</span><span class="ar" lang="ar">مأكولات بحرية</span></span><span><span class="fr" lang="fr">Formules</span><span class="ar" lang="ar">فورميلات</span></span><span><span class="fr" lang="fr">Fêtes & événements</span><span class="ar" lang="ar">أفراح ومناسبات</span></span><span><span class="fr" lang="fr">Couscous</span><span class="ar" lang="ar">كسكس</span></span><span><span class="fr" lang="fr">Tajine zitoune</span><span class="ar" lang="ar">طاجين الزيتون</span></span><span><span class="fr" lang="fr">Grillades</span><span class="ar" lang="ar">مشاوي</span></span><span><span class="fr" lang="fr">Fruits de mer</span><span class="ar" lang="ar">مأكولات بحرية</span></span><span><span class="fr" lang="fr">Formules</span><span class="ar" lang="ar">فورميلات</span></span><span><span class="fr" lang="fr">Fêtes & événements</span><span class="ar" lang="ar">أفراح ومناسبات</span></span></div></div>
+<section class="about" id="histoire"><div class="wrap grid">
+ <div class="ph reveal"><img src="images/facade.webp" alt="La façade du Restaurant Bladi" loading="lazy"><span class="tag"><span class="fr" lang="fr">Restaurant Bladi · Maraval</span><span class="ar" lang="ar">مطعم بلادي · مارافال</span></span></div>
+ <div class="reveal"><div class="kick"><span class="fr" lang="fr">Notre maison</span><span class="ar" lang="ar">بيتنا</span></div><h2 class="disp h2"><span class="fr" lang="fr">Une table <em>pour toute la famille</em></span><span class="ar" lang="ar">مائدة <em>تجمع العائلة</em></span></h2>
+  <p class="t"><span class="fr" lang="fr">Au cœur de Maraval, au sein de l’Hôtel Bladi Suite, le Restaurant Bladi célèbre la cuisine algérienne authentique : des recettes de chez nous, préparées à la maison et présentées avec élégance.</span><span class="ar" lang="ar">في قلب مارافال، داخل فندق بلادي سويت، يحتفي مطعم بلادي بالمطبخ الجزائري الأصيل: وصفات من بلادنا، محضّرة على الطريقة التقليدية ومقدَّمة بأناقة.</span></p><p class="t"><span class="fr" lang="fr">Repas en famille, dîners du jeudi, fatiha, naissance ou événement professionnel : notre équipe s’occupe de l’accueil et de l’organisation pour que vous profitiez de vos invités.</span><span class="ar" lang="ar">عشاء عائلي، سهرات الخميس، فاتحة، نفاس، طهارة أو مناسبة مهنية: فريقنا يتكفّل بالاستقبال والتنظيم، وأنتم استمتعوا مع ضيوفكم.</span></p>
+  <div class="stats"><div class="stat"><b class="ltr">42,8K</b><span class="fr" lang="fr">abonnés sur TikTok</span><span class="ar" lang="ar">متابع على تيك توك</span></div><div class="stat"><b class="ltr">24K</b><span class="fr" lang="fr">abonnés Instagram</span><span class="ar" lang="ar">متابع على إنستغرام</span></div><div class="stat"><b class="ltr">7/7</b><span class="fr" lang="fr">ouvert tous les jours</span><span class="ar" lang="ar">مفتوح كل يوم</span></div></div>
+ </div>
+</div></section>
+<section class="sigs" id="signatures"><div class="wrap">
+ <div class="kick reveal"><span class="fr" lang="fr">Nos spécialités</span><span class="ar" lang="ar">أطباقنا</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Les classiques <em>de Bladi</em></span><span class="ar" lang="ar">كلاسيكيات <em>بلادي</em></span></h2>
+ <div class="sig">
+<article class="tile reveal"><span class=badge><span class="fr" lang="fr">Le classique</span><span class="ar" lang="ar">الكلاسيكي</span></span><img src="images/tajine.webp" alt="Tajine zitoune" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Tajine zitoune</span><span class="ar" lang="ar">طاجين الزيتون</span></h3><p><span class="fr" lang="fr">Poulet aux olives, pommes de terre dorées et sauce maison, à l’ancienne.</span><span class="ar" lang="ar">دجاج بالزيتون، بطاطا ذهبية وصلصة بنينة على الطريقة التقليدية.</span></p></div></article>
+<article class="tile reveal"><img src="images/fruits-mer.webp" alt="Fruits de mer" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Fruits de mer</span><span class="ar" lang="ar">مأكولات بحرية</span></h3><p><span class="fr" lang="fr">Crevettes et produits de la mer, généreusement servis.</span><span class="ar" lang="ar">قمبري ومأكولات بحرية بكميات سخية.</span></p></div></article>
+<article class="tile reveal"><img src="images/grillade.webp" alt="Grillades" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Grillades</span><span class="ar" lang="ar">مشاوي</span></h3><p><span class="fr" lang="fr">Viandes grillées et garnitures soignées, dressées à l’assiette.</span><span class="ar" lang="ar">لحوم مشوية مع مقبلات، مقدَّمة بعناية.</span></p></div></article>
+<article class="tile reveal"><img src="images/salade.webp" alt="Salades" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Salades</span><span class="ar" lang="ar">سلطات</span></h3><p><span class="fr" lang="fr">Salades fraîches et entrées pour bien commencer le repas.</span><span class="ar" lang="ar">سلطات طازجة ومقبلات لبداية الوجبة.</span></p></div></article>
+<article class="tile reveal"><img src="images/desserts.webp" alt="Desserts maison" loading="lazy"><div class="b"><h3 class="disp"><span class="fr" lang="fr">Desserts maison</span><span class="ar" lang="ar">حلويات البيت</span></h3><p><span class="fr" lang="fr">Entremets, tartes et crème brûlée pour finir en douceur.</span><span class="ar" lang="ar">حلويات، تارت وكريم بروليه لختام حلو.</span></p></div></article>
+</div></div></section>
+<section class="menu" id="menu"><div class="wrap"><div class="kick reveal"><span class="fr" lang="fr">La carte</span><span class="ar" lang="ar">المنيو</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Formules & <em>cuisine de chez nous</em></span><span class="ar" lang="ar">فورميلات و<em>أطباق بلادنا</em></span></h2>
+<p class="lead reveal"><span class="fr" lang="fr">Une sélection de nos plats et formules. Demandez la carte du jour à notre équipe.</span><span class="ar" lang="ar">مختارات من أطباقنا وفورميلاتنا. اسألوا فريقنا على أطباق اليوم.</span></p>
+<div class="cats">
+<div class="cat reveal"><h3 class="disp"><span class="fr" lang="fr">Formules</span><span class="ar" lang="ar">الفورميلات</span></h3>
+<ul class="rows">
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Formule Spéciale</span><span class="ar" lang="ar">الفورميلة الخاصة</span></span><span class=dots></span><span class=pr><span class=ltr>3000 DA</span></span></div><div class=ds><span class="fr" lang="fr">Soupe de potiron · 2 cigares de poulet au fromage · Tajine zitoune · Crème brûlée</span><span class="ar" lang="ar">شوربة القرع · 2 سيڨار دجاج بالجبن · طاجين الزيتون · كريم بروليه</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Formule Bladi</span><span class="ar" lang="ar">فورميلة بلادي</span></span><span class=dots></span><span class=pr><span class=ltr>2000 DA</span></span></div><div class=ds><span class="fr" lang="fr">Crème d’épinard aux croûtons · Suprême de poulet · …</span><span class="ar" lang="ar">كريمة السبانخ بالخبز المحمّص · صدر دجاج سوبريم · …</span></div></li>
+</ul></div>
+<div class="cat reveal"><h3 class="disp"><span class="fr" lang="fr">Cuisine traditionnelle</span><span class="ar" lang="ar">المطبخ التقليدي</span></h3>
+<ul class="rows">
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Couscous</span><span class="ar" lang="ar">كسكس</span></span></div><div class=ds><span class="fr" lang="fr">Le plat de fête, préparé à la maison.</span><span class="ar" lang="ar">طبق المناسبات، محضّر على الطريقة التقليدية.</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Tajine zitoune</span><span class="ar" lang="ar">طاجين الزيتون</span></span></div><div class=ds><span class="fr" lang="fr">Poulet, olives, pommes de terre dorées, sauce maison.</span><span class="ar" lang="ar">دجاج، زيتون، بطاطا ذهبية، صلصة البيت.</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Tajines du jour</span><span class="ar" lang="ar">طواجن اليوم</span></span></div><div class=ds><span class="fr" lang="fr">Selon le marché et la saison.</span><span class="ar" lang="ar">حسب السوق والموسم.</span></div></li>
+</ul></div>
+<div class="cat reveal"><h3 class="disp"><span class="fr" lang="fr">Grillades & mer</span><span class="ar" lang="ar">مشاوي وبحر</span></h3>
+<ul class="rows">
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Grillades</span><span class="ar" lang="ar">مشاوي</span></span></div><div class=ds><span class="fr" lang="fr">Viandes grillées et garnitures.</span><span class="ar" lang="ar">لحوم مشوية مع مقبلات.</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Fruits de mer</span><span class="ar" lang="ar">مأكولات بحرية</span></span></div><div class=ds><span class="fr" lang="fr">Crevettes et poissons selon arrivage.</span><span class="ar" lang="ar">قمبري وحوت حسب الوصول.</span></div></li>
+</ul></div>
+<div class="cat reveal"><h3 class="disp"><span class="fr" lang="fr">Événements</span><span class="ar" lang="ar">المناسبات</span></h3>
+<p class="note"><span class="fr" lang="fr">Sur réservation</span><span class="ar" lang="ar">بالحجز المسبق</span></p>
+<ul class="rows">
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Soirées familiales du jeudi</span><span class="ar" lang="ar">سهرات الخميس العائلية</span></span></div><div class=ds><span class="fr" lang="fr">Dîner gala et animation, en famille.</span><span class="ar" lang="ar">عشاء فاخر وتنشيط، مع العائلة.</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Fatiha, naissance, tahara</span><span class="ar" lang="ar">فاتحة، نفاس، طهارة</span></span></div><div class=ds><span class="fr" lang="fr">Salle, accueil et organisation pris en charge.</span><span class="ar" lang="ar">القاعة، الاستقبال والتنظيم علينا.</span></div></li>
+<li class="row"><div class="rl"><span class="nm"><span class="fr" lang="fr">Événements professionnels</span><span class="ar" lang="ar">مناسبات مهنية</span></span></div><div class=ds><span class="fr" lang="fr">Repas d’affaires et réceptions privées.</span><span class="ar" lang="ar">وجبات أعمال وحفلات خاصة.</span></div></li>
+</ul></div>
+</div>
+<p class="mnote reveal"><span class="fr" lang="fr">Prix des formules relevés sur les publications du restaurant ; la carte complète et les prix sont à confirmer sur place.</span><span class="ar" lang="ar">أسعار الفورميلات من منشورات المطعم؛ المنيو الكامل والأسعار تتأكّدوا منها في المطعم.</span></p>
+</div></section>
+<section class="gal" id="galerie"><div class="wrap"><div class="kick reveal"><span class="fr" lang="fr">Galerie</span><span class="ar" lang="ar">الصور</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">À table <em>chez Bladi</em></span><span class="ar" lang="ar">على مائدة <em>بلادي</em></span></h2><div class="grid-g">
+<figure class="reveal "><img src="images/chorba.webp" alt="Restaurant Bladi" loading="lazy"></figure>
+<figure class="reveal "><img src="images/tajine.webp" alt="Restaurant Bladi" loading="lazy"></figure>
+<figure class="reveal w"><img src="images/salle.webp" alt="Restaurant Bladi" loading="lazy"></figure>
+<figure class="reveal "><img src="images/desserts.webp" alt="Restaurant Bladi" loading="lazy"></figure>
+<figure class="reveal "><img src="images/viennoiseries.webp" alt="Restaurant Bladi" loading="lazy"></figure>
+<figure class="reveal "><img src="images/fruits-mer.webp" alt="Restaurant Bladi" loading="lazy"></figure>
+<figure class="reveal "><img src="images/grillade.webp" alt="Restaurant Bladi" loading="lazy"></figure>
+</div><p class="credit-src"><span class="fr" lang="fr">Photos publiées par le restaurant et ses clients sur Google Maps et Instagram.</span><span class="ar" lang="ar">صور منشورة من المطعم وزبائنه على Google Maps وإنستغرام.</span></p></div></section>
+<section class="reviews" id="avis"><div class="wrap"><div class="kick reveal"><span class="fr" lang="fr">Ils en parlent</span><span class="ar" lang="ar">قالو علينا</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Vos <em>mots</em></span><span class="ar" lang="ar">كلامكم <em>علينا</em></span></h2>
+<div class="revs">
+<figure class="rev reveal"><span class="stars"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><q><span class="fr" lang="fr">Rien à dire, magnifique, excellent, service aux petits soins, excellente cuisine, une présentation très très soignée. Mes invités étaient aux anges.</span><span class="ar" lang="ar">ما كاين ما يتقال: رائع، ممتاز، خدمة في القمة، طبخ ممتاز وتقديم مدروس بزاف. ضيوفي كانوا فرحانين بزاف.</span></q><figcaption class="who"><span class="fr" lang="fr">Avis Google · événement organisé chez Bladi</span><span class="ar" lang="ar">تقييم Google · مناسبة نُظّمت عند بلادي</span></figcaption></figure>
+<figure class="rev reveal"><span class="stars"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><q><span class="fr" lang="fr">Un très bon restaurant, je le recommande vivement : à Maraval, des plats traditionnels (tajine et couscous).</span><span class="ar" lang="ar">مطعم مليح بزاف، ننصح بيه: في مارافال، أطباق تقليدية (طاجين وكسكس).</span></q><figcaption class="who"><span class="fr" lang="fr">Avis TripAdvisor · traduit de l’anglais</span><span class="ar" lang="ar">تقييم TripAdvisor · مترجم من الإنجليزية</span></figcaption></figure>
+</div></div></section>
+<section class="info" id="infos"><div class="wrap"><div class="kick reveal"><span class="fr" lang="fr">Infos pratiques</span><span class="ar" lang="ar">معلومات</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Venez <em>nous voir</em></span><span class="ar" lang="ar">مرحبا <em>بيكم</em></span></h2><div class="grid">
+<div class="box reveal"><h3 class="disp"><span class="fr" lang="fr">Horaires</span><span class="ar" lang="ar">الأوقات</span></h3><table class="hrs">
+<tr data-day="6"><td><span class="fr" lang="fr">Samedi</span><span class="ar" lang="ar">السبت</span></td><td><span class="fr" lang="fr">12:00 – 23:30</span><span class="ar" lang="ar">12:00 – 23:30</span></td></tr>
+<tr data-day="0"><td><span class="fr" lang="fr">Dimanche</span><span class="ar" lang="ar">الأحد</span></td><td><span class="fr" lang="fr">12:00 – 23:30</span><span class="ar" lang="ar">12:00 – 23:30</span></td></tr>
+<tr data-day="1"><td><span class="fr" lang="fr">Lundi</span><span class="ar" lang="ar">الاثنين</span></td><td><span class="fr" lang="fr">12:00 – 23:30</span><span class="ar" lang="ar">12:00 – 23:30</span></td></tr>
+<tr data-day="2"><td><span class="fr" lang="fr">Mardi</span><span class="ar" lang="ar">الثلاثاء</span></td><td><span class="fr" lang="fr">12:00 – 23:30</span><span class="ar" lang="ar">12:00 – 23:30</span></td></tr>
+<tr data-day="3"><td><span class="fr" lang="fr">Mercredi</span><span class="ar" lang="ar">الأربعاء</span></td><td><span class="fr" lang="fr">12:00 – 23:30</span><span class="ar" lang="ar">12:00 – 23:30</span></td></tr>
+<tr data-day="4"><td><span class="fr" lang="fr">Jeudi</span><span class="ar" lang="ar">الخميس</span></td><td><span class="fr" lang="fr">12:00 – 23:30</span><span class="ar" lang="ar">12:00 – 23:30</span></td></tr>
+<tr data-day="5"><td><span class="fr" lang="fr">Vendredi</span><span class="ar" lang="ar">الجمعة</span></td><td><span class="fr" lang="fr">14:00 – 23:30</span><span class="ar" lang="ar">14:00 – 23:30</span></td></tr>
+</table>
+<p class="note" style="font-size:13px;color:var(--mut);margin-top:10px"><span class="fr" lang="fr">Horaires indiqués sur Google Maps.</span><span class="ar" lang="ar">الأوقات كما في Google Maps.</span></p>
+</div>
+<div class="box reveal"><h3 class="disp"><span class="fr" lang="fr">Nous trouver</span><span class="ar" lang="ar">العنوان</span></h3><div class="cl">
+<div class="ln"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><div><span class="fr" lang="fr">Hôtel Bladi Suite, 3<sup>e</sup> périphérique, face au tribunal militaire, Maraval, Oran</span><span class="ar" lang="ar">فندق بلادي سويت، الطريق الدائري الثالث، مقابل المحكمة العسكرية، مارافال، وهران</span></div></div>
+<div class="ln"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><div><span class="ltr">0560 70 53 01</span></div></div>
+<div class="ln"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><div><span class="ltr">@restaurant_bladi_</span></div></div>
+<div class="btns"><button class="pill p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</button><button class="pill o act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="fr" lang="fr">Appeler</span><span class="ar" lang="ar">اتصل</span></button><button class="pill o act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="fr" lang="fr">Itinéraire</span><span class="ar" lang="ar">الطريق</span></button></div></div></div>
+<div class="mapbox reveal"><button type="button" class="smap act" aria-label="Carte"><img class="mimg" src="images/map.webp" alt="" loading="lazy"><span class="pulse"></span><span class="pin"></span><span class="mlabel"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Bladi</span><span class="osm">© OpenStreetMap</span></button></div>
+</div></div></section>
+<section class="cta"><img src="images/salle.webp" alt="" loading="lazy"><div class="wrap"><div class="kick reveal" style="color:var(--acc2)"><span class="fr" lang="fr">Réservations</span><span class="ar" lang="ar">الحجز</span></div><h2 class="disp h2 reveal"><span class="fr" lang="fr">Une table, une fête, <em>un souvenir</em></span><span class="ar" lang="ar">طاولة، فرحة، <em>وذكرى</em></span></h2><div class="ctas reveal" style="justify-content:center"><button class="pill p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</button><button class="pill o act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="fr" lang="fr">Appeler</span><span class="ar" lang="ar">اتصل</span></button></div></div></section>
+</main>
+<footer><div class="wrap"><div class="giant">Bladi</div>
+ <div class="fl"><span>© 2026 Restaurant Bladi · Maraval, Oran</span><span class="demo-note"><span class="fr" lang="fr">Site de démonstration</span><span class="ar" lang="ar">موقع تجريبي</span></span><span class="credit" dir="ltr">Conçu par Mahmoud · <span class="ltr">0657567567</span></span></div>
+</div></footer>
+<div class="bar" style="--barcols:3"><button class="p act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</button><button class=" act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="fr" lang="fr">Appeler</span><span class="ar" lang="ar">اتصل</span></button><button class=" act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="fr" lang="fr">Itinéraire</span><span class="ar" lang="ar">الطريق</span></button></div>
+<dialog id="demoDlg" class="demo"><div class="lock">🔒</div><h3 lang="fr">Disponible après activation</h3><h3 lang="ar">متاح بعد التفعيل</h3>
+<p><span lang="fr">Ce bouton sera activé quand le site sera mis en ligne à votre nom.</span><br><span lang="ar">هذا الزر يتفعّل عندما يوضع الموقع على الإنترنت باسمكم.</span></p>
+<button type="button" class="ok" id="dlgClose">OK</button></dialog>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), root=document.documentElement;
+  function setLang(l){root.lang=l;root.dir=(l==='ar')?'rtl':'ltr';try{localStorage.setItem('demo_lang',l)}catch(e){}
+    document.querySelectorAll('.langs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===l?'true':'false')});
+    document.title=(l==='ar'?document.body.dataset.titleAr:document.body.dataset.titleFr)}
+  var l=q.get('lang');if(!l){try{l=localStorage.getItem('demo_lang')}catch(e){}}
+  setLang(l==='ar'?'ar':'fr');
+  document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.l)})});
+  var dlg=document.getElementById('demoDlg');
+  document.querySelectorAll('.act').forEach(function(b){b.setAttribute('aria-disabled','true');b.addEventListener('click',function(e){e.preventDefault();if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','')})});
+  document.getElementById('dlgClose').addEventListener('click',function(){dlg.close?dlg.close():dlg.removeAttribute('open')});
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12}):null;
+  document.querySelectorAll('.reveal').forEach(function(el,i){if(io)io.observe(el);else el.classList.add('in')});
+  var d=new Date().getDay(); document.querySelectorAll('[data-day="'+d+'"]').forEach(function(r){r.classList.add('today')});
+  var nav=document.querySelector('.nav'); function sc(){if(nav)nav.classList.toggle('scrolled',scrollY>40)} addEventListener('scroll',sc,{passive:true}); sc();
+})();
+</script>
+</body>
+</html>

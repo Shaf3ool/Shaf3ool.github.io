@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Kaadet Zman · Cuisine traditionnelle constantinoise · Constantine · Démo</title>
+<meta name="description" content="Kaadet Zman (قعدات زمان), restaurant familial de cuisine et douceurs traditionnelles constantinoises, 9 rue des frères Neghigroud, Constantine.">
+<meta property="og:title" content="Kaadet Zman · Cuisine traditionnelle constantinoise · Constantine · Démo">
+<meta property="og:description" content="Kaadet Zman (قعدات زمان), restaurant familial de cuisine et douceurs traditionnelles constantinoises, 9 rue des frères Neghigroud, Constantine.">
+<meta name="theme-color" content="#2B1B14">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Lato:wght@400;700;900&family=Tajawal:wght@400;500;700;800&family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{overflow-x:hidden;position:relative}
+img{display:block;max-width:100%;height:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+html[lang=ar] .fr{display:none!important}
+html[lang=fr] .ar{display:none!important}
+:lang(ar){letter-spacing:0!important}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+/* demo protection */
+.watermark{position:fixed;inset:0;z-index:90;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22440%22%20height%3D%22280%22%3E%3Cg%20transform%3D%22rotate%28-28%20220%20140%29%22%3E%3Ctext%20x%3D%2220%22%20y%3D%22150%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22700%22%20fill%3D%22%25232B1B14%22%3ED%C3%89MO%20%C2%B7%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%3C/text%3E%3C/g%3E%3C/svg%3E");background-size:440px 280px;opacity:var(--wm-op,.06)}
+.ribbon{position:fixed;top:22px;inset-inline-end:-46px;z-index:95;transform:rotate(45deg);background:var(--rib-bg,#e5484d);color:var(--rib-fg,#fff);font:700 11px/1 system-ui,sans-serif;padding:7px 54px;box-shadow:0 6px 18px rgba(0,0,0,.28);pointer-events:none;white-space:nowrap;letter-spacing:.5px}
+html[dir=rtl] .ribbon{transform:rotate(-45deg)}
+dialog.demo{margin:auto;border:0;border-radius:22px;padding:30px 26px 24px;max-width:340px;width:calc(100% - 40px);text-align:center;background:#fff;color:#141414;box-shadow:0 30px 80px rgba(0,0,0,.4);font-family:system-ui,'Cairo',sans-serif}
+dialog.demo::backdrop{background:rgba(10,8,6,.62);backdrop-filter:blur(4px)}
+dialog.demo .lock{width:54px;height:54px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:#f3f0ea;font-size:24px}
+dialog.demo h3{font-size:19px;line-height:1.35;margin-bottom:2px}
+dialog.demo h3+h3{font-size:15px;color:#666;font-weight:600;margin-bottom:12px}
+dialog.demo p{font-size:14px;line-height:1.6;color:#444;margin-bottom:18px}
+dialog.demo .ok{background:#141414;color:#fff;border-radius:999px;padding:12px 30px;font-weight:700}
+.demo-note{display:inline-flex;align-items:center;gap:8px;font-size:12px;opacity:.75}
+.act[aria-disabled=true]{cursor:pointer}
+.credit{font-size:12.5px;opacity:.85}
+
+.nav .navr{margin-inline-end:52px}
+@media(min-width:760px){.nav .navr{margin-inline-end:56px}}
+
+.smap{position:relative;display:block;width:100%;min-height:300px;height:100%;overflow:hidden;padding:0;text-align:start}
+.smap .mimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--map-filter,none);transition:transform 1.2s}
+.smap:hover .mimg{transform:scale(1.04)}
+.smap .pin{position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-34px 0 0 -17px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--pin,#e5484d);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.smap .pin::after{content:"";position:absolute;inset:10px;border-radius:50%;background:#fff}
+.smap .pulse{position:absolute;left:50%;top:50%;width:80px;height:80px;margin:-40px;border-radius:50%;background:var(--pin,#e5484d);opacity:.18;animation:pl 2.4s ease-out infinite}
+@keyframes pl{from{transform:scale(.3);opacity:.35}to{transform:scale(1.6);opacity:0}}
+.smap .mlabel{position:absolute;inset-inline-start:14px;bottom:14px;display:inline-flex;gap:8px;align-items:center;background:var(--ml-bg,#111);color:var(--ml-fg,#fff);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:700}
+.smap .osm{position:absolute;inset-inline-end:8px;bottom:6px;font-size:10px;opacity:.7;background:rgba(255,255,255,.7);color:#222;padding:1px 5px;border-radius:4px}
+:root{--max:1180px}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+html[lang=ar] body{font-family:var(--f-ar)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+@media(min-width:760px){.wrap{padding:0 36px}}
+.disp{font-family:var(--f-disp);line-height:1.02;letter-spacing:-.01em;font-weight:var(--disp-w,700)}
+html[lang=ar] .disp{font-family:var(--f-ar-disp);line-height:1.3;letter-spacing:0}
+.kicker{font:700 12px/1 var(--f-body);letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+html[lang=ar] .kicker{font-family:var(--f-ar);letter-spacing:0;font-size:14.5px}
+.kicker::before{content:"";width:26px;height:2px;background:currentColor}
+h2.disp{font-size:clamp(34px,6vw,58px);margin-bottom:18px}
+.lead{font-size:17px;opacity:.86;max-width:60ch}
+section{padding:84px 0;position:relative}
+@media(min-width:900px){section{padding:110px 0}}
+.nav{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .3s,box-shadow .3s;color:#fff}
+.nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,.18);color:var(--nav-fg)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
+.logo{display:flex;flex-direction:column;line-height:1}
+.logo b{font-family:var(--f-disp);font-size:24px;letter-spacing:.01em;font-weight:var(--disp-w,700)}
+.logo small{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;opacity:.8;margin-top:5px}
+html[lang=ar] .logo small{letter-spacing:0;font-size:12px}
+.links{display:none;gap:26px;font-weight:600;font-size:14.5px}
+.links a{opacity:.85}.links a:hover{opacity:1}
+@media(min-width:1020px){.links{display:flex}}
+.navr{display:flex;align-items:center;gap:10px}
+.langs{display:flex;border:1.5px solid currentColor;border-radius:999px;padding:2px}
+.langs button{font:700 12.5px/1 system-ui,sans-serif;padding:7px 10px;border-radius:999px;min-width:34px}
+.langs button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+.navcta{display:none!important}
+@media(min-width:640px){.navcta{display:inline-flex!important}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 24px;border-radius:999px;font-weight:800;font-size:15.5px;background:var(--accent);color:var(--on-accent);box-shadow:0 12px 30px var(--accent-shadow);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:inherit;border:1.5px solid currentColor;box-shadow:none}
+.btn.small{padding:10px 16px;font-size:13.5px;box-shadow:none}
+.btn.wa{background:#25D366;color:#06301a;box-shadow:0 12px 30px rgba(37,211,102,.3)}
+.hero{min-height:100svh;display:flex;align-items:flex-end;padding:120px 0 64px;color:#fff;overflow:hidden;isolation:isolate}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(1.04);animation:kb 18s ease-out forwards;object-position:var(--hero-pos,center)}
+@keyframes kb{to{transform:scale(1.12)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--hero-grad)}
+.hero h1{font-size:clamp(46px,11vw,108px);margin:12px 0 18px;text-wrap:balance}
+.hero .sub{font-size:clamp(16px,2.2vw,20px);max-width:46ch;opacity:.93;margin-bottom:26px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.24);font-size:13.5px;font-weight:600}
+.chip svg{color:var(--star)}
+.marquee{background:var(--accent);color:var(--on-accent);overflow:hidden;padding:15px 0;white-space:nowrap;position:relative;z-index:2;direction:ltr}
+.marquee .track{display:inline-flex;gap:38px;animation:mq 34s linear infinite;font-family:var(--f-disp);font-size:24px;font-weight:var(--disp-w,700)}
+.marquee .track span::after{content:"✦";margin-left:38px;opacity:.6}
+.marquee .track span.ar{font-family:var(--f-ar-disp);font-size:22px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.about .grid{display:grid;gap:40px;align-items:center}
+@media(min-width:900px){.about .grid{grid-template-columns:1fr 1.05fr;gap:70px}}
+.about figure{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px rgba(0,0,0,.22)}
+.about figure img{width:100%;height:100%;object-fit:cover}
+.about figure figcaption{position:absolute;inset-inline-start:14px;bottom:14px;background:rgba(0,0,0,.55);color:#fff;font-size:12.5px;padding:6px 12px;border-radius:999px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:30px}
+.stats div{background:var(--card);border-radius:16px;padding:16px 10px;text-align:center;border:1px solid var(--line)}
+.stats b{display:block;font-family:var(--f-disp);font-size:30px;line-height:1;color:var(--accent);font-weight:var(--disp-w,700)}
+.stats span{font-size:12.5px;opacity:.78;display:block;margin-top:7px;line-height:1.3}
+.cards{display:grid;gap:18px;margin-top:34px}
+@media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}}
+.scard{background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}
+.scard .ph{aspect-ratio:4/3;overflow:hidden;background:var(--ph-bg)}
+.scard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.scard .ph.contain img{object-fit:contain;padding:10px}
+.scard:hover .ph img{transform:scale(1.05)}
+.scard .tx{padding:18px 20px 22px}
+.scard h3{font-family:var(--f-disp);font-size:24px;line-height:1.1;margin-bottom:6px;font-weight:var(--disp-w,700)}
+html[lang=ar] .scard h3{font-family:var(--f-ar-disp);line-height:1.4}
+.scard p{font-size:14.5px;opacity:.8}
+.scard .pr{margin-top:10px;font-weight:800;color:var(--accent)}
+.menuwrap .tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 14px;margin:26px -2px 10px;scrollbar-width:none}
+.menuwrap .tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;padding:10px 18px;border-radius:999px;border:1.5px solid var(--line);font-weight:700;font-size:14px;background:var(--card)}
+.tabs button[aria-selected=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.items{display:grid;gap:12px}
+@media(min-width:760px){.items{grid-template-columns:1fr 1fr}}
+.item{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px}
+.item .im{width:88px;height:88px;flex:none;border-radius:14px;overflow:hidden;background:var(--ph-bg)}
+.item .im img{width:100%;height:100%;object-fit:cover}
+.item .im.contain img{object-fit:contain;padding:4px}
+.item .bd{flex:1;min-width:0}
+.item h4{font-size:16.5px;line-height:1.25;font-weight:800}
+.item p{font-size:13.5px;opacity:.74;line-height:1.45;margin-top:3px}
+.item .pr{font-weight:800;color:var(--accent);white-space:nowrap;font-size:16px;padding-inline-end:6px}
+.item.noimg{padding:16px 18px}
+.mnote{font-size:12.5px;opacity:.68;margin-top:18px}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
+@media(min-width:900px){.gal{grid-template-columns:repeat(4,1fr);gap:14px}}
+.gal figure{border-radius:16px;overflow:hidden;aspect-ratio:1;background:var(--ph-bg)}
+.gal figure.wide{grid-column:span 2;aspect-ratio:2/1}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.gal figure:hover img{transform:scale(1.06)}
+.revs{display:grid;gap:16px;margin-top:30px}
+@media(min-width:900px){.revs{grid-template-columns:repeat(3,1fr)}}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;display:flex;flex-direction:column;gap:14px}
+.rev .st{display:flex;gap:2px;color:var(--star)}
+.rev q{font-size:16px;line-height:1.6;quotes:"« " " »"}
+html[lang=ar] .rev q{quotes:"«" "»"}
+.rev cite{font-style:normal;font-size:13px;opacity:.68;margin-top:auto}
+.rating{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.rating .big{font-family:var(--f-disp);font-size:64px;line-height:1;color:var(--accent);font-weight:var(--disp-w,700)}
+.rating .st{display:flex;color:var(--star)}
+.visit .grid{display:grid;gap:22px}
+@media(min-width:900px){.visit .grid{grid-template-columns:1fr 1.1fr;gap:36px}}
+.vcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px}
+.vcard h3{font-family:var(--f-disp);font-size:26px;margin-bottom:12px;font-weight:var(--disp-w,700)}
+html[lang=ar] .vcard h3{font-family:var(--f-ar-disp)}
+.hours{list-style:none;margin-bottom:20px}
+.hours li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.hours li.today{font-weight:800;color:var(--accent)}
+.info p{display:flex;gap:10px;align-items:flex-start;margin:10px 0;font-size:15px}
+.info p svg{flex:none;margin-top:3px;color:var(--accent)}
+.vbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.map{border-radius:var(--radius);overflow:hidden;min-height:340px;border:1px solid var(--line)}
+.branches{display:grid;gap:10px;margin:8px 0 6px}
+.branch{border:1px solid var(--line);border-radius:14px;padding:13px 15px}
+.branch b{display:block;font-size:15.5px}
+.branch span{font-size:14px;opacity:.82}
+.band{background:var(--band-bg);color:var(--band-fg);text-align:center;overflow:hidden}
+.band h2{font-size:clamp(36px,7vw,72px);margin-bottom:14px}
+.band p{opacity:.88;margin:0 auto 26px;max-width:52ch}
+.band .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+footer{background:var(--foot-bg);color:var(--foot-fg);padding:46px 0 120px;text-align:center}
+@media(min-width:760px){footer{padding-bottom:50px}}
+footer .fl{display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:14px;font-size:13px;opacity:.88}
+footer .flogo{font-family:var(--f-disp);font-size:30px;font-weight:var(--disp-w,700)}
+html[lang=ar] footer .flogo{font-family:var(--f-ar-disp)}
+.bar{position:fixed;inset:auto 10px calc(10px + env(safe-area-inset-bottom)) 10px;z-index:70;display:flex;gap:8px;background:var(--bar-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;padding:7px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.bar button{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 6px;border-radius:999px;font-weight:800;font-size:14px;color:var(--bar-fg)}
+.bar button.main{background:var(--accent);color:var(--on-accent)}
+.bar button.wa{background:#25D366;color:#06301a}
+@media(min-width:760px){.bar{display:none}}
+
+[hidden]{display:none!important}
+
+:root{--bg:#F5EDE0;--ink:#2B1B14;--card:#FFF9F0;--line:rgba(80,50,20,.16);--accent:#8E2424;--on-accent:#FFF4E2;--accent-shadow:rgba(142,36,36,.25);--star:#C99A3E;--radius:20px;--ph-bg:#E8DCC8;
+--f-disp:'Playfair Display',Georgia,serif;--f-body:'Lato',system-ui,sans-serif;--f-ar:'Tajawal',system-ui,sans-serif;--f-ar-disp:'Amiri',serif;--disp-w:700;
+--nav-bg:rgba(43,27,20,.9);--nav-fg:#F5EDE0;--hero-grad:linear-gradient(180deg,rgba(20,10,5,.55) 0%,rgba(20,10,5,.2) 40%,rgba(20,10,5,.88) 100%);
+--band-bg:#1F3B33;--band-fg:#F5EDE0;--foot-bg:#2B1B14;--foot-fg:#F5EDE0;--bar-bg:rgba(43,27,20,.92);--bar-fg:#F5EDE0;--pin:#8E2424;--rib-bg:#8E2424}
+.ruqaa{font-family:'Aref Ruqaa',serif;font-size:34px;color:#E2B964;line-height:1.2}
+.logo b{font-family:'Aref Ruqaa',serif!important;font-size:27px;font-weight:700}
+.hero h1{font-size:clamp(40px,8.5vw,84px);font-style:italic}
+html[lang=ar] .hero h1{font-style:normal;font-size:clamp(40px,9vw,80px)}
+.hero .btn.ghost{color:#fff}
+.carte{background:#EFE3CF}
+.toc{display:grid;gap:22px;margin-top:30px}
+@media(min-width:900px){.toc{grid-template-columns:1fr 1fr;gap:30px}}
+.chap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;position:relative}
+.chap::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,154,62,.45);border-radius:14px;pointer-events:none}
+.chap h3{font-family:var(--f-disp);font-size:26px;color:var(--accent);margin-bottom:10px;text-align:center}
+html[lang=ar] .chap h3{font-family:var(--f-ar-disp)}
+.chap ul{list-style:none}
+.chap li{display:flex;align-items:flex-end;gap:8px;padding:11px 4px;border-bottom:1px dashed var(--line)}
+.chap li:last-child{border-bottom:0}
+.chap li b{display:block;font-size:16.5px}
+.chap li small{display:block;font-size:13px;opacity:.7}
+.chap .ld{flex:1;border-bottom:1px dotted rgba(80,50,20,.35);margin-bottom:6px;min-width:12px}
+.chap .pr{font-weight:800;color:var(--accent);white-space:nowrap}
+.galsec{background:#2B1B14;color:#F5EDE0}
+.galsec .kicker{color:#E2B964}
+.band .btn.ghost{color:#F5EDE0}
+.band .ruqaa{color:#E2B964}
+.reviews{background:#F5EDE0}
+</style>
+</head>
+<body data-title-fr="Kaadet Zman · Cuisine traditionnelle constantinoise · Constantine · Démo" data-title-ar="قعدات زمان · مأكولات وحلويات تقليدية قسنطينية · نموذج">
+<div class="watermark" aria-hidden="true"></div><div class="ribbon" aria-hidden="true">DÉMO · نموذج</div>
+<header class="nav"><div class="wrap">
+ <a href="#top" class="logo"><b>قعدات زمان</b><small>Kaadet Zman · Constantine</small></a>
+ <nav class="links"><a href="#specialites"><span class="fr" lang="fr">Spécialités</span><span class="ar" lang="ar">التخصصات</span></a><a href="#carte"><span class="fr" lang="fr">La carte</span><span class="ar" lang="ar">المنيو</span></a><a href="#galerie"><span class="fr" lang="fr">Galerie</span><span class="ar" lang="ar">الصور</span></a><a href="#avis"><span class="fr" lang="fr">Avis</span><span class="ar" lang="ar">الآراء</span></a><a href="#infos"><span class="fr" lang="fr">Visite</span><span class="ar" lang="ar">زيارتنا</span></a></nav>
+ <div class="navr"><div class="langs" role="group" aria-label="Langue / اللغة"><button type="button" data-l="fr" aria-pressed="true">FR</button><button type="button" data-l="ar" aria-pressed="false">ع</button></div><button class="btn small navcta act" type="button"><span class="fr" lang="fr">Réserver</span><span class="ar" lang="ar">احجز</span></button></div>
+</div></header>
+<main id="top">
+
+<section class="hero"><img src="images/hero.webp" alt="La salle traditionnelle de Kaadet Zman, plateaux en cuivre">
+ <div class="wrap">
+  <div class="ruqaa reveal">قعدات زمان</div>
+  <h1 class="disp reveal"><span class="fr" lang="fr">La cuisine de nos grands-mères, au cœur de Constantine</span><span class="ar" lang="ar">ماكلة جدّاتنا، في قلب قسنطينة</span></h1>
+  <p class="sub reveal"><span class="fr" lang="fr">Plats et douceurs traditionnels constantinois, servis sur les plateaux en cuivre d’antan.</span><span class="ar" lang="ar">أطباق وحلويات قسنطينية تقليدية، تتقدّم على صواني النحاس كيما زمان.</span></p>
+  <div class="chips reveal" style="margin-bottom:24px"><span class="chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg> 4,8 / 5 · 436 <span class="fr" lang="fr">avis Google</span><span class="ar" lang="ar">تقييم Google</span></span><span class="chip"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> <span class="fr" lang="fr">Rue des frères Neghigroud</span><span class="ar" lang="ar">نهج الإخوة نغيغرود</span></span></div>
+  <div class="ctas reveal"><button class="btn wa act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg><span class="fr" lang="fr">Réserver sur WhatsApp</span><span class="ar" lang="ar">احجز عبر واتساب</span></button><a class="btn ghost" href="#carte"><span class="fr" lang="fr">Voir la carte</span><span class="ar" lang="ar">شوف المنيو</span></a></div>
+ </div>
+</section>
+<section class="about" id="histoire"><div class="wrap grid">
+ <figure class="reveal"><img src="images/facade.webp" alt="La devanture de Kaadet Zman, Constantine" loading="lazy"><figcaption><span class="fr" lang="fr">9, rue des frères Neghigroud</span><span class="ar" lang="ar">9 نهج الإخوة نغيغرود</span></figcaption></figure>
+ <div>
+  <div class="kicker reveal"><span class="fr" lang="fr">Days of yesteryear</span><span class="ar" lang="ar">قعدات زمان</span></div>
+  <h2 class="disp reveal"><span class="fr" lang="fr">Une maison constantinoise, une table de famille</span><span class="ar" lang="ar">دار قسنطينية، وطابلة تاع عائلة</span></h2>
+  <p class="lead reveal"><span class="fr" lang="fr">Chez Kaadet Zman, on vient goûter Constantine comme on la mange à la maison : chakhchoukha, trida, chorba frik, tajine sfarjel, et pour finir le m'halbi, le tbikh ou la jawzia. Les visiteurs parlent autant des plats que de l'accueil d'une famille « d'une extrême sympathie » et d'un décor de cuivres ciselés et de souvenirs d'antan.</span><span class="ar" lang="ar">في قعدات زمان، تذوق قسنطينة كيما تتّاكل في الدار: الشخشوخة، التريدة، شربة الفريك، طاجين السفرجل، وفي اللخر المحلبي، الطبيخ ولا الجوزية. الزوار يهدرو على الماكلة وعلى استقبال عائلة «لطيفة بزاف» وديكور النحاس المنقوش وذكريات زمان.</span></p>
+  <div class="stats reveal"><div><b>4,8★</b><span><span class="fr" lang="fr">436 avis Google</span><span class="ar" lang="ar">436 تقييم Google</span></span></div><div><b><span class="fr" lang="fr">Salé</span><span class="ar" lang="ar">مالح</span></b><span><span class="fr" lang="fr">&amp; sucré, fait maison</span><span class="ar" lang="ar">وحلو، صنعة الدار</span></span></div><div><b><span class="fr" lang="fr">Famille</span><span class="ar" lang="ar">عائلي</span></b><span><span class="fr" lang="fr">restaurant familial</span><span class="ar" lang="ar">مطعم عائلي</span></span></div></div>
+ </div>
+</div></section>
+<section class="sig" id="specialites"><div class="wrap">
+ <div class="kicker reveal"><span class="fr" lang="fr">Les spécialités</span><span class="ar" lang="ar">التخصصات</span></div>
+ <h2 class="disp reveal"><span class="fr" lang="fr">Ce que les clients reviennent manger</span><span class="ar" lang="ar">واش يرجعو الزبائن ياكلو</span></h2>
+ <div class="cards"><article class="scard reveal"><div class="ph"><img src="images/chakhchoukha.webp" alt="Chakhchoukha" loading="lazy"></div><div class="tx"><h3><span class="fr" lang="fr">Chakhchoukha</span><span class="ar" lang="ar">الشخشوخة</span></h3><p><span class="fr" lang="fr">La star de la maison selon les clients : feuilles de pâte roulées à la main, sauce rouge, pois chiches et viande.</span><span class="ar" lang="ar">نجمة الدار حسب الزبائن: رقاق مفتول باليد، مرق أحمر، حمص ولحم.</span></p></div></article><article class="scard reveal"><div class="ph"><img src="images/chorba.webp" alt="Chorba frik &amp; bourek" loading="lazy"></div><div class="tx"><h3><span class="fr" lang="fr">Chorba frik &amp; bourek</span><span class="ar" lang="ar">الشربة فريك والبوراك</span></h3><p><span class="fr" lang="fr">La soupe de blé vert concassé et les bricks croustillantes, comme à la maison.</span><span class="ar" lang="ar">شربة الفريك والبوراك المقرمش، كيما في الدار.</span></p></div></article><article class="scard reveal"><div class="ph"><img src="images/douceurs.webp" alt="Douceurs constantinoises" loading="lazy"></div><div class="tx"><h3><span class="fr" lang="fr">Douceurs constantinoises</span><span class="ar" lang="ar">حلويات قسنطينية</span></h3><p><span class="fr" lang="fr">Du sucré comme du salé : les gâteaux traditionnels de la ville des ponts.</span><span class="ar" lang="ar">من الحلو للمالح: حلويات تقليدية من مدينة الجسور.</span></p></div></article></div>
+</div></section>
+<section class="carte" id="carte"><div class="wrap">
+ <div class="kicker reveal"><span class="fr" lang="fr">La carte</span><span class="ar" lang="ar">المنيو</span></div>
+ <h2 class="disp reveal"><span class="fr" lang="fr">Plats &amp; douceurs d’antan</span><span class="ar" lang="ar">أطباق وحلويات زمان</span></h2>
+ <div class="toc"><div class="chap reveal"><h3><span class="fr" lang="fr">Plats traditionnels</span><span class="ar" lang="ar">الأطباق التقليدية</span></h3><ul><li><div><b><span class="fr" lang="fr">Chakhchoukha</span><span class="ar" lang="ar">الشخشوخة</span></b><small><span class="fr" lang="fr">Pâte roulée, sauce rouge, pois chiches</span><span class="ar" lang="ar">رقاق، مرق أحمر، حمص</span></small></div><span class="ld"></span><span class="pr ltr"></span></li><li><div><b><span class="fr" lang="fr">Trida</span><span class="ar" lang="ar">التريدة</span></b><small><span class="fr" lang="fr">Petits carrés de pâte en sauce</span><span class="ar" lang="ar">مربعات عجين في المرق</span></small></div><span class="ld"></span><span class="pr ltr"></span></li><li><div><b><span class="fr" lang="fr">Couscous</span><span class="ar" lang="ar">الكسكسي</span></b><small><span class="fr" lang="fr">Légumes et viande</span><span class="ar" lang="ar">بالخضرة واللحم</span></small></div><span class="ld"></span><span class="pr ltr"></span></li><li><div><b><span class="fr" lang="fr">Chorba frik</span><span class="ar" lang="ar">شربة فريك</span></b><small><span class="fr" lang="fr">Soupe de blé vert concassé</span><span class="ar" lang="ar">شربة القمح الأخضر</span></small></div><span class="ld"></span><span class="pr ltr"></span></li><li><div><b><span class="fr" lang="fr">Tajine sfarjel</span><span class="ar" lang="ar">طاجين السفرجل</span></b><small><span class="fr" lang="fr">Sucré-salé aux coings</span><span class="ar" lang="ar">حلو ومالح بالسفرجل</span></small></div><span class="ld"></span><span class="pr ltr">1 200 DA</span></li></ul></div><div class="chap reveal"><h3><span class="fr" lang="fr">Douceurs d’antan</span><span class="ar" lang="ar">حلويات زمان</span></h3><ul><li><div><b><span class="fr" lang="fr">M'halbi</span><span class="ar" lang="ar">المحلبي</span></b><small><span class="fr" lang="fr">Crème de riz au lait, eau de fleur d'oranger</span><span class="ar" lang="ar">كريمة الأرز بالحليب وماء الزهر</span></small></div><span class="ld"></span><span class="pr ltr">800 DA</span></li><li><div><b><span class="fr" lang="fr">Tbikh</span><span class="ar" lang="ar">الطبيخ</span></b><small><span class="fr" lang="fr">Gelée d’amande, miel, noix et eau de rose</span><span class="ar" lang="ar">هلام اللوز، عسل، جوز وماء الورد</span></small></div><span class="ld"></span><span class="pr ltr">1 200 DA</span></li><li><div><b><span class="fr" lang="fr">Chrik</span><span class="ar" lang="ar">الشريك</span></b><small><span class="fr" lang="fr">La brioche moelleuse de Constantine</span><span class="ar" lang="ar">الشريك القسنطيني الطري</span></small></div><span class="ld"></span><span class="pr ltr"></span></li><li><div><b><span class="fr" lang="fr">Jawzia</span><span class="ar" lang="ar">الجوزية</span></b><small><span class="fr" lang="fr">La douceur aux noix de Constantine</span><span class="ar" lang="ar">حلوى الجوز القسنطينية</span></small></div><span class="ld"></span><span class="pr ltr"></span></li></ul></div></div>
+ <p class="mnote"><span class="fr" lang="fr">Prix relevés sur la carte du restaurant (photo publique Google Maps) ; autres prix sur place.</span><span class="ar" lang="ar">الأسعار من منيو المطعم (صورة عامة على Google Maps)؛ باقي الأسعار في المحل.</span></p>
+</div></section>
+<section class="galsec" id="galerie"><div class="wrap">
+ <div class="kicker reveal"><span class="fr" lang="fr">En images</span><span class="ar" lang="ar">بالصور</span></div>
+ <h2 class="disp reveal"><span class="fr" lang="fr">Entrez, installez-vous</span><span class="ar" lang="ar">ادخلو، ارتاحو</span></h2>
+ <div class="gal"><figure class="reveal wide"><img src="images/g0.webp" alt="" loading="lazy"></figure><figure class="reveal"><img src="images/g1.webp" alt="" loading="lazy"></figure><figure class="reveal"><img src="images/g2.webp" alt="" loading="lazy"></figure><figure class="reveal"><img src="images/g3.webp" alt="" loading="lazy"></figure><figure class="reveal"><img src="images/g4.webp" alt="" loading="lazy"></figure><figure class="reveal"><img src="images/g5.webp" alt="" loading="lazy"></figure><figure class="reveal"><img src="images/g6.webp" alt="" loading="lazy"></figure></div>
+</div></section>
+<section class="reviews" id="avis"><div class="wrap">
+ <div class="kicker reveal"><span class="fr" lang="fr">Ils en parlent</span><span class="ar" lang="ar">واش قالو الزبائن</span></div>
+ <div class="rating reveal"><span class="big">4,8</span><div><div class="st"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><div><span class="fr" lang="fr">436 avis sur Google</span><span class="ar" lang="ar">436 تقييم على Google</span></div></div></div>
+ <div class="revs"><figure class="rev reveal"><div class="st"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><q><span class="fr" lang="fr">Une superbe adresse pour découvrir les spécialités constantinoises, maîtrisées à la perfection. Une mention spéciale pour la chakhchoukha qui est incroyable !</span><span class="ar" lang="ar">عنوان رائع لاكتشاف الأطباق القسنطينية، متقنة على أكمل وجه. تنويه خاص بالشخشوخة، رائعة!</span></q><cite><span class="fr" lang="fr">Cliente, avis Google</span><span class="ar" lang="ar">زبونة، تقييم Google</span></cite></figure><figure class="rev reveal"><div class="st"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><q><span class="fr" lang="fr">Nous avons pris trida et chakhchoukha : des plats généreux et délicieux. Service impeccable et prix abordables.</span><span class="ar" lang="ar">أخذنا التريدة والشخشوخة: أطباق سخية ولذيذة. خدمة ممتازة وأسعار معقولة.</span></q><cite><span class="fr" lang="fr">Client, avis Google</span><span class="ar" lang="ar">زبون، تقييم Google</span></cite></figure><figure class="rev reveal"><div class="st"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div><q><span class="fr" lang="fr">Une véritable expérience gastronomique constantinoise ! La décoration est magnifique et typiquement traditionnelle, avec ses cuivres ciselés.</span><span class="ar" lang="ar">تجربة قسنطينية حقيقية! الديكور رائع وتقليدي بامتياز، بالنحاس المنقوش.</span></q><cite><span class="fr" lang="fr">Client, avis Google</span><span class="ar" lang="ar">زبون، تقييم Google</span></cite></figure></div>
+</div></section>
+<section class="visit" id="infos"><div class="wrap">
+ <div class="kicker reveal"><span class="fr" lang="fr">Nous rendre visite</span><span class="ar" lang="ar">زورونا</span></div>
+ <h2 class="disp reveal"><span class="fr" lang="fr">Une table vous attend</span><span class="ar" lang="ar">الطابلة تستناكم</span></h2>
+ <div class="grid">
+  <div class="vcard reveal">
+   <h3><span class="fr" lang="fr">Horaires</span><span class="ar" lang="ar">الأوقات</span></h3>
+   <ul class="hours"><li data-day="6"><span><span class="fr" lang="fr">Samedi</span><span class="ar" lang="ar">السبت</span></span><span><span class="ltr">11:30 – 20:00</span></span></li><li data-day="0"><span><span class="fr" lang="fr">Dimanche</span><span class="ar" lang="ar">الأحد</span></span><span><span class="ltr">11:30 – 20:00</span></span></li><li data-day="1"><span><span class="fr" lang="fr">Lundi</span><span class="ar" lang="ar">الإثنين</span></span><span><span class="ltr">11:30 – 20:00</span></span></li><li data-day="2"><span><span class="fr" lang="fr">Mardi</span><span class="ar" lang="ar">الثلاثاء</span></span><span><span class="ltr">11:30 – 20:00</span></span></li><li data-day="3"><span><span class="fr" lang="fr">Mercredi</span><span class="ar" lang="ar">الأربعاء</span></span><span><span class="ltr">11:30 – 20:00</span></span></li><li data-day="4"><span><span class="fr" lang="fr">Jeudi</span><span class="ar" lang="ar">الخميس</span></span><span><span class="ltr">11:30 – 20:00</span></span></li><li data-day="5"><span><span class="fr" lang="fr">Vendredi</span><span class="ar" lang="ar">الجمعة</span></span><span><span class="ltr">15:00 – 20:00</span></span></li></ul>
+   <div class="info">
+    <p><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span><span class="fr" lang="fr">9, rue des frères Neghigroud, Constantine</span><span class="ar" lang="ar">9 نهج الإخوة نغيغرود، قسنطينة</span></span></p>
+    <p><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="ltr">0549 88 89 06</span></p>
+   </div>
+   <div class="vbtns"><button class="btn wa act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg><span class="fr" lang="fr">Réserver sur WhatsApp</span><span class="ar" lang="ar">احجز عبر واتساب</span></button><button class="btn ghost act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="fr" lang="fr">Appeler</span><span class="ar" lang="ar">اتصال</span></button></div>
+  </div>
+  <div class="map reveal"><button type="button" class="smap act" aria-label="Itinéraire"><img class="mimg" src="images/map.webp" width="900" height="640" alt="Carte : Kaadet Zman, Constantine" loading="lazy"><span class="pulse"></span><span class="pin"></span><span class="mlabel"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="fr" lang="fr">Itinéraire</span><span class="ar" lang="ar">الاتجاهات</span></span><small class="osm">© OpenStreetMap</small></button></div>
+ </div>
+</div></section>
+<section class="band"><div class="wrap reveal">
+ <div class="ruqaa" style="font-size:44px;margin-bottom:6px">قعدات زمان</div>
+ <h2 class="disp"><span class="fr" lang="fr">Réservez votre qaada</span><span class="ar" lang="ar">احجزو قعدتكم</span></h2>
+ <p><span class="fr" lang="fr">En famille ou entre amis, un message suffit.</span><span class="ar" lang="ar">مع العائلة ولا الصحاب، ميساج واحد يكفي.</span></p>
+ <div class="ctas"><button class="btn wa act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg><span class="fr" lang="fr">Réserver sur WhatsApp</span><span class="ar" lang="ar">احجز عبر واتساب</span></button><button class="btn ghost act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="fr" lang="fr">Appeler</span><span class="ar" lang="ar">اتصال</span></button></div>
+</div></section>
+</main>
+<footer><div class="wrap"><div class="flogo"><span style="font-family:Aref Ruqaa,serif">قعدات زمان</span></div>
+ <div class="fl"><span>© 2026 Kaadet Zman · Constantine</span><span class="credit"><span class="fr" lang="fr">Conçu par Mahmoud</span><span class="ar" lang="ar">تصميم محمود</span> · <span class="ltr">0657 56 75 67</span></span><span class="demo-note"><span class="fr" lang="fr">Site de démonstration, non officiel</span><span class="ar" lang="ar">موقع تجريبي غير رسمي</span></span></div></div></footer>
+<div class="bar"><button class="wa act" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</button><button class="act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="fr" lang="fr">Appeler</span><span class="ar" lang="ar">اتصال</span></button><button class="act" type="button"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="fr" lang="fr">Itinéraire</span><span class="ar" lang="ar">الطريق</span></button></div>
+<dialog id="demoDlg" class="demo"><div class="lock">&#128274;</div><h3 lang="fr">Disponible après activation</h3><h3 lang="ar">متاح بعد التفعيل</h3><p><span lang="fr">Ce bouton sera activé quand le site sera mis en ligne à votre nom.</span><br><span lang="ar">هذا الزر يتفعّل عندما يوضع الموقع على الإنترنت باسمكم.</span></p><button type="button" class="ok" id="dlgClose">OK</button></dialog>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), root=document.documentElement;
+  function setLang(l){root.lang=l;root.dir=(l==='ar')?'rtl':'ltr';try{localStorage.setItem('demo_lang',l)}catch(e){}
+    document.querySelectorAll('.langs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===l?'true':'false')});
+    document.title=(l==='ar'?document.body.dataset.titleAr:document.body.dataset.titleFr)}
+  var l=q.get('lang');if(!l){try{l=localStorage.getItem('demo_lang')}catch(e){}}
+  setLang(l==='ar'?'ar':'fr');
+  document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.l)})});
+  var dlg=document.getElementById('demoDlg');
+  document.querySelectorAll('.act').forEach(function(b){b.setAttribute('aria-disabled','true');b.addEventListener('click',function(e){e.preventDefault();if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','')})});
+  document.getElementById('dlgClose').addEventListener('click',function(){dlg.close?dlg.close():dlg.removeAttribute('open')});
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){if(io)io.observe(el);else el.classList.add('in')});
+  var d=new Date().getDay(); document.querySelectorAll('[data-day="'+d+'"]').forEach(function(r){r.classList.add('today')});
+  var nav=document.querySelector('.nav'); function sc(){if(nav)nav.classList.toggle('scrolled',scrollY>40)} addEventListener('scroll',sc,{passive:true}); sc();
+  document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){var g=b.closest('.menuwrap');g.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b?'true':'false')});g.querySelectorAll('.cat').forEach(function(c){c.hidden=c.dataset.cat!==b.dataset.cat})})});
+})();
+</script>
+</body>
+</html>
