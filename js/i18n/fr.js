@@ -143,6 +143,11 @@ export const FR = {
   "ct_title": "Construisons <em>quelque chose</em>.",
   "ct_lead": "Sites web, systèmes, marques. Basé à Alger, je travaille partout dans le monde en anglais, arabe et allemand.",
   "to_top": "Haut de page ↑",
+  // --- 3D project cards (Venezia Premium, Gesture 3D) ---
+  "type_premium_scroll": "Concept premium animé au scroll",
+  "type_gesture_demo": "Démo 3D pilotée par les gestes",
+  "city_web_lab": "Expérience web",
+  "view_demo": "Voir la démo en ligne",
 };
 
 // Page title per language

@@ -1,11 +1,13 @@
 /* ==========================================================
    main.js — entry point. Imports each module and starts it.
-   Modules: lang (EN/FR), nav (header), reveal (scroll fades).
+   Modules: lang (EN/FR), nav (header), reveal (scroll fades),
+   tilt (3D tilt on the project cards).
    ========================================================== */
 
 import { initLang } from "./modules/lang.js";
 import { initNav } from "./modules/nav.js";
 import { initReveal } from "./modules/reveal.js";
+import { initTilt } from "./modules/tilt.js";
 
 /**
  * Boots the page: flags JS, sets the footer year, starts modules.
@@ -22,6 +24,7 @@ function boot() {
   initLang();
   initNav();
   initReveal();
+  initTilt();
 }
 
 boot();

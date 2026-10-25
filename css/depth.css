@@ -1,0 +1,71 @@
+/* ==========================================================
+   depth.css — light CSS 3D on the project cards only.
+   GPU-cheap transforms (rotate + translate), no library.
+   - Every visitor: each card's screenshot tips up from a
+     slight 3D lean when it scrolls into view (one CSS
+     transition, no per-frame work).
+   - Mouse users: the screenshot tilts toward the pointer,
+     with a soft glare and the phone mock floating forward.
+   - prefers-reduced-motion: nothing here moves at all.
+   ========================================================== */
+
+/* ---------- Grid helper: the last two cards sit side by side ---------- */
+.cases .case.case--half { grid-column: auto; }
+
+/* ---------- Static depth (all visitors, no motion needed) ---------- */
+.case__media {
+  /* Inputs written by js/modules/tilt.js (0 when idle) */
+  --rx: 0;            /* pointer x, −1 … 1 */
+  --ry: 0;            /* pointer y, −1 … 1 */
+  --gx: 50%;          /* glare centre x */
+  --gy: 50%;          /* glare centre y */
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+/* Soft glare layer above both screenshots (hidden until tilting) */
+.case__media::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--gx) var(--gy), rgba(255, 255, 255, .22), transparent 55%);
+  opacity: 0; transition: opacity .45s var(--ease);
+}
+/* The phone mock reads as a layer in front of the desktop shot */
+.case__phone { z-index: 1; }
+
+/* ---------- Motion (only when the visitor has not asked for less) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Before it is seen: the screenshot leans back in 3D */
+  .js .case .case__media {
+    transform: perspective(1400px) rotateX(14deg) scale(.96);
+    transition: transform 1.2s var(--ease), box-shadow .5s var(--ease);
+  }
+  /* Once revealed (reveal.js adds .is-in): stands up, then follows the tilt */
+  .js .case.is-in .case__media {
+    transform: perspective(1400px) rotateX(calc(var(--ry) * -4deg)) rotateY(calc(var(--rx) * 5deg)) scale(1);
+  }
+  /* Slight delay so the tip-up follows the card's own fade-in */
+  .js .case.is-in .case__media { transition-delay: calc(var(--delay, 0s) + .08s); }
+
+  /* While the pointer is on a card: quick response, deeper shadow, glare on */
+  .case__media.is-tilting {
+    transition: transform .18s linear, box-shadow .5s var(--ease) !important;
+    transition-delay: 0s !important;
+    box-shadow: 0 34px 60px -28px rgba(20, 20, 20, .45);
+  }
+  .case__media.is-tilting::after { opacity: 1; }
+
+  /* Parallax inside the card: desktop shot drifts a little, phone more
+     (the shot only drifts while hovered, when it is scaled up to cover) */
+  .case__desk {
+    transform: translate3d(calc(var(--rx) * -7px), calc(var(--ry) * -5px), 0);
+    transition: transform .6s var(--ease);
+  }
+  .case__media:hover .case__desk {
+    transform: scale(1.06) translate3d(calc(var(--rx) * -7px), calc(var(--ry) * -5px), 0);
+  }
+  .case__phone {
+    transform: translate3d(calc(var(--rx) * 12px), 0, 0);
+    transition: transform .6s var(--ease), box-shadow .5s var(--ease);
+  }
+  .case__media.is-tilting .case__phone { box-shadow: 0 28px 60px rgba(0, 0, 0, .42); }
+}
