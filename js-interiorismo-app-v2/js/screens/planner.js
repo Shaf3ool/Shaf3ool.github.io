@@ -1,21 +1,24 @@
 /* =========================================================================
    screens/planner.js — "Diseña tu espacio": the room planner
-   2D floor-plan editor (SVG, drag / rotate / duplicate / delete), live 3D
-   view (planner3d.js), 2D / 3D / split toggle, catalogue, finish picker,
-   room size, AR-style preview and "send to Jorge" (demo).
+   A full-stage architectural 2D plan (SVG): drag / rotate / duplicate /
+   delete pieces with live distance guides, two drawing modes (colour
+   finishes or technical line drawing), catalogue, finish picker that
+   repaints floor and walls, room size, the 2D "Ver en tu espacio" preview
+   and "send to Jorge" (demo).
    ========================================================================= */
 import { t, onLang } from '../i18n.js';
-import { h, icon, toast, esc } from '../ui.js';
+import { h, icon, toast } from '../ui.js';
 import { CATALOGUE, FINISHES } from '../data.js';
-import { finishURL, tileSizeCm } from '../textures.js';
+import { finishURL } from '../textures.js';
 import { pieceSVG, pieceThumb } from '../furniture2d.js';
+import { planBox, planDefs, roomMarkup, annotationMarkup, guidesMarkup, pickDoor } from '../plan2d.js';
 import { saveDesign, uid } from '../store.js';
-import { hasWebGL } from '../planner3d.js';
 import { openSendSheet } from './send.js';
 
-const MARGIN = 70;           // cm of breathing room around the plan
-const SNAP = 5;              // position snap (cm)
-const ROT_SNAP = 15;         // rotation snap (deg)
+const ROT_SNAP = 15;         // rotation magnet step (deg)
+const ROT_PULL = 5;          // within this many degrees the magnet snaps
+const ID = 'pl';             // defs id prefix for the editor SVG
+const MODE_KEY = 'jsi-v2-planmode';
 
 /**
  * What: catalogue entry for a type.
@@ -47,41 +50,51 @@ function clampItem(item, room) {
 }
 
 /**
+ * What: read the remembered drawing mode (colour / technical).
+ * In:  —
+ * Out: 'color' | 'tech'
+ */
+function savedMode() {
+  try { return localStorage.getItem(MODE_KEY) === 'tech' ? 'tech' : 'color'; } catch (e) { return 'color'; }
+}
+
+/**
  * What: mount the planner screen for one design.
  * In:  host (Element), design (object, edited in place), ctx { close(), openAR(type), goDesigns() }
- * Out: { el, destroy() }
+ * Out: { el, pause(), destroy() }
  */
 export function mountPlanner(host, design, ctx) {
-  let view = 'split';
+  let mode = savedMode();
   let tab = 'furniture';
   let selected = null;
-  let room3d = null;
-  const webgl = hasWebGL();
+  let fresh = null;          // id of a piece just added (plays the pop-in once)
   // --- markup ------------------------------------------------------------
   const el = h(`
     <section class="screen planner" aria-label="Planner">
       <header class="pl-top">
         <button class="icon-btn" data-act="back" aria-label="Back">${icon('back')}</button>
         <div class="pl-title"><span class="pl-name"></span><span class="pl-meta"></span></div>
+        <button class="icon-btn place-btn" data-act="ar" data-i18n-aria="pl.ar">${icon('place', 21)}</button>
         <button class="pill-btn primary sm" data-act="save">${icon('send', 16)}<span data-i18n="pl.save"></span></button>
       </header>
-      <div class="pl-seg seg" role="tablist">
-        <button data-view="2d" data-i18n="pl.view2d"></button>
-        <button data-view="3d" data-i18n="pl.view3d"></button>
-        <button data-view="split" data-i18n="pl.split"></button>
+      <div class="pl-seg seg two" role="tablist">
+        <button data-mode="color" data-i18n="pl.mode.color"></button>
+        <button data-mode="tech" data-i18n="pl.mode.tech"></button>
         <span class="seg-ind"></span>
       </div>
-      <div class="pl-stage" data-view="split">
-        <div class="pane pane-2d"><svg class="plan" xmlns="http://www.w3.org/2000/svg"></svg></div>
-        <div class="pane pane-3d"><div class="gl-host"></div><div class="gl-badge">3D</div></div>
+      <div class="pl-stage">
+        <svg class="plan" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="pl-legend" aria-hidden="true">
+          <span class="lg" data-slot="floor"><i></i><b></b></span>
+          <span class="lg" data-slot="wall"><i></i><b></b></span>
+        </div>
         <div class="pl-hint"></div>
         <div class="sel-bar" hidden>
-          <span class="sel-name"></span>
+          <span class="sel-name"></span><span class="sel-size"></span>
           <button data-act="rot" aria-label="Rotate">${icon('rotate', 18)}</button>
           <button data-act="dup" aria-label="Duplicate">${icon('copy', 18)}</button>
           <button data-act="del" aria-label="Delete">${icon('trash', 18)}</button>
         </div>
-        <button class="ar-fab" data-act="ar">${icon('ar', 18)}<span data-i18n="pl.ar"></span></button>
       </div>
       <div class="pl-panel">
         <div class="pl-tabs">
@@ -94,7 +107,6 @@ export function mountPlanner(host, design, ctx) {
     </section>`);
   host.appendChild(el);
   const svg = el.querySelector('svg.plan');
-  const stage = el.querySelector('.pl-stage');
   const body = el.querySelector('.pl-body');
   const selBar = el.querySelector('.sel-bar');
 
@@ -107,31 +119,6 @@ export function mountPlanner(host, design, ctx) {
    */
   function persist() { clearTimeout(saveT); saveT = setTimeout(() => saveDesign(design), 350); }
 
-  // --- 3D ----------------------------------------------------------------
-  /**
-   * What: create the 3D view on demand (lazy import keeps first paint light).
-   * In:  —
-   * Out: Promise<void>
-   */
-  async function ensure3D() {
-    if (room3d || !webgl) return;
-    const { Room3D } = await import('../planner3d.js');
-    if (destroyed) return;
-    room3d = new Room3D(el.querySelector('.gl-host'));
-    room3d.set(design, selected);
-    room3d.setActive(view !== '2d');
-  }
-  let raf3d = 0;
-  /**
-   * What: push the design to the 3D view at most once per frame.
-   * In:  —
-   * Out: —
-   */
-  function sync3D() {
-    if (!room3d || raf3d) return;
-    raf3d = requestAnimationFrame(() => { raf3d = 0; room3d && room3d.set(design, selected); });
-  }
-
   // --- 2D plan rendering -------------------------------------------------
   /**
    * What: (re)draw the whole SVG plan from the design.
@@ -139,32 +126,19 @@ export function mountPlanner(host, design, ctx) {
    * Out: —
    */
   function draw2D() {
-    const { w, d } = design.room;
-    svg.setAttribute('viewBox', `${-MARGIN} ${-MARGIN} ${w + MARGIN * 2} ${d + MARGIN * 2}`);
-    const ts = tileSizeCm(design.floor);
-    const items = design.items.map((it) => itemMarkup(it)).join('');
-    // dimension labels in metres
-    const mw = (w / 100).toFixed(2), md = (d / 100).toFixed(2);
-    svg.innerHTML = `
-      <defs>
-        <pattern id="pfloor" patternUnits="userSpaceOnUse" width="${ts}" height="${ts}"><image href="${finishURL(design.floor)}" width="${ts}" height="${ts}"/></pattern>
-        <pattern id="pgrid" patternUnits="userSpaceOnUse" width="50" height="50"><path d="M50 0H0V50" fill="none" stroke="#B8643E" stroke-opacity=".08" stroke-width="1"/></pattern>
-        <filter id="pshadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#3b2a1e" flood-opacity=".22"/></filter>
-      </defs>
-      <rect x="${-MARGIN}" y="${-MARGIN}" width="${w + MARGIN * 2}" height="${d + MARGIN * 2}" fill="url(#pgrid)"/>
-      <rect x="0" y="0" width="${w}" height="${d}" fill="url(#pfloor)"/>
-      <rect x="0" y="0" width="${w}" height="${d}" fill="#fff" fill-opacity=".12"/>
-      <rect x="-7" y="-7" width="${w + 14}" height="${d + 14}" fill="none" stroke="#3E3027" stroke-width="14"/>
-      <g class="dims" font-family="DM Sans, sans-serif" font-size="17" fill="#8B7563" text-anchor="middle">
-        <line x1="0" y1="-38" x2="${w}" y2="-38" stroke="#B9A48F" stroke-width="1.2"/>
-        <line x1="0" y1="-46" x2="0" y2="-30" stroke="#B9A48F" stroke-width="1.2"/><line x1="${w}" y1="-46" x2="${w}" y2="-30" stroke="#B9A48F" stroke-width="1.2"/>
-        <rect x="${w / 2 - 34}" y="-50" width="68" height="24" rx="12" fill="#F7F1E8"/>
-        <text x="${w / 2}" y="-32">${mw} m</text>
-        <line x1="-38" y1="0" x2="-38" y2="${d}" stroke="#B9A48F" stroke-width="1.2"/>
-        <line x1="-46" y1="0" x2="-30" y2="0" stroke="#B9A48F" stroke-width="1.2"/><line x1="-46" y1="${d}" x2="-30" y2="${d}" stroke="#B9A48F" stroke-width="1.2"/>
-        <g transform="translate(-38 ${d / 2}) rotate(-90)"><rect x="-34" y="-12" width="68" height="24" rx="12" fill="#F7F1E8"/><text x="0" y="6">${md} m</text></g>
-      </g>
-      <g class="items">${items}</g>`;
+    // the door is placed once (where it doesn't hit furniture) and then kept
+    if (!design.door) design.door = pickDoor(design, halfExtents);
+    const b = planBox(design.room);
+    svg.setAttribute('viewBox', `${b.x} ${b.y} ${b.w} ${b.h}`);
+    svg.classList.toggle('tech', mode === 'tech');
+    const labels = { area: t('pl.area'), floor: `${t('pl.floor')} ${t('fin.' + design.floor).toLowerCase()}`, wall: `${t('pl.wall')} ${t('fin.' + design.wall).toLowerCase()}` };
+    svg.innerHTML = `${planDefs(design, ID)}
+      <rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" fill="url(#${ID}-grid)"/>
+      <g class="room">${roomMarkup(design, ID, mode)}</g>
+      <g class="items">${design.items.map((it) => itemMarkup(it)).join('')}</g>
+      <g class="annot">${annotationMarkup(design, labels)}</g>
+      <g class="guides"></g>`;
+    fresh = null;
     updateMeta();
   }
 
@@ -176,20 +150,22 @@ export function mountPlanner(host, design, ctx) {
   function itemMarkup(it) {
     const c = cat(it.type);
     const sel = it.id === selected;
+    // selection: dashed frame + stalk + round rotate handle (big invisible hit area)
+    const hy = -c.d / 2 - 52;
     const chrome = sel ? `
-      <rect x="${-c.w / 2 - 8}" y="${-c.d / 2 - 8}" width="${c.w + 16}" height="${c.d + 16}" rx="10" fill="#B8643E" fill-opacity=".06" stroke="#B8643E" stroke-width="2.2" stroke-dasharray="7 6"/>
-      <line x1="0" y1="${-c.d / 2 - 8}" x2="0" y2="${-c.d / 2 - 40}" stroke="#B8643E" stroke-width="2.2"/>
-      <circle class="rot-handle" cx="0" cy="${-c.d / 2 - 52}" r="13" fill="#fff" stroke="#B8643E" stroke-width="3"/>
-      <circle cx="0" cy="${-c.d / 2 - 52}" r="4.5" fill="#B8643E" pointer-events="none"/>
-      <circle class="rot-handle hit" cx="0" cy="${-c.d / 2 - 52}" r="30" fill="transparent"/>` : '';
+      <rect x="${-c.w / 2 - 8}" y="${-c.d / 2 - 8}" width="${c.w + 16}" height="${c.d + 16}" rx="10" fill="#B8643E" fill-opacity=".05" stroke="#B8643E" stroke-width="2.2" stroke-dasharray="7 6"/>
+      <line x1="0" y1="${-c.d / 2 - 8}" x2="0" y2="${hy + 13}" stroke="#B8643E" stroke-width="2.2"/>
+      <circle cx="0" cy="${hy}" r="13" fill="#fff" stroke="#B8643E" stroke-width="3"/>
+      <path d="M-5 ${hy - 1}a5.5 5.5 0 1 1 1.6 4.2" fill="none" stroke="#B8643E" stroke-width="2" stroke-linecap="round" pointer-events="none"/>
+      <circle class="rot-handle" cx="0" cy="${hy}" r="32" fill="transparent"/>` : '';
     return `<g class="piece ${sel ? 'sel' : ''}" data-id="${it.id}" transform="translate(${it.x} ${it.y}) rotate(${it.rot})">
-      <g filter="url(#pshadow)">${pieceSVG(it.type, c.w, c.d)}</g>
+      <g class="body ${it.id === fresh ? 'pop' : ''}" filter="url(#${ID}-sh)">${pieceSVG(it.type, c.w, c.d)}</g>
       <rect class="hit" x="${-c.w / 2}" y="${-c.d / 2}" width="${c.w}" height="${c.d}" fill="transparent"/>
       ${chrome}</g>`;
   }
 
   /**
-   * What: refresh header name / area and the selection bar.
+   * What: refresh header, finish legend, selection bar and hint.
    * In:  —
    * Out: —
    */
@@ -197,10 +173,20 @@ export function mountPlanner(host, design, ctx) {
     el.querySelector('.pl-name').textContent = design.name;
     const area = ((design.room.w * design.room.d) / 10000).toFixed(1);
     el.querySelector('.pl-meta').textContent = `${area} ${t('pl.area')} · ${design.items.length} ${t('ds.pieces')}${design.demo ? ' · ' + t('common.demo') : ''}`;
+    // legend chips: swatch + finish name for floor and wall
+    el.querySelectorAll('.pl-legend .lg').forEach((lg) => {
+      const key = design[lg.dataset.slot];
+      lg.querySelector('i').style.backgroundImage = `url(${finishURL(key, 128)})`;
+      lg.querySelector('b').textContent = `${t('pl.' + lg.dataset.slot)} · ${t('fin.' + key)}`;
+    });
     const it = design.items.find((i) => i.id === selected);
     selBar.hidden = !it;
-    if (it) selBar.querySelector('.sel-name').textContent = t('f.' + it.type);
-    el.querySelector('.pl-hint').textContent = view === '3d' ? t('pl.hint3d') : t('pl.hint');
+    if (it) {
+      const c = cat(it.type);
+      selBar.querySelector('.sel-name').textContent = t('f.' + it.type);
+      selBar.querySelector('.sel-size').textContent = `${c.w}×${c.d}`;
+    }
+    el.querySelector('.pl-hint').textContent = t('pl.hint');
   }
 
   /**
@@ -211,6 +197,16 @@ export function mountPlanner(host, design, ctx) {
   function moveNode(it) {
     const g = svg.querySelector(`g.piece[data-id="${it.id}"]`);
     if (g) g.setAttribute('transform', `translate(${it.x} ${it.y}) rotate(${it.rot})`);
+  }
+
+  /**
+   * What: draw (or clear) the live guides for the piece being handled.
+   * In:  it (item or null), gmode ('move' | 'rot')
+   * Out: —
+   */
+  function drawGuides(it, gmode) {
+    const g = svg.querySelector('g.guides'); if (!g) return;
+    g.innerHTML = it ? guidesMarkup(it, halfExtents(it), design.room, gmode, -cat(it.type).d / 2 - 52) : '';
   }
 
   // --- pointer interaction on the plan -----------------------------------
@@ -226,14 +222,19 @@ export function mountPlanner(host, design, ctx) {
     return { x: p.x, y: p.y };
   }
   let drag = null;
+  let rafMove = 0;
   svg.addEventListener('pointerdown', (e) => {
     const g = e.target.closest('g.piece');
-    if (!g) { select(null); return; }
+    if (!g) { if (selected) select(null); return; }
     const it = design.items.find((i) => i.id === g.dataset.id);
     const p = toPlan(e);
     // rotate handle vs body drag
     if (e.target.classList.contains('rot-handle')) drag = { it, mode: 'rot' };
-    else { drag = { it, mode: 'move', dx: p.x - it.x, dy: p.y - it.y, moved: false }; if (selected !== it.id) select(it.id, true); }
+    else { drag = { it, mode: 'move', dx: p.x - it.x, dy: p.y - it.y }; if (selected !== it.id) select(it.id); }
+    // "pick up" feel: deeper shadow while the finger holds the piece
+    const node = svg.querySelector(`g.piece[data-id="${it.id}"]`);
+    if (node) { node.classList.add('lift'); node.querySelector('.body').setAttribute('filter', `url(#${ID}-lift)`); }
+    drawGuides(it, drag.mode);
     svg.setPointerCapture(e.pointerId);
     e.preventDefault();
   });
@@ -241,16 +242,18 @@ export function mountPlanner(host, design, ctx) {
     if (!drag) return;
     const p = toPlan(e), it = drag.it;
     if (drag.mode === 'move') {
-      it.x = Math.round((p.x - drag.dx) / SNAP) * SNAP;
-      it.y = Math.round((p.y - drag.dy) / SNAP) * SNAP;
-      drag.moved = true;
+      // follow the finger 1:1 (1 cm resolution), no jumpy grid
+      it.x = Math.round(p.x - drag.dx);
+      it.y = Math.round(p.y - drag.dy);
     } else {
-      // angle from piece centre to pointer, 0° = handle straight up
-      const a = (Math.atan2(p.y - it.y, p.x - it.x) * 180) / Math.PI + 90;
-      it.rot = ((Math.round(a / ROT_SNAP) * ROT_SNAP) % 360 + 360) % 360;
+      // angle from piece centre to pointer, 0° = handle straight up; soft magnet every 15°
+      const a = (((Math.atan2(p.y - it.y, p.x - it.x) * 180) / Math.PI + 90) % 360 + 360) % 360;
+      const near = Math.round(a / ROT_SNAP) * ROT_SNAP;
+      it.rot = (Math.abs(a - near) <= ROT_PULL ? near : Math.round(a)) % 360;
     }
     clampItem(it, design.room);
-    moveNode(it); sync3D();
+    // paint at most once per frame
+    if (!rafMove) rafMove = requestAnimationFrame(() => { rafMove = 0; if (drag) { moveNode(drag.it); drawGuides(drag.it, drag.mode); } });
   });
   /**
    * What: finish a drag / rotate gesture and save.
@@ -260,56 +263,53 @@ export function mountPlanner(host, design, ctx) {
   function endDrag() {
     if (!drag) return;
     drag = null;
-    draw2D(); sync3D(); persist();
+    cancelAnimationFrame(rafMove); rafMove = 0;
+    draw2D(); persist();
   }
   svg.addEventListener('pointerup', endDrag);
   svg.addEventListener('pointercancel', endDrag);
 
   /**
-   * What: select a piece (or none) and refresh the views.
-   * In:  id (string|null), keepDrag (bool: don't redraw while a drag starts)
+   * What: select a piece (or none) and redraw.
+   * In:  id (string|null)
    * Out: —
    */
-  function select(id, keepDrag = false) {
+  function select(id) {
     selected = id;
     draw2D();
-    // after a redraw the dragged node is new; the drag object keeps the item ref
-    if (keepDrag) { /* nothing else needed */ }
-    if (room3d) room3d.select(id);
   }
 
   // --- selection actions ---------------------------------------------------
   selBar.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     const it = design.items.find((i) => i.id === selected); if (!it) return;
-    if (b.dataset.act === 'rot') { it.rot = (it.rot + 90) % 360; clampItem(it, design.room); }
+    if (b.dataset.act === 'rot') { it.rot = (Math.round(it.rot / 90) * 90 + 90) % 360; clampItem(it, design.room); }
     if (b.dataset.act === 'dup') {
+      // the copy lands slightly offset so both stay visible
       const copy = { ...it, id: uid('p'), x: it.x + 30, y: it.y + 30 };
-      clampItem(copy, design.room); design.items.push(copy); selected = copy.id;
+      clampItem(copy, design.room); design.items.push(copy); selected = copy.id; fresh = copy.id;
     }
     if (b.dataset.act === 'del') { design.items = design.items.filter((i) => i.id !== it.id); selected = null; }
-    draw2D(); sync3D(); persist();
+    draw2D(); persist();
   });
 
-  // --- view toggle -------------------------------------------------------
+  // --- drawing mode toggle -------------------------------------------------
   /**
-   * What: switch between 2D, 3D and split views.
-   * In:  v ('2d' | '3d' | 'split')
+   * What: switch between the colour-finish plan and the technical drawing.
+   * In:  m ('color' | 'tech')
    * Out: —
    */
-  function setView(v) {
-    view = v;
-    stage.dataset.view = v;
+  function setMode(m) {
+    mode = m;
+    try { localStorage.setItem(MODE_KEY, m); } catch (e) { /* private mode */ }
     el.querySelectorAll('.pl-seg button').forEach((b, i) => {
-      b.classList.toggle('on', b.dataset.view === v);
-      if (b.dataset.view === v) el.querySelector('.seg-ind').style.transform = `translateX(${i * 100}%)`;
+      b.classList.toggle('on', b.dataset.mode === m);
+      if (b.dataset.mode === m) el.querySelector('.seg-ind').style.transform = `translateX(${i * 100}%)`;
     });
-    if (v !== '2d') ensure3D();
-    if (room3d) { room3d.setActive(v !== '2d'); room3d.resize(); }
-    updateMeta();
+    el.querySelector('.pl-stage').classList.toggle('tech', m === 'tech');
+    draw2D();
   }
-  el.querySelector('.pl-seg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setView(b.dataset.view); });
-  if (!webgl) el.querySelector('.pane-3d').innerHTML = `<div class="nogl">${icon('info', 22)}<p>${t('pl.nowebgl')}</p></div>`;
+  el.querySelector('.pl-seg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) setMode(b.dataset.mode); });
 
   // --- bottom panel ------------------------------------------------------
   /**
@@ -324,6 +324,7 @@ export function mountPlanner(host, design, ctx) {
         <button class="cat-tile" data-type="${c.type}"><span class="cat-art">${pieceThumb(c.type, c.w, c.d)}</span>
         <span class="cat-name">${t('f.' + c.type)}</span><span class="cat-size">${c.w}×${c.d}</span></button>`).join('')}</div>`;
     } else if (tab === 'finishes') {
+      // one row per slot; the chip is the procedural texture itself
       const row = (slot) => `<div class="fin-row"><span class="fin-label">${t('pl.' + slot)}</span><div class="fin-chips">${FINISHES.map((f) => `
         <button class="fin-chip ${design[slot] === f.key ? 'on' : ''}" data-slot="${slot}" data-key="${f.key}" style="background-image:url(${finishURL(f.key, 128)})">
         <span>${t('fin.' + f.key)}</span></button>`).join('')}</div></div>`;
@@ -344,13 +345,19 @@ export function mountPlanner(host, design, ctx) {
       const n = design.items.length % 5;
       const it = { id: uid('p'), type: tile.dataset.type, x: design.room.w / 2 + (n - 2) * 15, y: design.room.d / 2 + (n - 2) * 15, rot: 0 };
       clampItem(it, design.room);
-      design.items.push(it); selected = it.id;
-      draw2D(); sync3D(); persist();
+      design.items.push(it); selected = it.id; fresh = it.id;
+      draw2D(); persist();
       toast(`${t('f.' + it.type)} ${t('pl.added')}`, 'plus');
       return;
     }
     const chip = e.target.closest('.fin-chip');
-    if (chip) { design[chip.dataset.slot] = chip.dataset.key; drawPanel(); draw2D(); sync3D(); persist(); }
+    if (chip) {
+      design[chip.dataset.slot] = chip.dataset.key;
+      drawPanel(); draw2D(); persist();
+      // brief highlight on the legend chip that changed
+      const lg = el.querySelector(`.pl-legend .lg[data-slot="${chip.dataset.slot}"]`);
+      lg.classList.remove('flash'); void lg.offsetWidth; lg.classList.add('flash');
+    }
   });
   body.addEventListener('input', (e) => {
     const r = e.target.closest('input[data-dim]'); if (!r) return;
@@ -358,49 +365,46 @@ export function mountPlanner(host, design, ctx) {
     design.items.forEach((it) => clampItem(it, design.room));
     r.nextElementSibling.textContent = (r.value / 100).toFixed(2) + ' m';
     body.querySelector('.dim-area span').textContent = `${((design.room.w * design.room.d) / 10000).toFixed(1)} ${t('pl.area')}`;
-    draw2D(); sync3D(); persist();
+    draw2D(); persist();
   });
 
-  // --- header + AR actions -----------------------------------------------
+  // --- header + preview actions --------------------------------------------
   el.addEventListener('click', (e) => {
     const b = e.target.closest('[data-act]'); if (!b) return;
     if (b.dataset.act === 'back') { saveDesign(design); ctx.close(); }
     if (b.dataset.act === 'save') {
       saveDesign(design);
-      openSendSheet(design, { onSaved: () => { draw2D(); }, goDesigns: () => { ctx.close(); ctx.goDesigns(); } });
+      openSendSheet(design, { onSaved: () => { draw2D(); }, goDesigns: () => { ctx.close(); ctx.goDesigns(); }, goProgress: () => { ctx.close(); ctx.goProgress(); } });
     }
     if (b.dataset.act === 'ar') {
+      // preview the selected piece, else the first piece that isn't a rug
       const it = design.items.find((i) => i.id === selected);
       ctx.openAR(it ? it.type : (design.items.find((i) => i.type !== 'tapete') || { type: 'sofa' }).type);
     }
   });
 
   // --- language refresh ----------------------------------------------------
-  const offLang = onLang(() => { drawPanel(); draw2D(); if (!webgl) el.querySelector('.nogl p').textContent = t('pl.nowebgl'); });
-  let destroyed = false;
+  const offLang = onLang(() => { drawPanel(); draw2D(); });
 
   // --- first render ------------------------------------------------------
-  draw2D(); drawPanel(); setView(view);
+  drawPanel(); setMode(mode);
 
   return {
     el,
     /**
-     * What: pause the 3D loop when another layer covers the planner (AR).
+     * What: kept for the app shell's API (the 2D plan has no loop to pause).
      * In:  on (bool)
      * Out: —
      */
-    pause(on) { if (room3d) room3d.setActive(!on && view !== '2d'); },
+    pause() { /* nothing runs in the background */ },
     /**
-     * What: tear down the planner and free the 3D view.
+     * What: tear down the planner.
      * In:  —
      * Out: —
      */
     destroy() {
-      destroyed = true;
-      clearTimeout(saveT); cancelAnimationFrame(raf3d);
+      clearTimeout(saveT); cancelAnimationFrame(rafMove);
       offLang();
-      if (room3d) room3d.destroy();
-      room3d = null;
       el.remove();
     },
   };

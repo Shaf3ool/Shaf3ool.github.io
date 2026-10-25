@@ -640,3 +640,34 @@ export const TEMPLATES = {
   },
   blanco: { room: { w: 400, d: 360 }, floor: 'roble', wall: 'chukum', items: [] },
 };
+
+
+// --- Demo client project for the progress tracker (all DEMO, labelled) ------
+// Photos are Jorge Santana's real renders used as stand-ins (credited in UI).
+// st: done | now | next · date strings are demo milestones.
+export const PROJECT = {
+  key: 'mezquite',
+  name: 'Casa Mezquite',
+  hero: 'img/bano-sereno-1-sm.webp',
+  phases: [
+    { k: 'design',   date: { es: '02 sep', en: 'Sep 02' }, st: 'done' },
+    { k: 'approval', date: { es: '23 sep', en: 'Sep 23' }, st: 'done' },
+    { k: 'buy',      date: { es: '14 oct', en: 'Oct 14' }, st: 'now' },
+    { k: 'build',    date: { es: '11 nov', en: 'Nov 11' }, st: 'next' },
+    { k: 'handover', date: { es: 'feb',    en: 'Feb' },    st: 'next' },
+  ],
+  // recent updates, newest first (photo = his render, credited)
+  updates: [
+    { k: 'u1', img: 'img/bano-sereno-2-sm.webp', ago: 2 },
+    { k: 'u2', img: 'img/bano-chukum-1-sm.webp', ago: 5 },
+    { k: 'u3', img: 'img/cocina-neutra-1-sm.webp', ago: 9 },
+  ],
+  // finish approvals waiting for the client (finish = procedural swatch key)
+  approvals: [
+    { id: 'ap1', finish: 'travertino' },
+    { id: 'ap2', finish: 'chukum' },
+    { id: 'ap3', finish: 'nogal' },
+  ],
+  base: 54,          // % complete before the pending approvals
+  perApproval: 4,    // % each approved finish adds
+};

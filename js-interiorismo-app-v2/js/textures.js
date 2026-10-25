@@ -1,7 +1,7 @@
 /* =========================================================================
    textures.js — procedural material textures drawn on <canvas>
-   One canvas per finish, reused by: the 2D plan (as SVG pattern image),
-   the 3D room (THREE.CanvasTexture) and the swatch chips (CSS background).
+   One canvas per finish, reused by: the 2D plan (floor and wall fills as
+   SVG pattern images), the approval swatches and the chips (CSS background).
    No image files, no AI: everything is drawn by code from a seeded RNG.
    ========================================================================= */
 

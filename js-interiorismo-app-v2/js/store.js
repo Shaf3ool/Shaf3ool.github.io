@@ -43,7 +43,7 @@ function seed() {
   // the second demo shows the "in review" timeline
   b.status = 'review'; b.updated = Date.now() - 1000 * 60 * 60 * 26;
   a.updated = Date.now() - 1000 * 60 * 40;
-  return { designs: [a, b], board: ['bano-chukum', 'loft'], booking: null, onboarded: false };
+  return { designs: [a, b], board: ['bano-chukum', 'loft'], booking: null, onboarded: false, approvals: {}, approvalNotes: {} };
 }
 
 // --- load once ------------------------------------------------------------

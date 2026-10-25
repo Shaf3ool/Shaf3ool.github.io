@@ -1,22 +1,42 @@
 /* =========================================================================
-   ar.js — "Ver en tu espacio": AR-style preview in the browser
-   Rear camera via getUserMedia (only after the user taps), a transparent
-   Three.js layer with the chosen piece + soft contact shadow on top.
-   Drag = move on the floor, pinch = scale, button = rotate.
-   No camera / permission denied → graceful fallback over one of Jorge's
-   renders. Nothing is recorded or uploaded. Not real AR (no surface tracking).
+   ar.js — "Ver en tu espacio": 2D preview over the camera
+   Rear camera via getUserMedia (only after the user taps). On top, the
+   piece's own floor-plan drawing laid on the floor (foreshortened, soft
+   shadow) with its real measurements. Drag = move, pinch = scale and
+   twist, button = rotate 45°. No camera / permission denied → preview
+   over one of Jorge's renders. Nothing is recorded or uploaded; it is
+   not real AR (no surface tracking, no measuring).
    ========================================================================= */
-import * as THREE from 'three';
 import { t } from './i18n.js';
 import { h, icon, toast } from './ui.js';
 import { CATALOGUE } from './data.js';
-import { buildPiece, disposePiece } from './models.js';
-import { hasWebGL } from './planner3d.js';
+import { pieceSVG } from './furniture2d.js';
 
 const FALLBACK_IMG = 'img/recamara-2.webp';
+const FLOOR_K = 0.56;         // vertical squash that lays the drawing on the floor
 
 /**
- * What: open the AR layer over the app.
+ * What: padding (cm) around a piece's drawing so chairs / stools fit.
+ * In:  type (catalogue type)
+ * Out: number
+ */
+const padFor = (type) => (type === 'mesa' ? 60 : type === 'isla' ? 46 : 10);
+
+/**
+ * What: standalone SVG of one piece, 1 user unit = 1 px at scale 1.
+ * In:  c (catalogue entry)
+ * Out: { svg: markup string, vw, vh }
+ */
+function pieceArt(c) {
+  const p = padFor(c.type), vw = c.w + p * 2, vh = c.d + p * 2;
+  // dashed footprint guide (the piece's real width × depth) under the drawing
+  const guide = `<rect x="${-c.w / 2 - 5}" y="${-c.d / 2 - 5}" width="${c.w + 10}" height="${c.d + 10}" rx="8" fill="#FFFFFF" fill-opacity=".16" stroke="#FFFFFF" stroke-width="2.4" stroke-dasharray="9 7"/>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-vw / 2} ${-vh / 2} ${vw} ${vh}" width="${vw}" height="${vh}">${guide}${pieceSVG(c.type, c.w, c.d)}</svg>`;
+  return { svg, vw, vh };
+}
+
+/**
+ * What: open the preview layer over the app.
  * In:  startType (catalogue type), opts { onClose() }
  * Out: —
  */
@@ -26,13 +46,12 @@ export function openAR(startType = 'sofa', opts = {}) {
     <div class="ar" role="dialog" aria-modal="true">
       <video class="ar-video" playsinline muted autoplay></video>
       <img class="ar-bg" alt="" src="${FALLBACK_IMG}" width="1440" height="1440" hidden>
-      <div class="ar-gl"></div>
+      <div class="ar-floor"><div class="ar-piece"></div><span class="ar-dim"></span></div>
       <div class="ar-top">
         <button class="icon-btn glass" data-act="close" aria-label="${t('ar.close')}">${icon('close')}</button>
         <div class="ar-status glass"><i class="dot"></i><span></span></div>
         <button class="icon-btn glass" data-act="rot" aria-label="${t('ar.rotate')}">${icon('rotate')}</button>
       </div>
-      <div class="ar-reticle"></div>
       <p class="ar-hint glass">${t('ar.hint')}</p>
       <div class="ar-bottom">
         <div class="ar-chips">${CATALOGUE.filter((c) => c.type !== 'tapete').map((c) => `<button class="ar-chip" data-type="${c.type}">${t('f.' + c.type)}</button>`).join('')}</div>
@@ -58,7 +77,13 @@ export function openAR(startType = 'sofa', opts = {}) {
   requestAnimationFrame(() => el.classList.add('open'));
   const video = el.querySelector('.ar-video');
   const bg = el.querySelector('.ar-bg');
-  let stream = null, three = null, type = startType;
+  const floor = el.querySelector('.ar-floor');
+  const pieceEl = el.querySelector('.ar-piece');
+  const dimEl = el.querySelector('.ar-dim');
+  let stream = null, type = startType, closed = false;
+  // placement state: centre (px), scale (px per cm), rotation (deg)
+  const st = { x: 0, y: 0, s: 1, rot: 0, placed: false };
+  let art = null, artImg = null;
 
   /**
    * What: show which mode we are in (live camera or fallback preview).
@@ -105,138 +130,97 @@ export function openAR(startType = 'sofa', opts = {}) {
    */
   function stopCamera() { if (stream) stream.getTracks().forEach((tr) => tr.stop()); stream = null; }
 
-  // --- Three.js overlay ----------------------------------------------------
+  // --- the piece -----------------------------------------------------------
   /**
-   * What: create the transparent 3D layer with the piece and a contact shadow.
+   * What: apply the placement state to the drawing and its size label.
    * In:  —
-   * Out: state object { renderer, scene, camera, piece, ... }
+   * Out: —
    */
-  function initThree() {
-    const host = el.querySelector('.ar-gl');
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    host.appendChild(renderer.domElement);
-    const scene = new THREE.Scene();
-    scene.add(new THREE.HemisphereLight('#FFF6EA', '#9C8570', 1.3));
-    const sun = new THREE.DirectionalLight('#FFE8D0', 2.2);
-    sun.position.set(-2, 5, 3); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
-    sun.shadow.camera.left = -3; sun.shadow.camera.right = 3; sun.shadow.camera.top = 3; sun.shadow.camera.bottom = -3;
-    sun.shadow.radius = 6;
-    scene.add(sun);
-    // camera at eye height, almost level (like a phone held upright)
-    const camera = new THREE.PerspectiveCamera(60, 1, 0.05, 60);
-    camera.position.set(0, 1.5, 0.6);
-    camera.lookAt(0, 1.3, -4);
-    const shadow = new THREE.Mesh(new THREE.PlaneGeometry(12, 12), new THREE.ShadowMaterial({ opacity: 0.32 }));
-    shadow.rotation.x = -Math.PI / 2; shadow.receiveShadow = true;
-    scene.add(shadow);
-    const holder = new THREE.Group();
-    holder.position.set(0, 0, -4.2);
-    scene.add(holder);
-    return { renderer, scene, camera, holder, piece: null, scale: 1, raf: 0, dirty: true };
+  function paint() {
+    if (!art) return;
+    pieceEl.style.transform = `translate(${st.x}px, ${st.y}px) scale(1, ${FLOOR_K}) rotate(${st.rot}deg) scale(${st.s})`;
+    // label sits just below the piece's on-screen footprint
+    const c = CATALOGUE.find((x) => x.type === type), a = (st.rot * Math.PI) / 180;
+    const hy = (Math.abs(Math.sin(a)) * art.vw / 2 + Math.abs(Math.cos(a)) * art.vh / 2) * st.s * FLOOR_K;
+    dimEl.style.transform = `translate(${st.x}px, ${st.y + hy + 16}px) translateX(-50%)`;
+    dimEl.textContent = `${t('f.' + c.type)} · ${c.w} × ${c.d} cm`;
   }
 
   /**
-   * What: swap the displayed piece.
+   * What: swap the displayed piece and fit it to the view.
    * In:  ty (catalogue type)
    * Out: —
    */
   function setPiece(ty) {
     type = ty;
     el.querySelectorAll('.ar-chip').forEach((b) => b.classList.toggle('on', b.dataset.type === ty));
-    if (!three) return;
-    if (three.piece) { three.holder.remove(three.piece); disposePiece(three.piece); }
     const c = CATALOGUE.find((x) => x.type === ty);
-    three.piece = buildPiece(ty, c.w, c.d);
-    three.holder.add(three.piece);
-    fitScale(c);
-    three.dirty = true;
+    art = pieceArt(c);
+    pieceEl.innerHTML = art.svg;
+    pieceEl.style.width = art.vw + 'px'; pieceEl.style.height = art.vh + 'px';
+    pieceEl.style.margin = `${-art.vh / 2}px 0 0 ${-art.vw / 2}px`;
+    // an <img> copy of the drawing is what the capture paints
+    artImg = new Image();
+    artImg.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(art.svg);
+    // big pieces start at ~62% of the width, small ones at a natural size
+    const W = el.clientWidth || 390, H = el.clientHeight || 844;
+    st.s = Math.min(1.5, (0.62 * W) / Math.max(art.vw, art.vh));
+    if (!st.placed) { st.x = W / 2; st.y = H * 0.62; st.placed = true; }
+    pieceEl.classList.remove('drop'); void pieceEl.offsetWidth; pieceEl.classList.add('drop');
+    paint();
   }
 
-  /**
-   * What: start big pieces at a scale that fits ~70% of the visible width
-   *       (small pieces stay at real size); pinch changes it afterwards.
-   * In:  c (catalogue entry)
-   * Out: —
-   */
-  function fitScale(c) {
-    const cam = three.camera;
-    const dist = cam.position.distanceTo(three.holder.position);
-    const vfov = THREE.MathUtils.degToRad(cam.fov);
-    const visW = 2 * dist * Math.tan(vfov / 2) * (cam.aspect || 0.5);
-    three.scale = Math.min(1, (0.7 * visW) / (Math.max(c.w, c.d) / 100));
-    three.holder.scale.setScalar(three.scale);
-  }
-
-  /**
-   * What: fit renderer to the layer size.
-   * In:  —
-   * Out: —
-   */
-  function resize() {
-    if (!three) return;
-    const w = el.clientWidth, hh = el.clientHeight;
-    three.renderer.setSize(w, hh, false);
-    three.camera.aspect = w / hh; three.camera.updateProjectionMatrix();
-    if (three.piece) fitScale(CATALOGUE.find((x) => x.type === type));
-    three.dirty = true;
-  }
-
-  /**
-   * What: render loop (on demand + gentle idle float of the reticle).
-   * In:  —
-   * Out: —
-   */
-  function loop() {
-    if (!three || closed) return;
-    if (three.dirty) { three.renderer.render(three.scene, three.camera); three.dirty = false; }
-    three.raf = requestAnimationFrame(loop);
-  }
-
-  // --- gestures: drag to move, pinch to scale ----------------------------
+  // --- gestures: drag to move, pinch to scale + twist ----------------------
   const pointers = new Map();
-  let pinch0 = 0, scale0 = 1;
-  const ray = new THREE.Raycaster(), plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hit = new THREE.Vector3();
-  const glHost = el.querySelector('.ar-gl');
-
+  let g0 = null;
   /**
-   * What: project a screen point onto the floor plane and move the piece there.
-   * In:  x, y (client px)
+   * What: snapshot the gesture start (one or two fingers).
+   * In:  —
    * Out: —
    */
-  function moveTo(x, y) {
-    const r = glHost.getBoundingClientRect();
-    const ndc = new THREE.Vector2(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1);
-    ray.setFromCamera(ndc, three.camera);
-    if (ray.ray.intersectPlane(plane, hit)) {
-      three.holder.position.set(THREE.MathUtils.clamp(hit.x, -3, 3), 0, THREE.MathUtils.clamp(hit.z, -9, -1.2));
-      three.dirty = true;
+  function startGesture() {
+    const ps = [...pointers.values()];
+    if (ps.length === 1) g0 = { kind: 'drag', px: ps[0].x, py: ps[0].y, x: st.x, y: st.y };
+    else if (ps.length >= 2) {
+      const [a, b] = ps;
+      g0 = { kind: 'pinch', d: Math.hypot(a.x - b.x, a.y - b.y) || 1, ang: Math.atan2(b.y - a.y, b.x - a.x), s: st.s, rot: st.rot };
     }
   }
-  glHost.addEventListener('pointerdown', (e) => {
-    if (!three) return;
-    pointers.set(e.pointerId, e); glHost.setPointerCapture(e.pointerId);
-    if (pointers.size === 2) { const [a, b] = [...pointers.values()]; pinch0 = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); scale0 = three.scale; }
+  floor.addEventListener('pointerdown', (e) => {
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    floor.setPointerCapture(e.pointerId);
+    startGesture();
+    pieceEl.classList.add('held');
     el.querySelector('.ar-hint').classList.add('gone');
   });
-  glHost.addEventListener('pointermove', (e) => {
-    if (!three || !pointers.has(e.pointerId)) return;
-    pointers.set(e.pointerId, e);
-    if (pointers.size === 1) moveTo(e.clientX, e.clientY);
-    else if (pointers.size === 2 && pinch0) {
-      const [a, b] = [...pointers.values()];
-      three.scale = THREE.MathUtils.clamp(scale0 * (Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY) / pinch0), 0.25, 1.8);
-      three.holder.scale.setScalar(three.scale); three.dirty = true;
+  floor.addEventListener('pointermove', (e) => {
+    if (!pointers.has(e.pointerId) || !g0) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const ps = [...pointers.values()];
+    if (g0.kind === 'drag' && ps.length === 1) {
+      // keep the piece inside the visible frame
+      st.x = Math.min(el.clientWidth - 20, Math.max(20, g0.x + ps[0].x - g0.px));
+      st.y = Math.min(el.clientHeight - 120, Math.max(110, g0.y + ps[0].y - g0.py));
+    } else if (g0.kind === 'pinch' && ps.length >= 2) {
+      const [a, b] = ps;
+      st.s = Math.min(3, Math.max(0.15, g0.s * (Math.hypot(a.x - b.x, a.y - b.y) / g0.d)));
+      st.rot = g0.rot + ((Math.atan2(b.y - a.y, b.x - a.x) - g0.ang) * 180) / Math.PI;
     }
+    paint();
   });
-  // pointer released: forget it (ends pinch when fewer than two remain)
-  const up = (e) => { pointers.delete(e.pointerId); if (pointers.size < 2) pinch0 = 0; };
-  glHost.addEventListener('pointerup', up);
-  glHost.addEventListener('pointercancel', up);
+  /**
+   * What: a finger lifted: restart the gesture with the remaining fingers.
+   * In:  e (PointerEvent)
+   * Out: —
+   */
+  function up(e) {
+    pointers.delete(e.pointerId);
+    if (pointers.size) startGesture(); else { g0 = null; pieceEl.classList.remove('held'); }
+  }
+  floor.addEventListener('pointerup', up);
+  floor.addEventListener('pointercancel', up);
 
-  // --- capture: composite background + 3D layer (stays on the device) -----
+  // --- capture: background + drawing composited (stays on the device) ------
   /**
    * What: build a still frame of the current view and show it as a thumbnail.
    * In:  —
@@ -244,8 +228,8 @@ export function openAR(startType = 'sofa', opts = {}) {
    */
   function capture() {
     const c = document.createElement('canvas');
-    const w = el.clientWidth, hh = el.clientHeight;
-    c.width = w * 2; c.height = hh * 2;
+    const w = el.clientWidth, hh = el.clientHeight, k = 2;
+    c.width = w * k; c.height = hh * k;
     const ctx = c.getContext('2d');
     const src = stream ? video : bg;
     const sw = stream ? video.videoWidth : bg.naturalWidth, sh = stream ? video.videoHeight : bg.naturalHeight;
@@ -254,7 +238,14 @@ export function openAR(startType = 'sofa', opts = {}) {
       const s = Math.max(c.width / sw, c.height / sh);
       ctx.drawImage(src, (c.width - sw * s) / 2, (c.height - sh * s) / 2, sw * s, sh * s);
     }
-    if (three) { three.renderer.render(three.scene, three.camera); ctx.drawImage(three.renderer.domElement, 0, 0, c.width, c.height); }
+    // same transform chain as the CSS: translate → floor squash → rotate → scale
+    if (artImg && artImg.complete && art) {
+      ctx.save();
+      ctx.translate(st.x * k, st.y * k); ctx.scale(1, FLOOR_K); ctx.rotate((st.rot * Math.PI) / 180); ctx.scale(st.s * k, st.s * k);
+      ctx.shadowColor = 'rgba(20, 12, 6, .45)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 18;
+      ctx.drawImage(artImg, -art.vw / 2, -art.vh / 2, art.vw, art.vh);
+      ctx.restore();
+    }
     const shot = el.querySelector('.ar-shot');
     shot.hidden = false;
     shot.style.backgroundImage = `url(${c.toDataURL('image/jpeg', 0.8)})`;
@@ -263,22 +254,14 @@ export function openAR(startType = 'sofa', opts = {}) {
   }
 
   // --- wiring --------------------------------------------------------------
-  let closed = false;
   /**
-   * What: close the layer, stop camera, free WebGL.
+   * What: close the layer and stop the camera.
    * In:  —
    * Out: —
    */
   function close() {
     if (closed) return; closed = true;
     stopCamera();
-    window.removeEventListener('resize', resize);
-    if (three) {
-      cancelAnimationFrame(three.raf);
-      if (three.piece) disposePiece(three.piece);
-      three.scene.traverse((o) => { if (o.geometry && o.geometry.type === 'PlaneGeometry') o.geometry.dispose(); });
-      three.renderer.dispose();
-    }
     el.classList.remove('open');
     setTimeout(() => { el.remove(); if (opts.onClose) opts.onClose(); }, 320);
   }
@@ -289,7 +272,8 @@ export function openAR(startType = 'sofa', opts = {}) {
    */
   function begin(useCamera) {
     el.querySelector('.ar-intro').classList.add('gone');
-    if (hasWebGL()) { three = initThree(); resize(); setPiece(type); loop(); }
+    el.classList.add('live');
+    setPiece(type);
     if (useCamera) startCamera(); else startPreview();
   }
   el.addEventListener('click', (e) => {
@@ -299,9 +283,8 @@ export function openAR(startType = 'sofa', opts = {}) {
     if (a === 'close') close();
     if (a === 'cam') begin(true);
     if (a === 'preview') begin(false);
-    if (a === 'rot' && three) { three.holder.rotation.y += Math.PI / 4; three.dirty = true; }
+    if (a === 'rot') { st.rot += 45; pieceEl.classList.add('ease'); paint(); setTimeout(() => pieceEl.classList.remove('ease'), 320); }
     if (a === 'cap') capture();
   });
-  window.addEventListener('resize', resize);
-  setPiece(type);
+  el.querySelectorAll('.ar-chip').forEach((b) => b.classList.toggle('on', b.dataset.type === type));
 }

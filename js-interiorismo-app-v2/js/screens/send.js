@@ -9,7 +9,7 @@ import { planThumb } from './thumb.js';
 
 /**
  * What: open the send / save sheet for a design.
- * In:  design (object, mutated), opts { onSaved(), goDesigns() }
+ * In:  design (object, mutated), opts { onSaved(), goDesigns(), goProgress() }
  * Out: —
  */
 export function openSendSheet(design, opts = {}) {
@@ -54,10 +54,11 @@ export function openSendSheet(design, opts = {}) {
           <div class="done-check">${icon('check', 40)}</div>
           <h3>${t('snd.done.t')}</h3>
           <p class="muted">${t('snd.done.p')}</p>
-          <button class="pill-btn primary block" data-act="designs">${t('snd.done.btn')}</button>
+          <button class="pill-btn primary block" data-act="progress">${t('snd.done.btn')}</button>
         </div>`;
       return;
     }
-    if (b.dataset.act === 'designs') { s.close(); if (opts.goDesigns) opts.goDesigns(); }
+    // the sent design now lives inside the project's progress pane
+    if (b.dataset.act === 'progress') { s.close(); if (opts.goProgress) opts.goProgress(); else if (opts.goDesigns) opts.goDesigns(); }
   });
 }

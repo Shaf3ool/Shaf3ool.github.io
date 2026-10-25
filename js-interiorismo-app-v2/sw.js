@@ -1,11 +1,11 @@
 /* =========================================================================
    sw.js — offline shell for the Js Interiorismo app prototype (scope: this folder)
-   - Precaches the app shell (HTML, CSS, JS, fonts, 3D library, icons)
+   - Precaches the app shell (HTML, CSS, JS, fonts, icons)
    - Images: cache-first at runtime (Jorge's renders load once, then offline)
    - Navigations: network-first with the cached shell as fallback
    All paths are relative so it works under /js-interiorismo-app-v2/.
    ========================================================================= */
-const VERSION = 'jsapp2-26e19db8d1';
+const VERSION = 'jsapp2-2d-8ef829c22c';
 const SHELL = [
   "./",
   "./css/app.css",
@@ -35,24 +35,20 @@ const SHELL = [
   "./js/data.js",
   "./js/furniture2d.js",
   "./js/i18n.js",
-  "./js/models.js",
-  "./js/planner3d.js",
+  "./js/plan2d.js",
   "./js/screens/agenda.js",
   "./js/screens/designs.js",
   "./js/screens/inspiration.js",
   "./js/screens/onboarding.js",
   "./js/screens/planner.js",
+  "./js/screens/progress.js",
   "./js/screens/send.js",
   "./js/screens/studio.js",
   "./js/screens/thumb.js",
   "./js/store.js",
   "./js/textures.js",
   "./js/ui.js",
-  "./manifest.webmanifest",
-  "./vendor/addons/controls/OrbitControls.js",
-  "./vendor/addons/environments/RoomEnvironment.js",
-  "./vendor/addons/geometries/RoundedBoxGeometry.js",
-  "./vendor/three.module.min.js"
+  "./manifest.webmanifest"
 ];
 
 // install: precache the shell, activate immediately

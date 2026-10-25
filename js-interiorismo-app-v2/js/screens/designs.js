@@ -1,6 +1,9 @@
 /* =========================================================================
-   screens/designs.js — Mis diseños: saved designs + inspiration board
+   screens/designs.js — "Proyecto" tab: two panes behind one segmented control
+     - Avance: the project progress tracker (progress.js, all Demo)
+     - Mis diseños: saved designs + inspiration board
    Designs live on this device (localStorage). Review status is a demo.
+   A design sent to Jorge shows up inside Avance and links back to it.
    ========================================================================= */
 import { t, onLang, getLang } from '../i18n.js';
 import { h, icon, esc, fmtDate, sheet, toast } from '../ui.js';
@@ -8,6 +11,7 @@ import { PROJECTS } from '../data.js';
 import { get, subscribe, update } from '../store.js';
 import { planThumb } from './thumb.js';
 import { openProject } from './inspiration.js';
+import { progressHTML, animateRing, onProgressClick } from './progress.js';
 
 /**
  * What: mount the Mis diseños tab.
@@ -18,6 +22,24 @@ export function mountDesigns(host, ctx) {
   const el = h(`<section class="screen tab-screen designs"><div class="scroll"></div></section>`);
   host.appendChild(el);
   const sc = el.querySelector('.scroll');
+  let pane = 'progress';     // 'progress' | 'designs'
+
+  /**
+   * What: header + segmented control shared by both panes.
+   * In:  —
+   * Out: HTML string
+   */
+  function headHTML() {
+    const head = pane === 'progress'
+      ? `<p class="eyebrow">${t('pj.eyebrow')}</p><h1>${t('pj.title')}</h1>`
+      : `<p class="eyebrow">${t('ds.sub')}</p><h1>${t('ds.title')}</h1>`;
+    return `<header class="big-head">${head}</header>
+      <div class="seg two pj-seg" role="tablist">
+        <button data-pane="progress" class="${pane === 'progress' ? 'on' : ''}">${t('pj.seg.progress')}</button>
+        <button data-pane="designs" class="${pane === 'designs' ? 'on' : ''}">${t('pj.seg.designs')}</button>
+        <span class="seg-ind" style="transform:translateX(${pane === 'progress' ? 0 : 100}%)"></span>
+      </div>`;
+  }
 
   /**
    * What: render designs list and board strip.
@@ -25,6 +47,7 @@ export function mountDesigns(host, ctx) {
    * Out: —
    */
   function render() {
+    if (pane === 'progress') { sc.innerHTML = headHTML() + `<div class="pane-in">${progressHTML()}</div>`; animateRing(sc); return; }
     const { designs, board } = get();
     const L = getLang();
     const cards = designs.map((d) => `
@@ -41,19 +64,31 @@ export function mountDesigns(host, ctx) {
         <button class="more" data-more="${d.id}" aria-label="${t('ds.open')}">${icon('chev', 18)}</button>
       </article>`).join('');
     const boardItems = board.map((slug) => PROJECTS.find((p) => p.slug === slug)).filter(Boolean);
-    sc.innerHTML = `
-      <header class="big-head"><p class="eyebrow">${t('ds.sub')}</p><h1>${t('ds.title')}</h1></header>
+    sc.innerHTML = headHTML() + `<div class="pane-in">
       <div class="dlist">${cards || `<p class="empty">${t('ds.empty')}</p>`}</div>
       <button class="pill-btn ghost block dashed" data-act="new">${icon('plus', 18)}<span>${t('nd.title')}</span></button>
       <div class="sec-head"><h2>${t('ds.board')}</h2><span class="muted">${boardItems.length}</span></div>
       ${boardItems.length ? `<div class="board">${boardItems.map((p) => `
         <button class="bitem" data-slug="${p.slug}"><img src="img/${p.imgs[0].src}-sm.webp" width="${p.imgs[0].sw}" height="${p.imgs[0].sh}" loading="lazy" alt=""><span>${p.title[L]}</span></button>`).join('')}</div>`
         : `<p class="empty">${t('ds.board.empty')}</p>`}
-      <p class="credit-line">${t('st.renders')}</p>`;
+      <p class="credit-line">${t('st.renders')}</p></div>`;
+  }
+
+  /**
+   * What: switch pane (and scroll back to the top).
+   * In:  p ('progress' | 'designs')
+   * Out: —
+   */
+  function setPane(p) {
+    pane = p;
+    render();
+    sc.scrollTop = 0;
   }
 
   // --- interactions --------------------------------------------------------
   sc.addEventListener('click', (e) => {
+    const sg = e.target.closest('[data-pane]'); if (sg) { if (sg.dataset.pane !== pane) setPane(sg.dataset.pane); return; }
+    if (pane === 'progress') { onProgressClick(e, { openDesignDetail: openDetail }); return; }
     if (e.target.closest('[data-act=new]')) { ctx.startNew(); return; }
     const b = e.target.closest('.bitem'); if (b) { openProject(b.dataset.slug, ctx); return; }
     const more = e.target.closest('[data-more]');
@@ -81,6 +116,7 @@ export function mountDesigns(host, ctx) {
         ${d.note ? `<p class="dd-note">“${esc(d.note)}”</p>` : ''}
         <ol class="timeline">${steps.map((s) => `<li class="${s.done ? 'done' : ''} ${s.now ? 'now' : ''}"><i>${s.done ? icon('check', 14) : ''}</i><span>${t(s.k)}</span></li>`).join('')}</ol>
         <p class="muted small">${t('common.demo')} · ${t('snd.done.p')}</p>
+        ${d.status === 'review' && pane !== 'progress' ? `<button class="pill-btn ghost block" data-act="progress">${icon('chev', 16)}<span>${t('ds.tl.progress')}</span></button>` : ''}
         <div class="proj-actions">
           <button class="pill-btn primary" data-act="open">${icon('layers', 18)}<span>${t('ds.open')}</span></button>
           <button class="pill-btn ghost round" data-act="del" aria-label="${t('ds.delete')}">${icon('trash', 20)}</button>
@@ -90,6 +126,7 @@ export function mountDesigns(host, ctx) {
     c.addEventListener('click', (e) => {
       const b = e.target.closest('[data-act]'); if (!b) return;
       if (b.dataset.act === 'open') { s.close(); setTimeout(() => ctx.openDesign(id), 200); }
+      if (b.dataset.act === 'progress') { s.close(); setPane('progress'); }
       if (b.dataset.act === 'del') { update((st) => { st.designs = st.designs.filter((x) => x.id !== id); }); s.close(); toast(t('ds.deleted'), 'trash'); }
     });
   }
@@ -97,5 +134,5 @@ export function mountDesigns(host, ctx) {
   const offLang = onLang(render);
   const offStore = subscribe(render);
   render();
-  return { el, refresh: render, destroy() { offLang(); offStore(); } };
+  return { el, refresh: render, setPane, destroy() { offLang(); offStore(); } };
 }

@@ -5,7 +5,7 @@
   <!-- Js Interiorismo · App concept v2 "Mediterráneo cálido / Diseña tu espacio" · Concept by Shaf3ool -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Js Interiorismo · Diseña tu espacio (app prototipo)</title>
-  <meta name="description" content="Concepto de app para Js Interiorismo (Jorge Santana, Aguascalientes): planea tu espacio en 2D y 3D, elige acabados y envía tu diseño para revisión. Prototipo web instalable.">
+  <meta name="description" content="Concepto de app para Js Interiorismo (Jorge Santana, Aguascalientes): planea tu espacio en un plano 2D, elige acabados, envía tu diseño a revisión y sigue el avance de tu proyecto. Prototipo web instalable.">
   <meta name="theme-color" content="#EFE6D8">
   <meta name="color-scheme" content="light">
   <meta name="mobile-web-app-capable" content="yes">
@@ -20,9 +20,6 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/app.css">
-  <script type="importmap">
-    { "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }
-  </script>
 </head>
 <body>
   <div class="desk">
@@ -52,7 +49,7 @@
           <div id="push"></div>
           <nav id="tabbar" aria-label="Tabs">
             <button data-tab="inspo" aria-selected="true"><svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10.5a8 8 0 0 1 16 0V20"/><path d="M8.5 20v-6.5a3.5 3.5 0 0 1 7 0V20"/><path d="M3 20h18"/></svg><span data-i18n="tab.inspo"></span></button>
-            <button data-tab="designs"><svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M3.5 12h8.5V3.5M12 12v8.5"/></svg><span data-i18n="tab.designs"></span></button>
+            <button data-tab="designs"><svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke-opacity=".35"/><path d="M12 3.5a8.5 8.5 0 0 1 8.2 10.7"/><path d="M8.5 12.2l2.3 2.3 4.7-4.8"/></svg><span data-i18n="tab.designs"></span></button>
             <button data-act="new" class="tab-new" data-i18n-aria="tab.new"><span class="plus"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span data-i18n="tab.new"></span></button>
             <button data-tab="agenda"><svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span data-i18n="tab.agenda"></span></button>
             <button data-tab="studio"><svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span data-i18n="tab.studio"></span></button>

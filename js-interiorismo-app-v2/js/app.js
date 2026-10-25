@@ -2,8 +2,8 @@
    app.js — boot + navigation for the Js Interiorismo app prototype (v2)
    - Desktop: the app runs inside a phone frame (scaled to fit), side panel
    - Phone: full screen, safe-area aware, installable (PWA)
-   - Tabs: Inspiración · Mis diseños · (+ Diseñar) · Agenda · Estudio
-   - Planner opens as a pushed screen; AR opens as a layer over it
+   - Tabs: Inspiración · Proyecto (Avance + Mis diseños) · (+ Diseñar) · Agenda · Estudio
+   - Planner opens as a pushed screen; the 2D "Ver en tu espacio" preview opens as a layer over it
    ========================================================================= */
 import { t, apply, onLang } from './i18n.js';
 import { h, icon, sheet } from './ui.js';
@@ -61,7 +61,8 @@ clock(); setInterval(clock, 30000);
 // --- tabs ----------------------------------------------------------------
 const ctx = {
   startNew, newDesign, openDesign,
-  goDesigns: () => showTab('designs'),
+  goDesigns: () => { showTab('designs'); screens.designs.setPane('designs'); },
+  goProgress: () => { showTab('designs'); screens.designs.setPane('progress'); },
   install, isStandalone: () => standalone,
 };
 const screens = {
@@ -162,11 +163,12 @@ async function openPlanner(design) {
   app.classList.add('pushed');
   planner = mountPlanner(pushHost, design, {
     close: closePlanner,
-    goDesigns: () => showTab('designs'),
+    goDesigns: ctx.goDesigns,
+    goProgress: ctx.goProgress,
+    // the 2D preview layer is loaded on first use
     openAR: async (type) => {
       const { openAR } = await import('./ar.js');
-      planner && planner.pause(true);
-      openAR(type, { onClose: () => planner && planner.pause(false) });
+      openAR(type, {});
     },
   });
   apply(planner.el);
