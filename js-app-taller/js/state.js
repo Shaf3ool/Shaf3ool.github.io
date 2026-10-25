@@ -37,7 +37,7 @@ export function seedProject() {
   const m = makeItem;
   // a calm living area on top, dining area below (all Demo)
   return {
-    name: 'Sala-comedor · Demo', demo: true,
+    name: 'Sala-comedor', demo: true,
     room: { w: 480, l: 620, h: 270 },
     items: [
       m('tapete', 120, 105),
@@ -150,7 +150,7 @@ export function serialize() {
  * Out: —
  */
 export function load(p, projectId = null) {
-  S.name = p.name || 'Proyecto · Demo';
+  S.name = p.name || 'Proyecto';
   S.room = { w: +p.room.w, l: +p.room.l, h: +p.room.h };
   // rebuild items with fresh ids; unknown fields are ignored
   S.items = (p.items || []).map((i) => {

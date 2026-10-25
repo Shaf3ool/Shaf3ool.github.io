@@ -284,7 +284,7 @@ function openProjects() {
     if (b.dataset.act === 'open') { const p = listProjects().find((x) => x.id === card.dataset.id); if (p) load(p.data, p.id); sh.close(); }
     if (b.dataset.act === 'del') { deleteProject(card.dataset.id); card.remove(); }
     // a new project starts from an empty room with the default size
-    if (b.dataset.act === 'new') { load({ name: (getLang() === 'en' ? 'New project' : 'Nuevo proyecto') + ' · Demo', room: { w: 400, l: 500, h: 260 }, items: [] }); sh.close(); }
+    if (b.dataset.act === 'new') { load({ name: getLang() === 'en' ? 'New project' : 'Nuevo proyecto', room: { w: 400, l: 500, h: 260 }, items: [] }); sh.close(); }
   });
 }
 

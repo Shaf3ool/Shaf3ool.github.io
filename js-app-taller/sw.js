@@ -1,7 +1,7 @@
 /* =========================================================================
    sw.js: offline cache for the Taller prototype (cache-first, versioned).
    ========================================================================= */
-const CACHE = 'js-taller-v1';
+const CACHE = 'js-taller-v2';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css', 'css/fonts.css',
   'js/app.js', 'js/i18n.js', 'js/catalog.js', 'js/state.js', 'js/geometry.js', 'js/draw.js',
