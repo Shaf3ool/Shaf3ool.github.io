@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <!-- Js Interiorismo · App concept "Opciones" (idea 2: every option Jorge offers) · Concept by Shaf3ool -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Opciones · Js Interiorismo (app prototipo)</title>
+  <meta name="description" content="Concepto de app para Js Interiorismo (Jorge Santana, Aguascalientes): el cliente ve todas las opciones disponibles para su proyecto, guarda favoritos y se los envía a Jorge. Prototipo web instalable (Demo).">
+  <meta name="theme-color" content="#EFE6D8">
+  <meta name="color-scheme" content="light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Opciones Js">
+  <meta property="og:title" content="Opciones · Js Interiorismo">
+  <meta property="og:description" content="Concepto de app (prototipo web) · Concept by Shaf3ool">
+  <meta property="og:image" content="icons/og.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preload" href="fonts/Fraunces-normal-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="desk">
+    <!-- Desktop-only side panel (hidden on phones) -->
+    <aside class="side">
+      <div class="side-top"><span class="brand-mark lg">Js<i>.</i></span><span class="side-kicker" data-i18n="side.kicker"></span></div>
+      <h1 class="side-title" data-i18n="side.title"></h1>
+      <p class="side-text" data-i18n="side.text"></p>
+      <div class="side-cats" aria-hidden="true"><span>Pisos</span><span>Muros</span><span>Mobiliario</span><span>Iluminación</span><span>Baño</span><span>Cocina</span><span>Exteriores</span></div>
+      <div class="side-open">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg>
+        <div><b data-i18n="side.open"></b><span>shaf3ool.github.io/js-app-opciones</span></div>
+        <button class="lang side-lang" aria-label="Idioma / Language"><b data-l="es">ES</b><b data-l="en">EN</b></button>
+      </div>
+      <p class="side-honest" data-i18n="side.honest"></p>
+      <p class="side-credit" data-i18n="side.credit"></p>
+    </aside>
+
+    <!-- The app (in a phone frame on desktop, full screen on phones) -->
+    <div class="device">
+      <div class="device-screen">
+        <div id="app">
+          <div class="statusbar" aria-hidden="true">
+            <span class="sb-time">9:41</span><span class="island"></span>
+            <span class="sb-icons"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="16" height="8" rx="2"/><rect x="23" y="4" width="1.6" height="4" rx=".8" opacity=".45"/></svg></span>
+          </div>
+          <main id="screens"></main>
+          <div id="push"></div>
+          <div id="layers"></div>
+          <div id="toast" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <noscript><p style="padding:24px;font-family:sans-serif">Esta app necesita JavaScript. · This app needs JavaScript.</p></noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
