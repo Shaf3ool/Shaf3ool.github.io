@@ -1,1 +1,249 @@
-<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Js Interiorismo</title><body style="margin:0;display:grid;place-items:center;height:100vh;background:#EDE7DE;font-family:Georgia,serif;color:#1d1b19"><p>Js Interiorismo — próximamente</p></body></html>
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Js Interiorismo — Jorge Santana · Diseño de interiores en Aguascalientes</title>
+  <meta name="description" content="Js Interiorismo — estudio de diseño de interiores de Jorge Santana en Aguascalientes, México. Residencial, comercial y paisajismo, con visualización 3D fotorrealista.">
+  <meta name="theme-color" content="#EDE6DB">
+  <meta property="og:title" content="Js Interiorismo — Jorge Santana">
+  <meta property="og:description" content="Espacios funcionales y atemporales. Residencial · Comercial · Paisajismo · Aguascalientes, México.">
+  <meta property="og:image" content="https://shaf3ool.github.io/js-interiorismo/img/bano-sereno-1.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="vendor/lenis.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }</script>
+</head>
+<body class="is-loading">
+  <!-- ========== Preloader: monogram drawn as a line ========== -->
+  <div class="loader" aria-hidden="true">
+    <svg class="loader__mark" viewBox="0 0 120 120"><circle cx="60" cy="60" r="56"/><text x="60" y="76" text-anchor="middle">Js</text></svg>
+    <span class="loader__bar"><i></i></span>
+  </div>
+
+  <!-- ========== Header / navigation ========== -->
+  <header class="nav" data-nav>
+    <a class="brand" href="#top" aria-label="Js Interiorismo">
+      <span class="brand__js">Js</span><span class="brand__word">Interiorismo</span>
+    </a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#studio" data-i18n="nav.studio">Estudio</a>
+      <a href="#space" data-i18n="nav.space">Espacio 3D</a>
+      <a href="#projects" data-i18n="nav.projects">Proyectos</a>
+      <a href="#process" data-i18n="nav.process">Proceso</a>
+      <a href="#contact" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="nav__right">
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang-btn="es" aria-pressed="true">ES</button><span>/</span><button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn--line nav__cta" href="#contact" data-i18n="nav.cta">Agenda una cita</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-burger data-i18n-attr="aria-label:nav.menu"><i></i><i></i></button>
+    </div>
+  </header>
+  <div class="menu" id="menu" data-menu hidden>
+    <a href="#studio" data-i18n="nav.studio">Estudio</a>
+    <a href="#space" data-i18n="nav.space">Espacio 3D</a>
+    <a href="#projects" data-i18n="nav.projects">Proyectos</a>
+    <a href="#process" data-i18n="nav.process">Proceso</a>
+    <a href="#contact" data-i18n="nav.contact">Contacto</a>
+    <p class="menu__foot">Aguascalientes, México</p>
+  </div>
+
+  <main id="top">
+    <!-- ========== Hero + scroll story in one pinned 3D stage ========== -->
+    <section class="stage" id="space" data-stage>
+      <div class="stage__pin" data-stage-pin>
+        <canvas class="stage__canvas" data-canvas aria-label="Sala 3D interactiva"></canvas>
+        <img class="stage__fallback" src="img/loft-1.webp" alt="Loft contemporáneo — render de Jorge Santana" hidden data-fallback>
+        <div class="stage__veil"></div>
+
+        <!-- hero copy -->
+        <div class="hero" data-chapter="0">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Jorge Santana · Aguascalientes, México</p>
+          <h1 class="hero__title" data-i18n="hero.title">Espacios funcionales<br><em>y atemporales.</em></h1>
+          <p class="hero__sub" data-i18n="hero.sub">Residencial · Comercial · Paisajismo</p>
+          <div class="hero__cta">
+            <a class="btn btn--solid" href="#projects" data-i18n="hero.cta1">Ver proyectos</a>
+            <button class="btn btn--glass" type="button" data-explore data-i18n="hero.cta2">Recorrer el espacio</button>
+          </div>
+        </div>
+        <div class="scrollcue" aria-hidden="true"><span data-i18n="hero.scroll">Desliza</span><i></i></div>
+
+        <!-- story chapters -->
+        <div class="chapter" data-chapter="1"><p class="chapter__k" data-i18n="ch1.k"></p><h2 data-i18n="ch1.t"></h2><p data-i18n="ch1.s"></p></div>
+        <div class="chapter" data-chapter="2"><p class="chapter__k" data-i18n="ch2.k"></p><h2 data-i18n="ch2.t"></h2><p data-i18n="ch2.s"></p></div>
+        <div class="chapter" data-chapter="3"><p class="chapter__k" data-i18n="ch3.k"></p><h2 data-i18n="ch3.t"></h2><p data-i18n="ch3.s"></p></div>
+        <div class="chapter chapter--cta" data-chapter="4"><p class="chapter__k" data-i18n="ch4.k"></p><h2 data-i18n="ch4.t"></h2><p data-i18n="ch4.s"></p>
+          <button class="btn btn--solid" type="button" data-explore data-i18n="ch4.btn">Explorar en 3D</button></div>
+
+        <div class="stage__progress" aria-hidden="true"><i data-progress></i></div>
+
+        <!-- configurator UI (shown in explore mode) -->
+        <div class="cfg" data-cfg aria-hidden="true">
+          <div class="cfg__top">
+            <p class="cfg__title" data-i18n="cfg.title">Configurador de acabados</p>
+            <button class="cfg__close" type="button" data-explore-close data-i18n="cfg.close">Cerrar</button>
+          </div>
+          <div class="cfg__panel">
+            <div class="cfg__tabs" role="tablist">
+              <button type="button" role="tab" aria-selected="true" data-tab="floor" data-i18n="cfg.floor">Piso</button>
+              <button type="button" role="tab" aria-selected="false" data-tab="walls" data-i18n="cfg.walls">Muros</button>
+              <button type="button" role="tab" aria-selected="false" data-tab="fabric" data-i18n="cfg.fabric">Tapiz</button>
+            </div>
+            <div class="cfg__swatches" data-swatches></div>
+            <p class="cfg__hint"><span data-i18n="cfg.hint"></span> · <span data-i18n="cfg.note"></span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Studio ========== -->
+    <section class="section studio" id="studio">
+      <div class="wrap grid">
+        <p class="kicker col-l" data-reveal data-i18n="studio.k">El estudio</p>
+        <h2 class="display col-r" data-reveal data-i18n="studio.t"></h2>
+        <figure class="studio__img col-l" data-reveal>
+          <img src="img/vestidor-salvia-1-sm.webp" srcset="img/vestidor-salvia-1-sm.webp 900w, img/vestidor-salvia-1.webp 1800w" sizes="(max-width: 800px) 100vw, 40vw" width="1800" height="2250" loading="lazy" alt="Vestidor en verde salvia — render de Jorge Santana" data-parallax>
+          <figcaption>Vestidor Salvia · 2026</figcaption>
+        </figure>
+        <div class="studio__text col-r">
+          <p class="lead" data-reveal data-i18n="studio.p1"></p>
+          <p data-reveal data-i18n="studio.p2"></p>
+          <dl class="facts" data-reveal>
+            <div><dt>+59 mil</dt><dd data-i18n="studio.f1"></dd></div>
+            <div><dt>3ds Max · V-Ray</dt><dd data-i18n="studio.f2"></dd></div>
+            <div><dt>Gilsa 2024</dt><dd data-i18n="studio.f3"></dd></div>
+            <div><dt>2013</dt><dd data-i18n="studio.f4"></dd></div>
+          </dl>
+        </div>
+      </div>
+      <blockquote class="quote wrap" data-reveal>
+        <p data-i18n="studio.quote"></p>
+        <cite data-i18n="studio.quoteby"></cite>
+      </blockquote>
+    </section>
+
+    <!-- ========== Services ========== -->
+    <section class="section services" id="services">
+      <div class="wrap">
+        <div class="head">
+          <p class="kicker" data-reveal data-i18n="serv.k"></p>
+          <h2 class="display" data-reveal data-i18n="serv.t"></h2>
+        </div>
+        <ol class="services__list">
+          <li data-reveal><span class="num">01</span><h3 data-i18n="s1.t"></h3><p data-i18n="s1.p"></p></li>
+          <li data-reveal><span class="num">02</span><h3 data-i18n="s2.t"></h3><p data-i18n="s2.p"></p></li>
+          <li data-reveal><span class="num">03</span><h3 data-i18n="s3.t"></h3><p data-i18n="s3.p"></p></li>
+          <li data-reveal><span class="num">04</span><h3 data-i18n="s4.t"></h3><p data-i18n="s4.p"></p></li>
+          <li data-reveal><span class="num">05</span><h3 data-i18n="s5.t"></h3><p data-i18n="s5.p"></p></li>
+          <li data-reveal><span class="num">06</span><h3 data-i18n="s6.t"></h3><p data-i18n="s6.p"></p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== Projects ========== -->
+    <section class="section projects" id="projects">
+      <div class="wrap">
+        <div class="head head--row">
+          <div>
+            <p class="kicker" data-reveal data-i18n="proj.k"></p>
+            <h2 class="display" data-reveal data-i18n="proj.t"></h2>
+          </div>
+          <div class="filters" role="tablist" data-filters>
+            <button type="button" aria-selected="true" data-filter="all" data-i18n="proj.all">Todos</button>
+            <button type="button" aria-selected="false" data-filter="banos" data-i18n="proj.banos">Baños</button>
+            <button type="button" aria-selected="false" data-filter="cocinas" data-i18n="proj.cocinas">Cocinas</button>
+            <button type="button" aria-selected="false" data-filter="interiores" data-i18n="proj.interiores">Interiores</button>
+            <button type="button" aria-selected="false" data-filter="comercial" data-i18n="proj.comercial">Comercial</button>
+            <button type="button" aria-selected="false" data-filter="exteriores" data-i18n="proj.exteriores">Exteriores</button>
+          </div>
+        </div>
+        <ul class="pgrid" data-grid></ul>
+      </div>
+    </section>
+
+    <!-- ========== Process ========== -->
+    <section class="section process" id="process">
+      <div class="wrap">
+        <div class="head">
+          <p class="kicker" data-reveal data-i18n="proc.k"></p>
+          <h2 class="display" data-reveal data-i18n="proc.t"></h2>
+        </div>
+        <ol class="steps" data-steps>
+          <li data-reveal><span>01</span><h3 data-i18n="p1.t"></h3><p data-i18n="p1.p"></p></li>
+          <li data-reveal><span>02</span><h3 data-i18n="p2.t"></h3><p data-i18n="p2.p"></p></li>
+          <li data-reveal><span>03</span><h3 data-i18n="p3.t"></h3><p data-i18n="p3.p"></p></li>
+          <li data-reveal><span>04</span><h3 data-i18n="p4.t"></h3><p data-i18n="p4.p"></p></li>
+          <li data-reveal><span>05</span><h3 data-i18n="p5.t"></h3><p data-i18n="p5.p"></p></li>
+        </ol>
+        <p class="note" data-i18n="proc.note"></p>
+      </div>
+    </section>
+
+    <!-- ========== Contact ========== -->
+    <section class="section contact" id="contact">
+      <div class="contact__bg" aria-hidden="true"><img src="img/patio-jacaranda-1-sm.webp" srcset="img/patio-jacaranda-1-sm.webp 900w, img/patio-jacaranda-1.webp 1800w" sizes="100vw" alt="" loading="lazy" width="1800" height="1350"></div>
+      <div class="wrap grid">
+        <div class="col-l">
+          <p class="kicker" data-reveal data-i18n="cont.k"></p>
+          <h2 class="display" data-reveal data-i18n="cont.t"></h2>
+          <p class="lead" data-reveal data-i18n="cont.p"></p>
+          <ul class="channels" data-reveal>
+            <li><span data-i18n="cont.wa"></span><b class="ph" data-i18n="cont.ph.wa"></b></li>
+            <li><span data-i18n="cont.mail"></span><b class="ph" data-i18n="cont.ph.mail"></b></li>
+            <li><span>Instagram</span><a href="https://www.instagram.com/js.interiorismo/" target="_blank" rel="noopener">@js.interiorismo</a> · <a href="https://www.instagram.com/missyplicity/" target="_blank" rel="noopener">@missyplicity</a></li>
+            <li><span>Behance</span><a href="https://www.behance.net/JorgeSantana" target="_blank" rel="noopener">be.net/JorgeSantana</a></li>
+            <li><span data-i18n="cont.where"></span><b data-i18n="cont.city"></b></li>
+          </ul>
+        </div>
+        <form class="form col-r" data-form novalidate data-reveal>
+          <label><span data-i18n="form.name"></span><input name="name" autocomplete="name" required></label>
+          <label><span data-i18n="form.type"></span>
+            <select name="type"><option data-i18n="form.o1"></option><option data-i18n="form.o2"></option><option data-i18n="form.o3"></option><option data-i18n="form.o4"></option></select>
+          </label>
+          <label><span data-i18n="form.msg"></span><textarea name="msg" rows="4"></textarea></label>
+          <button class="btn btn--solid" type="submit" data-i18n="form.send"></button>
+          <p class="form__demo" data-form-note hidden data-i18n="form.demo"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== Footer ========== -->
+  <footer class="foot">
+    <div class="wrap">
+      <p class="foot__mark">Js <em>Interiorismo</em></p>
+      <div class="foot__row">
+        <p data-i18n="foot.rights"></p>
+        <a href="#top" data-i18n="foot.top"></a>
+      </div>
+      <p class="foot__credit" data-i18n="foot.credit"></p>
+      <p class="foot__concept"><span data-i18n="foot.concept">Concept by Shaf3ool</span></p>
+    </div>
+  </footer>
+
+  <!-- ========== Lightbox ========== -->
+  <dialog class="lb" data-lb aria-label="Proyecto">
+    <button class="lb__close" type="button" data-lb-close aria-label="Cerrar">×</button>
+    <div class="lb__media" data-lb-media></div>
+    <div class="lb__info">
+      <p class="lb__cat" data-lb-cat></p>
+      <h3 data-lb-title></h3>
+      <p data-lb-text></p>
+      <p class="lb__links"><a data-lb-src target="_blank" rel="noopener" data-i18n="proj.ig"></a> · <span data-i18n="proj.credit"></span></p>
+      <div class="lb__nav"><button type="button" data-lb-prev aria-label="Anterior">←</button><button type="button" data-lb-next aria-label="Siguiente">→</button></div>
+    </div>
+  </dialog>
+
+  <div class="cursor" data-cursor aria-hidden="true"><span data-i18n="proj.view">Ver</span></div>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="vendor/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
