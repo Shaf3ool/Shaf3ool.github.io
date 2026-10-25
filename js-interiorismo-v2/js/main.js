@@ -1,21 +1,15 @@
 /* ==========================================================
    main.js — boots v2 "Galería blanca": language, smooth scroll,
-   the scroll-driven maquette stage, reveals, menu, cursor,
-   swatch tilt and the demo form.
+   the full-bleed render hero, reveals, menu, cursor,
+   swatch tilt and the demo form. No WebGL anywhere.
    ========================================================== */
 import { initLang } from './i18n.js';
 import { initProjects } from './projects.js';
+import { initHero } from './hero.js';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 document.documentElement.classList.add('js');
-
-/* What: clamp + smoothstep helper for scroll choreography.
-   In: edge a, edge b, value x. Out: 0..1 */
-function smooth(a, b, x) {
-  const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
-  return t * t * (3 - 2 * t);
-}
 
 /* What: Lenis inertia scroll tied to GSAP's ticker (wheel only; touch stays native).
    In: nothing. Out: Lenis instance or null */
@@ -42,84 +36,6 @@ function initScroll() {
   return lenis;
 }
 
-/* What: the sticky hero stage — loads the 3D maquette lazily and maps
-   scroll progress to explosion, copy fades and part labels.
-   In: nothing. Out: nothing */
-async function initStage() {
-  const stage = document.querySelector('.stage');
-  const host = document.querySelector('[data-maquette]');
-  const title = document.querySelector('.hero__title');
-  const heroFoot = document.querySelector('.hero__foot');
-  const heroMeta = document.querySelector('.hero__meta');
-  const xcopy = document.querySelector('[data-xcopy]');
-  const xend = document.querySelector('[data-xend]');
-  const bar = document.querySelector('[data-stage-bar]');
-  const labels = [...document.querySelectorAll('.plabel')];
-  let progress = 0;
-  let maq = null;
-
-  /* What: fall back to a still render when WebGL is unavailable.
-     In: nothing. Out: nothing */
-  const fallback = () => { document.documentElement.classList.add('no-webgl'); if (window.ScrollTrigger) window.ScrollTrigger.refresh(); };
-
-  /* What: paint the DOM layer of the stage for a progress value.
-     In: p 0..1. Out: nothing */
-  const paint = (p) => {
-    const heroOut = smooth(0.04, 0.16, p);
-    title.style.opacity = String(1 - heroOut);
-    title.style.transform = `translateY(${-heroOut * 40}px)`;
-    heroFoot.style.opacity = String(1 - heroOut);
-    heroMeta.style.opacity = String(1 - heroOut * 0.6);
-    const xIn = smooth(0.2, 0.3, p) * (1 - smooth(0.58, 0.66, p));
-    xcopy.style.opacity = String(xIn);
-    xcopy.style.transform = `translateY(${(1 - smooth(0.2, 0.32, p)) * 24}px)`;
-    const eIn = smooth(0.8, 0.88, p);
-    xend.style.opacity = String(eIn);
-    xend.style.transform = `translateY(${(1 - eIn) * 24}px)`;
-    if (bar) bar.style.transform = `scaleY(${p})`;
-  };
-
-  /* What: place the part labels on their projected 3D anchors (called each 3D frame).
-     In: maquette api. Out: nothing */
-  const placeLabels = (api) => {
-    const e = api.explosion();
-    const pos = api.anchorsScreen();
-    const op = smooth(0.55, 0.9, e);
-    const W = host.clientWidth, H = host.clientHeight;
-    const top = (document.querySelector('.hdr').offsetHeight || 60) + 12;
-    labels.forEach((l) => {
-      const a = pos[l.dataset.part];
-      if (!a) return;
-      // keep every label fully on screen and clear of the header
-      const lw = l.offsetWidth || 120;
-      const x = Math.min(Math.max(a.x - 3, 10), W - lw - 10);
-      const y = Math.min(Math.max(a.y - 14, top), H - 40);
-      l.style.opacity = String(a.visible ? op : 0);
-      l.style.transform = `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`;
-    });
-  };
-
-  // scroll → progress (ScrollTrigger when available, plain math otherwise)
-  if (window.ScrollTrigger) {
-    window.ScrollTrigger.create({
-      trigger: stage, start: 'top top', end: 'bottom bottom',
-      onUpdate: (self) => { progress = self.progress; paint(progress); if (maq) maq.setProgress(progress); }
-    });
-  }
-  paint(0);
-
-  // lazy-load the 3D module after first paint so text shows instantly
-  try {
-    const mod = await import('./maquette.js');
-    maq = mod.createMaquette(host, { reducedMotion: reduced, onFail: fallback, onFrame: placeLabels });
-    if (!maq) return;
-    maq.setProgress(progress);
-    window.addEventListener('pagehide', () => maq && maq.dispose(), { once: true });
-  } catch (err) {
-    fallback();
-  }
-}
-
 /* What: fade/rise elements tagged data-reveal as they enter.
    In: nothing. Out: nothing */
 function initReveal() {
@@ -142,11 +58,14 @@ function initReveal() {
    In: nothing. Out: nothing */
 function initHeader() {
   const hdr = document.querySelector('.hdr');
-  const stage = document.querySelector('.stage');
-  /* What: toggle the solid header. In: nothing. Out: nothing */
+  const hero = document.querySelector('[data-hero]');
+  /* What: header is light-on-dark over the hero, solid paper after it.
+     In: nothing. Out: nothing */
   const onScroll = () => {
-    const end = stage.offsetTop + stage.offsetHeight - window.innerHeight * 0.95;
-    hdr.classList.toggle('is-solid', window.scrollY > end);
+    const end = hero ? hero.offsetTop + hero.offsetHeight - hdr.offsetHeight : 0;
+    const past = window.scrollY > end;
+    hdr.classList.toggle('is-solid', past);
+    hdr.classList.toggle('on-hero', !past);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -168,6 +87,8 @@ function initMenu() {
   /* What: open/close the menu. In: boolean. Out: nothing */
   const set = (open) => {
     menu.hidden = !open;
+    // dark-on-light header while the paper menu is open
+    document.documentElement.classList.toggle('menu-open', open);
     btn.setAttribute('aria-expanded', String(open));
     document.documentElement.style.overflow = open ? 'hidden' : '';
     if (window.__lenis) open ? window.__lenis.stop() : window.__lenis.start();
@@ -196,7 +117,7 @@ function initCursor() {
   loop();
 }
 
-/* What: tactile 3D tilt on the material tiles (pointer position).
+/* What: tactile tilt (CSS perspective) on the material tiles (pointer position).
    In: nothing. Out: nothing */
 function initTilt() {
   if (!fine || reduced) return;
@@ -239,7 +160,7 @@ function boot() {
   initCursor();
   initTilt();
   initForm();
-  initStage();
+  initHero({ reduced });
   // fonts change line lengths → re-measure scroll triggers once loaded
   if (document.fonts && window.ScrollTrigger) document.fonts.ready.then(() => window.ScrollTrigger.refresh());
 }

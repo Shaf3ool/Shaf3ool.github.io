@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Js Interiorismo — Jorge Santana · Diseño de interiores en Aguascalientes</title>
-<meta name="description" content="Js Interiorismo, estudio de Jorge Santana en Aguascalientes, México. Diseño de espacios funcionales y atemporales: residencial, comercial y paisajismo, con visualización 3D fotorrealista.">
+<meta name="description" content="Js Interiorismo, estudio de Jorge Santana en Aguascalientes, México. Diseño de espacios funcionales y atemporales: residencial, comercial y paisajismo, con renders fotorrealistas en 3ds Max + V-Ray.">
 <meta name="theme-color" content="#F7F6F3">
 <meta property="og:title" content="Js Interiorismo — Espacios funcionales y atemporales">
 <meta property="og:description" content="Jorge Santana · Diseño de interiores · Aguascalientes, México. Residencial • Comercial • Paisajismo.">
-<meta property="og:image" content="img/fachada-blanca-1.webp">
+<meta property="og:image" content="img/loft-1.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F7F6F3'/%3E%3Ctext x='32' y='43' font-family='Helvetica,Arial' font-size='30' font-weight='500' text-anchor='middle' fill='%23111'%3EJs%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="fonts/InterTight-normal-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/InterTight-normal-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="img/loft-1-sm.webp" imagesrcset="img/loft-1-sm.webp 900w, img/loft-1.webp 1440w" imagesizes="100vw" fetchpriority="high">
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="vendor/lenis.css">
 <link rel="stylesheet" href="css/main.css">
-<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/":"./vendor/addons/"}}</script>
 </head>
 <body>
 <a class="skip" href="#estudio" data-i18n="skip">Saltar al contenido</a>
@@ -51,45 +51,44 @@
 </div>
 
 <main>
-<!-- ===== Hero + exploding maquette (sticky stage) ===== -->
-<section class="stage" id="maqueta" aria-label="Maqueta 3D">
-  <div class="stage__sticky">
-    <div class="stage__canvas" data-maquette>
-      <img class="stage__fallback" src="img/fachada-blanca-1-sm.webp" width="900" height="1125" alt="Fachada Blanca — render de Jorge Santana" data-i18n-alt="fallback.alt">
+<!-- ===== Hero: full-bleed renders ===== -->
+<section class="hero" id="inicio" aria-label="Js Interiorismo" data-hero>
+  <!-- Jorge's own renders, slow crossfade (js/hero.js) -->
+  <div class="hero__slides" aria-hidden="false">
+      <figure class="hero__slide is-on" data-slide data-title-es="Loft contemporáneo" data-title-en="Contemporary Loft">
+        <img src="img/loft-1-sm.webp" srcset="img/loft-1-sm.webp 900w, img/loft-1.webp 1440w" sizes="100vw" loading="eager" fetchpriority="high" decoding="async" width="1440" height="1800" alt="Loft contemporáneo — render de Jorge Santana" data-alt-es="Loft contemporáneo — render de Jorge Santana" data-alt-en="Contemporary Loft — render by Jorge Santana">
+      </figure>
+      <figure class="hero__slide" data-slide data-title-es="Escenario Natural" data-title-en="Natural Stage">
+        <img data-src="img/escenario-natural-1-sm.webp" data-srcset="img/escenario-natural-1-sm.webp 900w, img/escenario-natural-1.webp 1440w" sizes="100vw" loading="lazy" decoding="async" width="1440" height="1153" alt="Escenario Natural — render de Jorge Santana" data-alt-es="Escenario Natural — render de Jorge Santana" data-alt-en="Natural Stage — render by Jorge Santana">
+      </figure>
+      <figure class="hero__slide" data-slide data-title-es="Baño Gilsa" data-title-en="Gilsa Bathroom">
+        <img data-src="img/bano-gilsa-2-sm.webp" data-srcset="img/bano-gilsa-2-sm.webp 900w, img/bano-gilsa-2.webp 1440w" sizes="100vw" loading="lazy" decoding="async" width="1440" height="1440" alt="Baño Gilsa — render de Jorge Santana" data-alt-es="Baño Gilsa — render de Jorge Santana" data-alt-en="Gilsa Bathroom — render by Jorge Santana">
+      </figure>
+      <figure class="hero__slide" data-slide data-title-es="Vestidor Salvia" data-title-en="Sage Walk-in Closet">
+        <img data-src="img/vestidor-salvia-1-sm.webp" data-srcset="img/vestidor-salvia-1-sm.webp 900w, img/vestidor-salvia-1.webp 1800w" sizes="100vw" loading="lazy" decoding="async" width="1800" height="2250" alt="Vestidor Salvia — render de Jorge Santana" data-alt-es="Vestidor Salvia — render de Jorge Santana" data-alt-en="Sage Walk-in Closet — render by Jorge Santana">
+      </figure>
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__inner wrap">
+    <div class="hero__meta">
+      <span class="lbl">(01)</span>
+      <span class="lbl" data-i18n="hero.meta">Estudio de diseño de interiores</span>
+      <span class="lbl hero__geo">Aguascalientes, México</span>
     </div>
-    <div class="stage__labels" aria-hidden="true">
-      <span class="plabel" data-part="roof"><i></i><b data-i18n="part.roof">Cubierta</b></span>
-      <span class="plabel" data-part="pergola"><i></i><b data-i18n="part.pergola">Pérgola</b></span>
-      <span class="plabel" data-part="walls"><i></i><b data-i18n="part.walls">Muros</b></span>
-      <span class="plabel" data-part="arch"><i></i><b data-i18n="part.arch">Arco</b></span>
-      <span class="plabel" data-part="base"><i></i><b data-i18n="part.base">Plataforma</b></span>
-    </div>
-
-    <div class="hero wrap">
-      <div class="hero__meta">
-        <span class="lbl">(01)</span>
-        <span class="lbl" data-i18n="hero.meta">Estudio de diseño de interiores</span>
-        <span class="lbl hero__geo">Aguascalientes, México</span>
+    <h1 class="hero__title" data-hero-title>
+      <span class="ln" data-i18n-html="hero.l1">Espacios</span>
+      <span class="ln" data-i18n-html="hero.l2">funcionales y</span>
+      <span class="ln" data-i18n-html="hero.l3"><em>atemporales.</em></span>
+    </h1>
+    <div class="hero__foot">
+      <p class="hero__lede" data-i18n="hero.lede">Jorge Santana diseña espacios residenciales, comerciales y de paisaje, y los muestra en renders fotorrealistas antes de construir.</p>
+      <div class="hero__cap" aria-live="off">
+        <b data-hero-name>Loft contemporáneo</b>
+        <span class="hero__count" data-hero-count>01 / 04</span>
+        <span class="hero__bar" aria-hidden="true"><i data-hero-bar></i></span>
+        <span class="hero__cue" aria-hidden="true"><i></i></span>
       </div>
-      <h1 class="hero__title" data-hero-title>
-        <span class="ln" data-i18n-html="hero.l1">Espacios</span>
-        <span class="ln" data-i18n-html="hero.l2">funcionales y</span>
-        <span class="ln" data-i18n-html="hero.l3"><em>atemporales.</em></span>
-      </h1>
-      <div class="hero__foot">
-        <p class="hero__lede" data-i18n="hero.lede">Jorge Santana diseña y visualiza en 3D espacios residenciales, comerciales y de paisaje.</p>
-        <span class="hero__cue"><i aria-hidden="true"></i><span data-i18n="hero.cue">Desplaza · gira la maqueta</span></span>
-      </div>
     </div>
-
-    <div class="xcopy wrap" data-xcopy>
-      <span class="lbl">(01) — <span data-i18n="x.label">La maqueta</span></span>
-      <p class="xcopy__t" data-i18n-html="x.text">Cada espacio se construye <em>por capas</em>: estructura, luz y material.</p>
-    </div>
-    <div class="xcopy xcopy--end wrap" data-xend>
-      <p class="xcopy__t" data-i18n-html="x.end">Y vuelve a ser <em>uno solo</em>.</p>
-    </div>
-    <div class="stage__progress" aria-hidden="true"><i data-stage-bar></i></div>
   </div>
 </section>
 
@@ -109,7 +108,7 @@
         <li><em>01</em><span data-i18n="disc.1">Residencial</span></li>
         <li><em>02</em><span data-i18n="disc.2">Comercial</span></li>
         <li><em>03</em><span data-i18n="disc.3">Paisajismo</span></li>
-        <li><em>04</em><span data-i18n="disc.4">Visualización 3D</span></li>
+        <li><em>04</em><span data-i18n="disc.4">Renders fotorrealistas</span></li>
       </ul>
       <dl class="facts" data-reveal>
         <div><dt>L. DI</dt><dd data-i18n="fact.1">Licenciado en Diseño de Interiores</dd></div>
@@ -154,7 +153,7 @@
     <li class="srv__row" data-reveal><em>01</em><h3 data-i18n="srv.1">Diseño interior residencial</h3><p data-i18n="srv.1d">Recámaras, baños, cocinas y estancias pensados para la vida diaria: primero la función, después una belleza que dura.</p></li>
     <li class="srv__row" data-reveal><em>02</em><h3 data-i18n="srv.2">Espacios comerciales</h3><p data-i18n="srv.2d">Cafeterías y locales con identidad propia, donde la luz y los materiales trabajan para la marca.</p></li>
     <li class="srv__row" data-reveal><em>03</em><h3 data-i18n="srv.3">Paisajismo y fachadas</h3><p data-i18n="srv.3d">Patios, jardines y fachadas que unen la arquitectura con el paisaje mexicano.</p></li>
-    <li class="srv__row" data-reveal><em>04</em><h3 data-i18n="srv.4">Visualización 3D fotorrealista</h3><p data-i18n="srv.4d">Renders en 3ds Max y V-Ray para ver cada material y cada luz antes de construir.</p></li>
+    <li class="srv__row" data-reveal><em>04</em><h3 data-i18n="srv.4">Renders fotorrealistas 3ds Max + V-Ray</h3><p data-i18n="srv.4d">Renders en 3ds Max + V-Ray para ver cada material y cada luz antes de construir.</p></li>
     <li class="srv__row" data-reveal><em>05</em><h3 data-i18n="srv.5">Mobiliario a medida</h3><p data-i18n="srv.5d">Closets, tocadores y vestidores diseñados a la medida, con iluminación integrada.</p></li>
   </ol>
 </section>
@@ -196,7 +195,7 @@
   <ol class="steps" data-steps>
     <li data-reveal><em>01</em><h3 data-i18n="st.1">Escucha</h3><p data-i18n="st.1d">Visita, medidas y una conversación sobre cómo vives o trabajas el espacio.</p></li>
     <li data-reveal><em>02</em><h3 data-i18n="st.2">Concepto</h3><p data-i18n="st.2d">Distribución, paleta de materiales y la idea que guía todo el proyecto.</p></li>
-    <li data-reveal><em>03</em><h3 data-i18n="st.3">Visualización 3D</h3><p data-i18n="st.3d">Renders fotorrealistas para decidir con certeza antes de construir.</p></li>
+    <li data-reveal><em>03</em><h3 data-i18n="st.3">Renders fotorrealistas</h3><p data-i18n="st.3d">Renders fotorrealistas para decidir con certeza antes de construir.</p></li>
     <li data-reveal><em>04</em><h3 data-i18n="st.4">Proyecto ejecutivo</h3><p data-i18n="st.4d">Planos, detalles y mobiliario a medida, listos para obra.</p></li>
     <li data-reveal><em>05</em><h3 data-i18n="st.5">Ejecución</h3><p data-i18n="st.5d">Fabricación y supervisión hasta la entrega del espacio.</p></li>
   </ol>
@@ -223,7 +222,7 @@
         <button type="button" class="chip is-on" data-i18n="f.k1">Residencial</button>
         <button type="button" class="chip" data-i18n="f.k2">Comercial</button>
         <button type="button" class="chip" data-i18n="f.k3">Paisajismo</button>
-        <button type="button" class="chip" data-i18n="f.k4">Render 3D</button>
+        <button type="button" class="chip" data-i18n="f.k4">Renders</button>
       </div>
       <label class="field"><span data-i18n="f.name">Nombre</span><input name="name" autocomplete="name" data-i18n-ph="f.name.ph" placeholder="Tu nombre"></label>
       <label class="field"><span data-i18n="f.msg">Mensaje</span><textarea name="msg" rows="3" data-i18n-ph="f.msg.ph" placeholder="Cuéntanos sobre el espacio"></textarea></label>
@@ -241,8 +240,8 @@
   <p class="ftr__mark" aria-hidden="true">Js <em>Interiorismo</em></p>
   <div class="ftr__row">
     <p>Jorge Santana · Aguascalientes, México</p>
-    <p data-i18n="ft.renders">Renders © Jorge Santana / Js Interiorismo</p>
-    <p data-i18n="ft.visual">Maqueta y texturas generadas por código · sin imágenes IA</p>
+    <p data-i18n="ft.renders">Renders y fotografías © Jorge Santana / Js Interiorismo</p>
+    <p data-i18n="ft.visual">Texturas de materiales dibujadas con código · sin imágenes IA</p>
     <p data-i18n="ft.concept">Propuesta conceptual · v2 Galería blanca</p>
     <p class="ftr__credit">Concept by Shaf3ool</p>
     <a href="#top" class="ftr__top" data-i18n="ft.top">Volver arriba ↑</a>

@@ -73,66 +73,72 @@ ol,ul{list-style:none}
 .menu nav a em{font:500 11px/1 var(--sans);letter-spacing:.14em;color:var(--ink-3);font-style:normal;width:22px}
 .menu__foot{font-size:12px;color:var(--ink-2)}
 
-/* ---------- 4. Stage: hero + exploding maquette ---------- */
-.stage{position:relative;height:340vh}
-.stage__sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.stage__canvas{position:absolute;inset:0;touch-action:pan-y;cursor:grab}
-.stage__canvas:active{cursor:grabbing}
-.stage__canvas canvas{display:block;width:100%!important;height:100%!important;outline:none}
-.stage__fallback{display:none}
-.no-webgl .stage__fallback{display:block;position:absolute;right:var(--pad);top:calc(var(--hdr) + 60px);width:min(38vw,520px);height:auto;aspect-ratio:4/5;object-fit:cover}
-@media (max-width:800px){ .no-webgl .stage__fallback{left:var(--pad);right:var(--pad);width:auto;height:40svh;aspect-ratio:auto} }
-.no-webgl .stage{height:auto}
-.no-webgl .stage__sticky{position:relative}
-.no-webgl .stage__labels,.no-webgl .xcopy,.no-webgl .stage__progress{display:none}
-
-.hero{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;
+/* ---------- 4. Hero: full-bleed crossfade of Jorge's renders ---------- */
+/* The hero is a viewport-tall gallery wall: 4 of his renders crossfade
+   slowly with a gentle Ken Burns drift; type sits on a soft dark scrim. */
+.hero{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#1c1b19;color:#fff}
+.hero__slides{position:absolute;inset:0}
+.hero__slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.8s var(--ease)}
+.hero__slide.is-on{opacity:1}
+.hero__slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);will-change:transform}
+/* slow drift while a slide is visible (paused by reduced-motion rules) */
+.hero__slide.is-on img{animation:kb 9s linear both}
+.hero__slide:nth-child(even).is-on img{animation-name:kb2}
+@keyframes kb{from{transform:scale(1.02) translate3d(0,0,0)}to{transform:scale(1.1) translate3d(-1.2%,-1%,0)}}
+@keyframes kb2{from{transform:scale(1.1) translate3d(1%,0,0)}to{transform:scale(1.02) translate3d(0,-.6%,0)}}
+/* scrim: keeps white type readable on any render */
+.hero__scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(17,17,17,.42) 0%,rgba(17,17,17,0) 26%,rgba(17,17,17,0) 46%,rgba(17,17,17,.62) 100%)}
+.hero__inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;
   padding-top:calc(var(--hdr) + 18px);padding-bottom:clamp(24px,4vh,48px)}
-.hero a,.hero button{pointer-events:auto}
-.hero__meta{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);border-top:1px solid var(--line);padding-top:14px}
-.hero__meta .lbl:nth-child(1){grid-column:1/2}
-.hero__meta .lbl:nth-child(2){grid-column:4/8}
-.hero__meta .lbl:nth-child(3){grid-column:10/13;text-align:right}
-.hero__title{font:300 clamp(46px,8.4vw,148px)/.94 var(--sans);letter-spacing:-.045em;margin-top:auto;max-width:11ch}
+.hero__meta{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap)}
+.hero__meta .lbl{color:rgba(255,255,255,.82)}
+.hero__meta .lbl:nth-child(1){grid-column:1/4}
+.hero__meta .lbl:nth-child(2){grid-column:4/9}
+.hero__meta .lbl:nth-child(3){grid-column:9/13;justify-self:end}
+/* headline */
+.hero__title{font:300 clamp(48px,8.4vw,148px)/.92 var(--sans);letter-spacing:-.05em;margin-top:auto;max-width:11ch;text-shadow:0 1px 30px rgba(0,0,0,.18)}
 .hero__title .ln{display:block;overflow:hidden;padding-bottom:.06em}
 .hero__title .ln>span,.hero__title .ln>em{display:inline-block}
 .hero__title em{letter-spacing:-.03em;font-weight:300}
-.hero__foot{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);align-items:end;margin-top:clamp(20px,3vh,36px);border-top:1px solid var(--line);padding-top:16px}
-.hero__lede{grid-column:1/6;font-size:15px;line-height:1.5;color:var(--ink-2);max-width:38ch}
-.hero__cue{grid-column:10/13;justify-self:end;display:flex;align-items:center;gap:12px;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
-.hero__cue i{width:1px;height:28px;background:var(--line-2);position:relative;overflow:hidden}
-.hero__cue i::after{content:"";position:absolute;left:0;top:-50%;width:1px;height:50%;background:var(--ink);animation:cue 2.2s var(--ease) infinite}
+.hero__foot{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap);align-items:end;margin-top:clamp(20px,3vh,36px);
+  border-top:1px solid rgba(255,255,255,.32);padding-top:16px}
+.hero__lede{grid-column:1/6;font-size:15px;line-height:1.5;color:rgba(255,255,255,.88);max-width:40ch}
+/* caption of the render on screen: name · counter · progress line */
+.hero__cap{grid-column:8/13;justify-self:end;display:flex;align-items:center;gap:16px;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.hero__cap b{font-weight:500;white-space:nowrap}
+.hero__count{color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums}
+.hero__bar{width:72px;height:1px;background:rgba(255,255,255,.3);position:relative;overflow:hidden}
+.hero__bar i{position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(0)}
+.hero__bar i.is-run{animation:heroBar var(--dur,6.5s) linear forwards}
+@keyframes heroBar{to{transform:scaleX(1)}}
+/* scroll cue */
+.hero__cue{display:flex;align-items:center;gap:12px}
+.hero__cue i{width:1px;height:28px;background:rgba(255,255,255,.35);position:relative;overflow:hidden}
+.hero__cue i::after{content:"";position:absolute;left:0;top:-50%;width:1px;height:50%;background:#fff;animation:cue 2.2s var(--ease) infinite}
 @keyframes cue{to{top:100%}}
 
 @media (max-width:800px){
-  .stage{height:300vh}
   .hero__meta{grid-template-columns:1fr auto}
   .hero__meta .lbl:nth-child(1){grid-column:1}
   .hero__meta .lbl:nth-child(2){display:none}
   .hero__meta .lbl:nth-child(3){grid-column:2}
   .hero__title{font-size:clamp(44px,13.4vw,64px);max-width:none}
-  .hero__foot{grid-template-columns:1fr auto;gap:16px}
-  .hero__lede{grid-column:1;font-size:13.5px}
-  .hero__cue{grid-column:2}
-  .hero__cue span{display:none}
+  .hero__foot{grid-template-columns:1fr;row-gap:18px}
+  .hero__lede{grid-column:1;font-size:14px}
+  .hero__cap{grid-column:1;justify-self:stretch;justify-content:space-between}
+  .hero__cue{display:none}
 }
 
-/* explode copy + labels */
-.xcopy{position:absolute;left:0;right:0;bottom:clamp(32px,7vh,72px);pointer-events:none;opacity:0;display:flex;flex-direction:column;gap:16px;max-width:calc(560px + var(--pad))}
-.xcopy__t{font:300 clamp(28px,3.2vw,48px)/1.08 var(--sans);letter-spacing:-.03em}
-.xcopy--end{max-width:none}
-@media (max-width:800px){ .xcopy{bottom:calc(36px + env(safe-area-inset-bottom))} .xcopy__t{font-size:30px} }
-.stage__labels{position:absolute;inset:0;pointer-events:none}
-.plabel{position:absolute;left:0;top:0;display:flex;align-items:center;gap:10px;opacity:0;will-change:transform,opacity}
-.plabel i{width:7px;height:7px;border-radius:50%;border:1px solid var(--ink);background:var(--bg);flex:none}
-.plabel b{font:500 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;padding:7px 10px;background:rgba(255,255,255,.82);border:1px solid var(--line);
-  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);white-space:nowrap}
-.plabel::before{content:"";position:absolute;left:3px;top:50%;width:26px;height:1px;background:var(--ink);transform-origin:left;opacity:.5}
-.plabel{padding-left:0}
-.plabel i{margin-right:18px}
-.stage__progress{position:absolute;right:var(--pad);top:50%;width:1px;height:120px;margin-top:-60px;background:var(--line)}
-.stage__progress i{position:absolute;left:0;top:0;width:1px;height:100%;background:var(--ink);transform-origin:top;transform:scaleY(0)}
-@media (max-width:800px){ .stage__progress{display:none} }
+/* header while it floats over the dark hero */
+.hdr.on-hero{color:#fff}
+.hdr.on-hero .hdr__name,.hdr.on-hero .lang i,.hdr.on-hero .lang span{color:rgba(255,255,255,.7)}
+.hdr.on-hero .lang span.is-on{color:#fff}
+.hdr.on-hero .menu-btn b{border-color:#fff}
+.menu-open .hdr.on-hero{color:var(--ink)}
+.menu-open .hdr.on-hero .menu-btn b{border-color:var(--ink)}
+.menu-open .hdr.on-hero .hdr__name,.menu-open .hdr.on-hero .lang span{color:var(--ink-3)}
+.menu-open .hdr.on-hero .lang span.is-on{color:var(--ink)}
 
 /* ---------- 5. Sections (shared) ---------- */
 .sec{padding-top:var(--sec)}
