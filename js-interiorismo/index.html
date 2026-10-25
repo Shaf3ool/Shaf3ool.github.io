@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Js Interiorismo — Jorge Santana · Diseño de interiores en Aguascalientes</title>
-  <meta name="description" content="Js Interiorismo — estudio de diseño de interiores de Jorge Santana en Aguascalientes, México. Residencial, comercial y paisajismo, con visualización 3D fotorrealista.">
+  <meta name="description" content="Js Interiorismo — estudio de diseño de interiores de Jorge Santana en Aguascalientes, México. Residencial, comercial y paisajismo, con renders fotorrealistas.">
   <meta name="theme-color" content="#EDE6DB">
   <meta property="og:title" content="Js Interiorismo — Jorge Santana">
   <meta property="og:description" content="Espacios funcionales y atemporales. Residencial · Comercial · Paisajismo · Aguascalientes, México.">
@@ -14,8 +14,7 @@
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="vendor/lenis.css">
-  <link rel="stylesheet" href="css/main.css">
-  <script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }</script>
+  <link rel="stylesheet" href="css/main.css?v=no3d">
 </head>
 <body class="is-loading">
   <!-- ========== Preloader: monogram drawn as a line ========== -->
@@ -31,7 +30,7 @@
     </a>
     <nav class="nav__links" aria-label="Principal">
       <a href="#studio" data-i18n="nav.studio">Estudio</a>
-      <a href="#space" data-i18n="nav.space">Espacio 3D</a>
+      <a href="#space" data-i18n="nav.space">Acabados</a>
       <a href="#projects" data-i18n="nav.projects">Proyectos</a>
       <a href="#process" data-i18n="nav.process">Proceso</a>
       <a href="#contact" data-i18n="nav.contact">Contacto</a>
@@ -46,7 +45,7 @@
   </header>
   <div class="menu" id="menu" data-menu hidden>
     <a href="#studio" data-i18n="nav.studio">Estudio</a>
-    <a href="#space" data-i18n="nav.space">Espacio 3D</a>
+    <a href="#space" data-i18n="nav.space">Acabados</a>
     <a href="#projects" data-i18n="nav.projects">Proyectos</a>
     <a href="#process" data-i18n="nav.process">Proceso</a>
     <a href="#contact" data-i18n="nav.contact">Contacto</a>
@@ -54,48 +53,93 @@
   </div>
 
   <main id="top">
-    <!-- ========== Hero + scroll story in one pinned 3D stage ========== -->
-    <section class="stage" id="space" data-stage>
-      <div class="stage__pin" data-stage-pin>
-        <canvas class="stage__canvas" data-canvas aria-label="Sala 3D interactiva"></canvas>
-        <img class="stage__fallback" src="img/loft-1.webp" alt="Loft contemporáneo — render de Jorge Santana" hidden data-fallback>
-        <div class="stage__veil"></div>
+    <!-- ========== Hero: full-bleed crossfade of Jorge's real renders ========== -->
+    <section class="hero" id="hero" data-hero aria-label="Js Interiorismo">
+      <div class="hero__media" data-hero-media>
+          <figure class="hero__slide is-active" data-slide data-slug="cafe-goretti"><img src="img/cafe-goretti-2-sm.webp" srcset="img/cafe-goretti-2-sm.webp 900w, img/cafe-goretti-2.webp 1800w" fetchpriority="high" sizes="100vw" width="1800" height="1350" decoding="async" style="object-position:50% 55%" alt="Café Goretti — render de Jorge Santana"></figure>
+          <figure class="hero__slide" data-slide data-slug="bano-sereno"><img data-src="img/bano-sereno-2-sm.webp" data-srcset="img/bano-sereno-2-sm.webp 900w, img/bano-sereno-2.webp 1800w" sizes="100vw" width="1800" height="1800" decoding="async" style="object-position:50% 50%" alt="Baño Sereno — render de Jorge Santana"></figure>
+          <figure class="hero__slide" data-slide data-slug="escenario-natural"><img data-src="img/escenario-natural-1-sm.webp" data-srcset="img/escenario-natural-1-sm.webp 900w, img/escenario-natural-1.webp 1440w" sizes="100vw" width="1440" height="1153" decoding="async" style="object-position:60% 50%" alt="Escenario Natural — render de Jorge Santana"></figure>
+          <figure class="hero__slide" data-slide data-slug="loft"><img data-src="img/loft-2-sm.webp" data-srcset="img/loft-2-sm.webp 900w, img/loft-2.webp 1440w" sizes="100vw" width="1440" height="1800" decoding="async" style="object-position:50% 40%" alt="Loft — render de Jorge Santana"></figure>
+      </div>
+      <div class="hero__veil" aria-hidden="true"></div>
 
-        <!-- hero copy -->
-        <div class="hero" data-chapter="0">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Jorge Santana · Aguascalientes, México</p>
-          <h1 class="hero__title" data-i18n="hero.title">Espacios funcionales<br><em>y atemporales.</em></h1>
-          <p class="hero__sub" data-i18n="hero.sub">Residencial · Comercial · Paisajismo</p>
-          <div class="hero__cta">
-            <a class="btn btn--solid" href="#projects" data-i18n="hero.cta1">Ver proyectos</a>
-            <button class="btn btn--glass" type="button" data-explore data-i18n="hero.cta2">Recorrer el espacio</button>
-          </div>
+      <!-- hero copy -->
+      <div class="hero__copy" data-hero-copy>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Jorge Santana · Aguascalientes, México</p>
+        <h1 class="hero__title" data-i18n="hero.title">Espacios funcionales<br><em>y atemporales.</em></h1>
+        <p class="hero__sub" data-i18n="hero.sub">Residencial · Comercial · Paisajismo</p>
+        <div class="hero__cta">
+          <a class="btn btn--solid" href="#projects" data-i18n="hero.cta1">Ver proyectos</a>
+          <a class="btn btn--glass" href="#space" data-i18n="hero.cta2">Prueba los acabados</a>
         </div>
-        <div class="scrollcue" aria-hidden="true"><span data-i18n="hero.scroll">Desliza</span><i></i></div>
+      </div>
 
-        <!-- story chapters -->
-        <div class="chapter" data-chapter="1"><p class="chapter__k" data-i18n="ch1.k"></p><h2 data-i18n="ch1.t"></h2><p data-i18n="ch1.s"></p></div>
-        <div class="chapter" data-chapter="2"><p class="chapter__k" data-i18n="ch2.k"></p><h2 data-i18n="ch2.t"></h2><p data-i18n="ch2.s"></p></div>
-        <div class="chapter" data-chapter="3"><p class="chapter__k" data-i18n="ch3.k"></p><h2 data-i18n="ch3.t"></h2><p data-i18n="ch3.s"></p></div>
-        <div class="chapter chapter--cta" data-chapter="4"><p class="chapter__k" data-i18n="ch4.k"></p><h2 data-i18n="ch4.t"></h2><p data-i18n="ch4.s"></p>
-          <button class="btn btn--solid" type="button" data-explore data-i18n="ch4.btn">Explorar en 3D</button></div>
+      <!-- slide caption, counter and timeline bars -->
+      <div class="hero__meta" aria-live="off">
+        <p class="hero__cap"><span data-hero-cap>Café Goretti</span><small data-i18n="hero.by">Render de Jorge Santana</small></p>
+        <div class="hero__bars" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+        <p class="hero__count" aria-hidden="true"><b data-hero-n>01</b> / 04</p>
+      </div>
+      <div class="scrollcue" aria-hidden="true"><span data-i18n="hero.scroll">Desliza</span><i></i></div>
+    </section>
 
-        <div class="stage__progress" aria-hidden="true"><i data-progress></i></div>
+    <!-- ========== Story: light, matter, visualisation (sticky render frame) ========== -->
+    <section class="section story" id="story">
+      <div class="wrap story__grid">
+        <div class="story__frame" aria-hidden="true">
+          <img class="story__img is-on" data-story-img="0" src="img/recamara-1-sm.webp" srcset="img/recamara-1-sm.webp 900w, img/recamara-1.webp 1440w" sizes="(max-width: 800px) 100vw, 50vw" width="1440" height="1440" loading="lazy" decoding="async" alt="Recámara — render de Jorge Santana">
+          <img class="story__img" data-story-img="1" src="img/bano-chukum-2-sm.webp" srcset="img/bano-chukum-2-sm.webp 900w, img/bano-chukum-2.webp 1440w" sizes="(max-width: 800px) 100vw, 50vw" width="1440" height="1440" loading="lazy" decoding="async" alt="Baño Chukum — render de Jorge Santana">
+          <img class="story__img" data-story-img="2" src="img/cocina-gilsa-1-sm.webp" srcset="img/cocina-gilsa-1-sm.webp 900w, img/cocina-gilsa-1.webp 1440w" sizes="(max-width: 800px) 100vw, 50vw" width="1440" height="957" loading="lazy" decoding="async" alt="Cocina Gilsa — render de Jorge Santana">
+          <p class="story__num"><b data-story-n>01</b> / 03</p>
+        </div>
+        <div class="story__list">
+        <article class="story__ch" data-story-ch="0">
+          <figure class="story__m"><img src="img/recamara-1-sm.webp" width="1440" height="1440" loading="lazy" decoding="async" alt="Recámara — render de Jorge Santana"></figure>
+          <p class="chapter__k" data-i18n="ch1.k"></p><h2 class="story__t" data-i18n="ch1.t"></h2><p class="story__s" data-i18n="ch1.s"></p>
+        </article>
+        <article class="story__ch" data-story-ch="1">
+          <figure class="story__m"><img src="img/bano-chukum-2-sm.webp" width="1440" height="1440" loading="lazy" decoding="async" alt="Baño Chukum — render de Jorge Santana"></figure>
+          <p class="chapter__k" data-i18n="ch2.k"></p><h2 class="story__t" data-i18n="ch2.t"></h2><p class="story__s" data-i18n="ch2.s"></p>
+        </article>
+        <article class="story__ch" data-story-ch="2">
+          <figure class="story__m"><img src="img/cocina-gilsa-1-sm.webp" width="1440" height="957" loading="lazy" decoding="async" alt="Cocina Gilsa — render de Jorge Santana"></figure>
+          <p class="chapter__k" data-i18n="ch3.k"></p><h2 class="story__t" data-i18n="ch3.t"></h2><p class="story__s" data-i18n="ch3.s"></p>
+        </article>
+        </div>
+      </div>
+    </section>
 
-        <!-- configurator UI (shown in explore mode) -->
-        <div class="cfg" data-cfg aria-hidden="true">
-          <div class="cfg__top">
-            <p class="cfg__title" data-i18n="cfg.title">Configurador de acabados</p>
-            <button class="cfg__close" type="button" data-explore-close data-i18n="cfg.close">Cerrar</button>
+    <!-- ========== Finishes: 2D sample board beside a real render ========== -->
+    <section class="section finishes" id="space">
+      <div class="wrap">
+        <div class="head head--row">
+          <div>
+            <p class="kicker" data-reveal data-i18n="ch4.k"></p>
+            <h2 class="display" data-reveal data-i18n="ch4.t"></h2>
           </div>
-          <div class="cfg__panel">
+          <p class="lead finishes__lead" data-reveal data-i18n="ch4.s"></p>
+        </div>
+        <div class="fin" data-fin>
+          <figure class="fin__render" data-reveal>
+            <div class="fin__photo" data-fin-photo></div>
+            <ul class="fin__legend fin__legend--chips" data-legend aria-hidden="true"></ul>
+            <figcaption><span data-i18n="cfg.ref">Proyecto de referencia</span> · <b data-fin-ref></b></figcaption>
+          </figure>
+          <div class="fin__side" data-reveal>
+            <div class="fin__board" data-board aria-live="polite">
+              <p class="fin__boardT" data-i18n="cfg.title">Tu paleta</p>
+              <div class="fin__slab fin__slab--walls" data-slab="walls"></div>
+              <div class="fin__slab fin__slab--floor" data-slab="floor"></div>
+              <div class="fin__slab fin__slab--fabric" data-slab="fabric"></div>
+            </div>
+            <ul class="fin__legend" data-legend></ul>
             <div class="cfg__tabs" role="tablist">
               <button type="button" role="tab" aria-selected="true" data-tab="floor" data-i18n="cfg.floor">Piso</button>
               <button type="button" role="tab" aria-selected="false" data-tab="walls" data-i18n="cfg.walls">Muros</button>
               <button type="button" role="tab" aria-selected="false" data-tab="fabric" data-i18n="cfg.fabric">Tapiz</button>
             </div>
-            <div class="cfg__swatches" data-swatches></div>
-            <p class="cfg__hint"><span data-i18n="cfg.hint"></span> · <span data-i18n="cfg.note"></span></p>
+            <div class="fin__swatches" data-swatches role="radiogroup" data-i18n-attr="aria-label:cfg.pick"></div>
+            <p class="fin__note" data-i18n="cfg.note"></p>
           </div>
         </div>
       </div>
@@ -244,6 +288,6 @@
   <script src="vendor/gsap.min.js"></script>
   <script src="vendor/ScrollTrigger.min.js"></script>
   <script src="vendor/lenis.min.js"></script>
-  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/main.js?v=no3d"></script>
 </body>
 </html>

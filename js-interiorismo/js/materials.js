@@ -1,10 +1,10 @@
 /* =========================================================================
-   materials.js — procedural (code-generated) textures for the 3D room.
-   Every texture is drawn on a 2D canvas at runtime: no image files, no AI.
+   materials.js — procedural (code-generated) finish samples for the 2D
+   "Acabados" section. Every sample is drawn on a 2D canvas at runtime:
+   no image files, no AI, no WebGL.
    Palette taken from Jorge Santana's own projects (oak, walnut, travertine,
    microcement, chukum, black marble, sage lacquer, linen, bouclé).
    ========================================================================= */
-import * as THREE from 'three';
 
 /* -------------------------------------------------------------------------
    rng
@@ -100,6 +100,7 @@ function woodGrain(g, x, y, w, h, base, r, vertical = false) {
   for (let i = 0; i < lines; i++) {
     const t = i / lines;
     g.strokeStyle = r() > 0.5 ? 'rgba(40,22,10,0.10)' : 'rgba(255,240,220,0.06)';
+    // fine grain lines, dark or light at random
     g.lineWidth = 0.6 + r() * 1.6;
     g.beginPath();
     const steps = 24;
@@ -114,6 +115,7 @@ function woodGrain(g, x, y, w, h, base, r, vertical = false) {
   }
   // occasional knot / cathedral figure
   if (r() > 0.55) {
+    // an occasional knot drawn as rings
     const kx = x + w * (0.2 + r() * 0.6), ky = y + h * (0.2 + r() * 0.6);
     for (let k = 1; k < 9; k++) {
       g.strokeStyle = 'rgba(50,28,12,0.08)';
@@ -140,6 +142,7 @@ function planks(size, colours, rows, seed, vertical = false) {
   // each row is split into long planks with staggered joints; every plank is
   // drawn twice (at x and x - size) so the texture wraps without a seam
   for (let row = 0; row < rows; row++) {
+    // each row of tiles starts at a random offset
     const start = r() * size;
     let pos = start;
     while (pos < start + size) {
@@ -219,6 +222,7 @@ function veinedMarble(size, base, vein, seed) {
   [[6, 0.06, 'blur(4px)'], [2, 0.22, 'blur(1px)'], [0.7, 0.55, 'none']].forEach(([w, a, f]) => {
     const rr = rng(seed + 3);
     g.filter = f; g.strokeStyle = vein; g.globalAlpha = a; g.lineWidth = w;
+    // nine veins per pass, wide-soft first then fine-sharp
     for (let v = 0; v < 9; v++) {
       let x = rr() * size, y = rr() * size, ang = rr() * Math.PI * 2;
       g.beginPath(); g.moveTo(x, y);
@@ -285,21 +289,6 @@ function fabric(size, base, seed, loops = false) {
 }
 
 /* -------------------------------------------------------------------------
-   toTexture
-   What: wrap a canvas as a repeating, colour-correct three.js texture.
-   In:   canvas, repeatX, repeatY, renderer (for anisotropy), isColour
-   Out:  THREE.CanvasTexture
-   ------------------------------------------------------------------------- */
-export function toTexture(canvas, rx = 1, ry = 1, renderer = null, isColour = true) {
-  const t = new THREE.CanvasTexture(canvas);
-  t.wrapS = t.wrapT = THREE.RepeatWrapping;
-  t.repeat.set(rx, ry);
-  if (isColour) t.colorSpace = THREE.SRGBColorSpace;
-  if (renderer) t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-  return t;
-}
-
-/* -------------------------------------------------------------------------
    roughFrom
    What: build a greyscale roughness map from a noise seed (adds subtle
          sheen variation so surfaces do not look like plastic).
@@ -315,32 +304,35 @@ function roughFrom(size, seed, min = 150, max = 235) {
 }
 
 /* -------------------------------------------------------------------------
-   FINISHES — the catalogue shown in the configurator.
-   Each entry knows how to draw itself (lazy, cached) and its PBR values.
+   FINISHES — the catalogue shown in the "Acabados" section.
+   Each entry knows how to draw itself (lazy, cached), which real project
+   of Jorge's is its reference (ref = project slug) and that render's path
+   (img, without the -sm/.webp suffix). rough/rep are kept as sample data.
    ------------------------------------------------------------------------- */
 export const FINISHES = {
   floor: [
-    { id: 'roble', es: 'Roble natural', en: 'Natural oak', draw: (s) => planks(s, ['#C9A57F', '#C49F78', '#CDAA84', '#C29C74'], 6, 11), rough: 0.62, rep: [6, 6] },
-    { id: 'nogal', es: 'Nogal', en: 'Walnut', draw: (s) => planks(s, ['#6E4B33', '#684631', '#73503A', '#6A4830'], 6, 21), rough: 0.55, rep: [6, 6] },
-    { id: 'travertino', es: 'Travertino', en: 'Travertine', draw: (s) => stone(s, '#DCCDB6', '#B9A27F', 31, 2), rough: 0.5, rep: [6, 6] },
-    { id: 'microcemento', es: 'Microcemento', en: 'Microcement', draw: (s) => plaster(s, '#B9B2A8', 41, 0.5, 0.6), rough: 0.7, rep: [3, 3] },
-    { id: 'marmol', es: 'Mármol negro', en: 'Black marble', draw: (s) => veinedMarble(s, '#1E1C1B', '#E9E4DC', 51), rough: 0.18, rep: [3, 3] },
+    { id: 'roble', ref: 'recamara', img: 'img/recamara-1', es: 'Roble natural', en: 'Natural oak', draw: (s) => planks(s, ['#C9A57F', '#C49F78', '#CDAA84', '#C29C74'], 6, 11), rough: 0.62, rep: [6, 6] },
+    { id: 'nogal', ref: 'cafe-goretti', img: 'img/cafe-goretti-2', es: 'Nogal', en: 'Walnut', draw: (s) => planks(s, ['#6E4B33', '#684631', '#73503A', '#6A4830'], 6, 21), rough: 0.55, rep: [6, 6] },
+    { id: 'travertino', ref: 'bano-sereno', img: 'img/bano-sereno-1', es: 'Travertino', en: 'Travertine', draw: (s) => stone(s, '#DCCDB6', '#B9A27F', 31, 2), rough: 0.5, rep: [6, 6] },
+    { id: 'microcemento', ref: 'cocina-neutra', img: 'img/cocina-neutra-1', es: 'Microcemento', en: 'Microcement', draw: (s) => plaster(s, '#B9B2A8', 41, 0.5, 0.6), rough: 0.7, rep: [3, 3] },
+    { id: 'marmol', ref: 'bano-negro', img: 'img/bano-negro-1', es: 'Mármol negro', en: 'Black marble', draw: (s) => veinedMarble(s, '#1E1C1B', '#E9E4DC', 51), rough: 0.18, rep: [3, 3] },
   ],
+  // walls: plaster family (yeso, chukum, sage, clay)
   walls: [
-    { id: 'yeso', es: 'Yeso cálido', en: 'Warm plaster', draw: (s) => plaster(s, '#E4D4BE', 61, 0.22, 0.1), rough: 0.92, rep: [2, 1] },
-    { id: 'chukum', es: 'Chukum', en: 'Chukum', draw: (s) => plaster(s, '#D8C2A4', 71, 0.45, 0.9), rough: 0.9, rep: [2, 1] },
-    { id: 'salvia', es: 'Verde salvia', en: 'Sage green', draw: (s) => plaster(s, '#9AA591', 81, 0.25, 0.15), rough: 0.88, rep: [2, 1] },
-    { id: 'arcilla', es: 'Arcilla', en: 'Clay', draw: (s) => plaster(s, '#C59C7E', 91, 0.3, 0.3), rough: 0.9, rep: [2, 1] },
+    { id: 'yeso', ref: 'recamara', img: 'img/recamara-2', es: 'Yeso cálido', en: 'Warm plaster', draw: (s) => plaster(s, '#E4D4BE', 61, 0.22, 0.1), rough: 0.92, rep: [2, 1] },
+    { id: 'chukum', ref: 'bano-chukum', img: 'img/bano-chukum-1', es: 'Chukum', en: 'Chukum', draw: (s) => plaster(s, '#D8C2A4', 71, 0.45, 0.9), rough: 0.9, rep: [2, 1] },
+    { id: 'salvia', ref: 'vestidor-salvia', img: 'img/vestidor-salvia-1', es: 'Verde salvia', en: 'Sage green', draw: (s) => plaster(s, '#9AA591', 81, 0.25, 0.15), rough: 0.88, rep: [2, 1] },
+    { id: 'arcilla', ref: 'escenario-natural', img: 'img/escenario-natural-1', es: 'Arcilla', en: 'Clay', draw: (s) => plaster(s, '#C59C7E', 91, 0.3, 0.3), rough: 0.9, rep: [2, 1] },
   ],
   fabric: [
-    { id: 'lino', es: 'Lino hueso', en: 'Bone linen', draw: (s) => fabric(s, '#E6DED1', 101), rough: 0.95, rep: [2, 2] },
-    { id: 'boucle', es: 'Bouclé arena', en: 'Sand bouclé', draw: (s) => fabric(s, '#D6C7B0', 111, true), rough: 1.0, rep: [3, 3] },
-    { id: 'olivo', es: 'Terciopelo olivo', en: 'Olive velvet', draw: (s) => fabric(s, '#6E7458', 121), rough: 0.75, rep: [2, 2] },
-    { id: 'cognac', es: 'Piel cognac', en: 'Cognac leather', draw: (s) => plaster(s, '#8A5A3A', 131, 0.25, 0.05), rough: 0.5, rep: [1.5, 1.5] },
+    { id: 'lino', ref: 'loft', img: 'img/loft-2', es: 'Lino hueso', en: 'Bone linen', draw: (s) => fabric(s, '#E6DED1', 101), rough: 0.95, rep: [2, 2] },
+    { id: 'boucle', ref: 'vestidor-salvia', img: 'img/vestidor-salvia-2', es: 'Bouclé arena', en: 'Sand bouclé', draw: (s) => fabric(s, '#D6C7B0', 111, true), rough: 1.0, rep: [3, 3] },
+    { id: 'olivo', ref: 'patio-jacaranda', img: 'img/patio-jacaranda-2', es: 'Terciopelo olivo', en: 'Olive velvet', draw: (s) => fabric(s, '#6E7458', 121), rough: 0.75, rep: [2, 2] },
+    { id: 'cognac', ref: 'cafe-goretti', img: 'img/cafe-goretti-1', es: 'Piel cognac', en: 'Cognac leather', draw: (s) => plaster(s, '#8A5A3A', 131, 0.25, 0.05), rough: 0.5, rep: [1.5, 1.5] },
   ],
 };
 
-/* Fixed (non-configurable) surfaces used around the room */
+/* Fixed surfaces (kept for future sample boards; not drawn unless asked) */
 export const FIXED = {
   walnutSlat: () => planks(512, ['#6A4831', '#5C3E2A', '#71503A'], 4, 141, true),
   oakSlat: () => planks(512, ['#C9A57F', '#BE9A73'], 4, 151, true),
@@ -379,4 +371,22 @@ export function swatchDataURL(group, id) {
   // crop the centre so planks/tiles read clearly at small size
   g.drawImage(src, src.width * 0.3, src.height * 0.3, src.width * 0.4, src.height * 0.4, 0, 0, 96, 96);
   return c.toDataURL('image/png');
+}
+
+/* -------------------------------------------------------------------------
+   slabDataURL
+   What: a JPEG data-URL of a finish, cropped like a cut sample slab, for
+         the large swatch tiles and the palette board.
+   In:   group, id, w (px), h (px)
+   Out:  string (data URL)
+   ------------------------------------------------------------------------- */
+export function slabDataURL(group, id, w = 320, h = 320) {
+  const src = finishCanvas(group, id, 512);
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const g = c.getContext('2d');
+  // fill the slab with the centre of the texture, keeping its aspect
+  const s = Math.min(src.width / w, src.height / h) * 0.7;
+  g.drawImage(src, (src.width - w * s) / 2, (src.height - h * s) / 2, w * s, h * s, 0, 0, w, h);
+  return c.toDataURL('image/jpeg', 0.86);
 }

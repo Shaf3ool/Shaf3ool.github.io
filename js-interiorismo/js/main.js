@@ -1,20 +1,24 @@
 /* =========================================================================
    main.js — page orchestration for Js Interiorismo · site v1
-   Boot order: language → smooth scroll → 3D stage → projects → reveals.
+   Boot order: language → smooth scroll → hero renders → story → finishes
+   → projects → reveals. No WebGL anywhere: every image is Jorge's own.
    GSAP, ScrollTrigger and Lenis are loaded as classic scripts (globals).
    ========================================================================= */
 import { applyLang, initialLang, onLang, t, getLang } from './i18n.js';
 import { PROJECTS } from './projects.js';
+// page modules (no WebGL): hero renders, story chapters, 2D finishes
+import { initHero } from './hero.js';
+import { initStory } from './story.js';
+import { initFinishes } from './finishes.js';
 
+// libraries are classic scripts, read from window
 const gsap = window.gsap;
 const ScrollTrigger = window.ScrollTrigger;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const mobile = window.matchMedia('(max-width: 800px)').matches || window.matchMedia('(pointer: coarse)').matches;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
 let lenis = null;
-let room = null;
 
 /* -------------------------------------------------------------------------
    initScroll
@@ -36,26 +40,15 @@ function initScroll() {
     if (!target) return;
     e.preventDefault();
     closeMenu();
-    lenis.scrollTo(target, { offset: a.getAttribute('href') === '#space' ? window.innerHeight * 0.0 : 0 });
+    // the header is fixed: land the section just below it
+    lenis.scrollTo(target, { offset: a.getAttribute('href') === '#top' ? 0 : -8 });
   }));
 }
 
 /* -------------------------------------------------------------------------
-   hasWebGL
-   What: feature-test WebGL before importing three.js.
-   In:   nothing
-   Out:  boolean
-   ------------------------------------------------------------------------- */
-function hasWebGL() {
-  try {
-    const c = document.createElement('canvas');
-    return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
-  } catch (e) { return false; }
-}
-
-/* -------------------------------------------------------------------------
    reveal
-   What: hide the preloader (once the first 3D frames exist, or on timeout).
+   What: hide the preloader (once the first hero render is decoded, or on
+         a timeout so a slow network never traps the visitor).
    In:   nothing
    Out:  nothing
    ------------------------------------------------------------------------- */
@@ -65,129 +58,8 @@ function reveal() {
   revealed = true;
   document.body.classList.remove('is-loading');
   // hero copy rises in after the veil lifts
-  if (!reduced) gsap.from('.hero > *', { y: 36, opacity: 0, duration: 1.3, stagger: 0.09, ease: 'power3.out', delay: 0.25 });
+  if (!reduced) gsap.from('[data-hero-copy] > *', { y: 36, opacity: 0, duration: 1.3, stagger: 0.09, ease: 'power3.out', delay: 0.25 });
   ScrollTrigger.refresh();
-}
-
-/* -------------------------------------------------------------------------
-   chapterOpacity
-   What: fade window for a story chapter as a function of scroll progress.
-   In:   p (0..1), a (start), b (end), f (fade width)
-   Out:  number 0..1
-   ------------------------------------------------------------------------- */
-function chapterOpacity(p, a, b, f = 0.045) {
-  if (p < a - f || p > b + f) return 0;
-  if (p < a) return (p - (a - f)) / f;
-  if (p > b) return 1 - (p - b) / f;
-  return 1;
-}
-
-/* -------------------------------------------------------------------------
-   initStage
-   What: build the 3D room (dynamic import so a failure never blocks the
-         page), wire scroll → camera, chapters, progress bar, visibility.
-   In:   nothing
-   Out:  Promise<void>
-   ------------------------------------------------------------------------- */
-async function initStage() {
-  const canvas = $('[data-canvas]');
-  const fallback = $('[data-fallback]');
-  // chapter windows on the 0..1 scroll progress of the pinned stage
-  const windows = [[0, 0.1], [0.2, 0.34], [0.42, 0.56], [0.64, 0.76], [0.85, 1.05]];
-  const chapters = $$('[data-chapter]');
-  const bar = $('[data-progress]');
-
-  if (!hasWebGL()) {
-    canvas.hidden = true; fallback.hidden = false;
-    fallback.alt = t('webgl.fallback');
-    reveal();
-  } else {
-    try {
-      const { createRoom } = await import('./scene.js');
-      room = createRoom(canvas, { mobile, reducedMotion: reduced, artURL: 'img/bano-sereno-1-sm.webp', onReady: reveal });
-      room.start();
-      window.addEventListener('resize', () => room.resize(), { passive: true });
-      // render only while the stage is on screen
-      new IntersectionObserver(([e]) => { if (e.isIntersecting) room.start(); else if (!document.body.classList.contains('is-exploring')) room.stop(); }).observe($('[data-stage]'));
-    } catch (err) {
-      canvas.hidden = true; fallback.hidden = false;
-      reveal();
-    }
-  }
-
-  // one ScrollTrigger maps the whole pinned stage to 0..1
-  ScrollTrigger.create({
-    trigger: '[data-stage]', start: 'top top', end: 'bottom bottom', scrub: true,
-    onUpdate: (self) => {
-      const p = self.progress;
-      // camera: hold the hero for the first 6 %, then travel the path
-      if (room) room.setProgress(Math.min(1, Math.max(0, (p - 0.06) / 0.84)));
-      chapters.forEach((el, i) => {
-        const o = chapterOpacity(p, windows[i][0], windows[i][1]);
-        el.style.opacity = o;
-        el.style.visibility = o > 0.01 ? 'visible' : 'hidden';
-        el.style.transform = `translateY(${(1 - o) * 24}px)`;
-      });
-      $('.scrollcue').style.opacity = String(Math.max(0, 1 - p * 12));
-      bar.style.transform = `scaleX(${p})`;
-    },
-  });
-  // the hero is visible at load (progress 0)
-  chapters[0].style.opacity = 1; chapters[0].style.visibility = 'visible'; chapters[0].style.transform = 'none';
-
-  initExplore();
-}
-
-/* -------------------------------------------------------------------------
-   initExplore
-   What: explore mode — full-screen orbit + material configurator.
-   In:   nothing
-   Out:  nothing
-   ------------------------------------------------------------------------- */
-function initExplore() {
-  const box = $('[data-swatches]');
-  let tab = 'floor';
-  let finishes = null;
-
-  /* What: draw the swatch buttons for the active tab.  In: nothing  Out: nothing */
-  const renderSwatches = async () => {
-    if (!room) return;
-    if (!finishes) finishes = await import('./materials.js');
-    box.innerHTML = '';
-    finishes.FINISHES[tab].forEach((f) => {
-      const b = document.createElement('button');
-      b.type = 'button'; b.className = 'sw';
-      b.setAttribute('aria-pressed', String(room.current[tab] === f.id));
-      b.innerHTML = `<i style="background-image:url(${finishes.swatchDataURL(tab, f.id)})"></i><span>${f[getLang()]}</span>`;
-      b.addEventListener('click', () => {
-        room.setFinish(tab, f.id);
-        $$('.sw', box).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      });
-      box.appendChild(b);
-    });
-  };
-
-  /* What: enter/leave explore mode.  In: on (boolean)  Out: nothing */
-  const setMode = (on) => {
-    if (!room) return;
-    document.body.classList.toggle('is-exploring', on);
-    $('[data-cfg]').setAttribute('aria-hidden', String(!on));
-    room.setExplore(on);
-    room.start();
-    room.resize();
-    if (on) { if (lenis) lenis.stop(); renderSwatches(); }
-    else if (lenis) lenis.start();
-  };
-
-  $$('[data-explore]').forEach((b) => b.addEventListener('click', () => setMode(true)));
-  $('[data-explore-close]').addEventListener('click', () => setMode(false));
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('is-exploring')) setMode(false); });
-  $$('[data-tab]').forEach((b) => b.addEventListener('click', () => {
-    tab = b.dataset.tab;
-    $$('[data-tab]').forEach((x) => x.setAttribute('aria-selected', String(x === b)));
-    renderSwatches();
-  }));
-  onLang(() => { if (document.body.classList.contains('is-exploring')) renderSwatches(); });
 }
 
 /* -------------------------------------------------------------------------
@@ -207,6 +79,7 @@ function renderProjects() {
         <figcaption class="pcard__meta"><h3>${p.title[L]}</h3><span>${p.category[L]} · ${p.year}</span></figcaption>
       </figure></li>`;
   }).join('');
+  // every card opens the lightbox by click or Enter
   $$('.pcard', grid).forEach((c) => {
     c.addEventListener('click', () => openLightbox(+c.dataset.index));
     c.addEventListener('keydown', (e) => { if (e.key === 'Enter') openLightbox(+c.dataset.index); });
@@ -242,6 +115,7 @@ function openLightbox(i) {
   lbIndex = (i + PROJECTS.length) % PROJECTS.length;
   const p = PROJECTS[lbIndex];
   $('[data-lb-media]').innerHTML = p.images.map((im) => `<img src="${im.src}" width="${im.w}" height="${im.h}" alt="${p.title[L]} — render de Jorge Santana">`).join('');
+  // caption, story and the Instagram source of the project
   $('[data-lb-cat]').textContent = `${p.category[L]} · ${p.year}`;
   $('[data-lb-title]').textContent = p.title[L];
   $('[data-lb-text]').textContent = p.text[L];
@@ -290,6 +164,7 @@ function bindCursor() {
     c.addEventListener('mouseenter', () => cur.classList.add('is-on'));
     c.addEventListener('mouseleave', () => cur.classList.remove('is-on'));
   });
+  // the follow-the-mouse listener is bound once only
   if (cursorBound) return;
   cursorBound = true;
   const xTo = gsap.quickTo(cur, 'x', { duration: 0.45, ease: 'power3' });
@@ -317,7 +192,7 @@ function initReveals() {
 
 /* -------------------------------------------------------------------------
    initNav
-   What: header turns solid after the 3D stage; hides on scroll-down and
+   What: header turns solid after the hero; hides on scroll-down and
          returns on scroll-up; mobile full-screen menu.
    In:   nothing
    Out:  nothing
@@ -327,9 +202,10 @@ function initNav() {
   let lastY = 0;
   const onScroll = () => {
     const y = window.scrollY;
-    const stageEnd = $('[data-stage]').offsetHeight - window.innerHeight;
-    nav.classList.toggle('is-solid', y > stageEnd - 10);
-    nav.classList.toggle('is-hidden', y > lastY && y > 200 && y > stageEnd);
+    // the hero is exactly one screen tall; past it the header needs a backdrop
+    const heroEnd = $('[data-hero]').offsetHeight - (nav.offsetHeight || 64);
+    nav.classList.toggle('is-solid', y > heroEnd - 10);
+    nav.classList.toggle('is-hidden', y > lastY && y > 200 && y > heroEnd);
     lastY = y;
   };
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -340,6 +216,7 @@ function initNav() {
 /* What: open the mobile menu.  In: nothing  Out: nothing */
 function openMenu() {
   $('[data-menu]').hidden = false;
+  document.body.classList.add('menu-open');
   $('[data-burger]').setAttribute('aria-expanded', 'true');
   if (lenis) lenis.stop();
   gsap.from('[data-menu] a', { y: 30, opacity: 0, duration: 0.7, stagger: 0.05, ease: 'power3.out' });
@@ -349,6 +226,7 @@ function closeMenu() {
   const m = $('[data-menu]');
   if (m.hidden) return;
   m.hidden = true;
+  document.body.classList.remove('menu-open');
   $('[data-burger]').setAttribute('aria-expanded', 'false');
   if (lenis) lenis.start();
 }
@@ -375,6 +253,7 @@ function initForm() {
 function boot() {
   applyLang(initialLang());
   $$('[data-lang-btn]').forEach((b) => b.addEventListener('click', () => applyLang(b.dataset.langBtn)));
+  // smooth scroll + header, then the project grid
   initScroll();
   initNav();
   renderProjects();
@@ -383,9 +262,12 @@ function boot() {
   initLightbox();
   initReveals();
   initForm();
-  initStage();
-  // never keep the loader longer than 4 s, even on a slow GPU
-  setTimeout(reveal, 4000);
+  // sections that replaced the old 3D stage
+  initHero({ gsap, ScrollTrigger, reduced, onFirstImage: reveal });
+  initStory({ gsap, ScrollTrigger, reduced, desktop: !window.matchMedia('(max-width: 800px)').matches });
+  initFinishes({ gsap, reduced });
+  // never keep the loader longer than 3 s, even on a slow network
+  setTimeout(reveal, 3000);
 }
 
 boot();
