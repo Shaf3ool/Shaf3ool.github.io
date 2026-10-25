@@ -5,7 +5,7 @@
    - Navigations: network-first with the cached shell as fallback
    All paths are relative so it works under /js-app-avances/.
    ========================================================================= */
-const VERSION = 'jsavances-e7faffdf94';
+const VERSION = 'jsavances-e7faffdf95';
 const SHELL = [
   "./",
   "./css/app.css",

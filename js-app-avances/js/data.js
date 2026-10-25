@@ -8,14 +8,50 @@
 // --- phases, in order (Diseño → Compras → Obra → Acabados → Entrega) -------
 export const PHASES = ['diseno', 'compras', 'obra', 'acabados', 'entrega'];
 
-// --- project summary ---------------------------------------------------------
-// state per phase: 'done' | 'now' | 'next'; pct is the overall progress
+// --- progress model (the algorithm explained to DJG) ------------------------
+// Each phase has a weight (sums to 100) and a completion 0..1 (Demo values).
+export const PHASE_WEIGHT = { diseno: 15, compras: 20, obra: 40, acabados: 20, entrega: 5 };
+export const PHASE_DONE   = { diseno: 1,  compras: 1,  obra: 0.6, acabados: 0, entrega: 0 };
+
+/**
+ * What: overall progress = sum(weight x completion), rounded.
+ * In:  weights, completion (objects keyed by phase)
+ * Out: number 0..100
+ */
+function computePct(w, c) {
+  // weighted sum over every phase
+  return Math.round(PHASES.reduce((s, p) => s + w[p] * c[p], 0));
+}
+
+/**
+ * What: current phase = the first phase that is not finished.
+ * In:  completion object
+ * Out: phase key (string)
+ */
+function currentPhase(c) {
+  // falls back to the last phase when everything is complete
+  return PHASES.find((p) => c[p] < 1) || PHASES[PHASES.length - 1];
+}
+
+/**
+ * What: derive done / now / next for each phase from the current phase.
+ * In:  current (phase key)
+ * Out: { phase: 'done'|'now'|'next' }
+ */
+function phaseStates(current) {
+  const i = PHASES.indexOf(current);
+  // before current = done, current = now, after = next
+  return Object.fromEntries(PHASES.map((p, k) => [p, k < i ? 'done' : k === i ? 'now' : 'next']));
+}
+
+// --- project summary (pct, phase and states are computed, not typed) -------
+const NOW_PHASE = currentPhase(PHASE_DONE);
 export const PROJECT = {
   name: { es: 'Casa Encino', en: 'Casa Encino' },
   scope: { es: 'Remodelación integral · Aguascalientes', en: 'Full remodel · Aguascalientes' },
-  pct: 64,
-  phase: 'obra',
-  phaseState: { diseno: 'done', compras: 'done', obra: 'now', acabados: 'next', entrega: 'next' },
+  pct: computePct(PHASE_WEIGHT, PHASE_DONE),
+  phase: NOW_PHASE,
+  phaseState: phaseStates(NOW_PHASE),
   phaseDates: {
     diseno:   '2026-09-22',
     compras:  '2026-10-21',
