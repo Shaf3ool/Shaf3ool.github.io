@@ -58,7 +58,10 @@
       <!-- Interactive 3D centrepiece (js/modules/hero3d.js). The poster is the
            static fallback (no WebGL / reduced motion) and the first-paint placeholder. -->
       <div class="hero3d" tabindex="0" role="button" aria-label="3D phone showing Shaf3ool concept sites. Drag to spin, press for the next site.">
-        <img class="hero3d__poster" src="assets/img/hero3d-poster.webp" alt="" width="640" height="720" decoding="async" fetchpriority="low">
+        <picture>
+          <source media="(max-width: 640px)" srcset="assets/img/hero3d-poster-m.webp" width="782" height="762">
+          <img class="hero3d__poster" src="assets/img/hero3d-poster.webp" alt="" width="749" height="720" decoding="async" fetchpriority="low">
+        </picture>
         <canvas class="hero3d__canvas" aria-hidden="true"></canvas>
         <p class="hero3d__hint" aria-hidden="true"><span class="hero3d__dot"></span><span data-i18n="h3d_hint">Drag to spin · tap for the next site</span></p>
       </div>
