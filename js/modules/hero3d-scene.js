@@ -430,7 +430,7 @@ export async function startHero3D(stage, opts) {
       state.vel *= Math.pow(0.04, dt);
       if (Math.abs(state.vel) < 0.002) {
         const home = Math.round(state.spin / (Math.PI * 2)) * Math.PI * 2;
-        state.spin += (home - state.spin) * k * 0.35;
+        state.spin += (home - state.spin) * k * 0.6;
       }
     }
     // --- Target pose: mouse follow on desktop, idle sway on touch ---
