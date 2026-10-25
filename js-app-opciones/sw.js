@@ -5,7 +5,7 @@
    - Navigations: network-first with the cached shell as fallback
    Relative paths, so it works under /js-app-opciones/.
    ========================================================================= */
-const VERSION = 'jsopc-685ced637c';
+const VERSION = 'jsopc-8d64db5b38';
 const SHELL = [
   "./",
   "./css/app.css",
