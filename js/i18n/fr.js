@@ -148,6 +148,8 @@ export const FR = {
   "type_gesture_demo": "Démo 3D pilotée par les gestes",
   "city_web_lab": "Expérience web",
   "view_demo": "Voir la démo en ligne",
+  // --- Hero 3D hint ---
+  "h3d_hint": "Glissez pour tourner · touchez pour le site suivant",
 };
 
 // Page title per language

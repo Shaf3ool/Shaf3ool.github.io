@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="css/sections.css">
   <!-- Light CSS 3D depth on the project cards -->
   <link rel="stylesheet" href="css/depth.css">
+  <link rel="stylesheet" href="css/hero3d.css">
   <!-- Behaviour (ES modules, deferred by default) -->
   <script type="module" src="js/main.js"></script>
 </head>
@@ -54,7 +55,13 @@
   <main id="main">
     <!-- ===== Hero ===== -->
     <section class="hero" aria-labelledby="hero-title">
-      <img class="hero__seal" src="assets/img/shaf3ool-seal.svg" alt="" width="220" height="220">
+      <!-- Interactive 3D centrepiece (js/modules/hero3d.js). The poster is the
+           static fallback (no WebGL / reduced motion) and the first-paint placeholder. -->
+      <div class="hero3d" tabindex="0" role="button" aria-label="3D phone showing Shaf3ool concept sites. Drag to spin, press for the next site.">
+        <img class="hero3d__poster" src="assets/img/hero3d-poster.webp" alt="" width="640" height="720" decoding="async" fetchpriority="low">
+        <canvas class="hero3d__canvas" aria-hidden="true"></canvas>
+        <p class="hero3d__hint" aria-hidden="true"><span class="hero3d__dot"></span><span data-i18n="h3d_hint">Drag to spin · tap for the next site</span></p>
+      </div>
       <p class="eyebrow reveal"><span data-i18n="hero_eyebrow">Shaf3ool · Web Studio — Algiers</span></p>
       <h1 class="hero__title reveal" id="hero-title">Mahmoud<br><em>Al Jounaidy</em></h1>
       <p class="hero__lead reveal"><span data-i18n-html="hero_lead">Software × Web Dev &amp; Designer. I build systems in C++ and sites people remember, from the stock room to the scroll.</span></p>

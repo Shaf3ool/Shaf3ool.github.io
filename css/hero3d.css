@@ -1,0 +1,78 @@
+/* ==========================================================
+   hero3d.css — stage for the interactive 3D centrepiece in
+   the hero (js/modules/hero3d.js + hero3d-scene.js).
+   Desktop/tablet: a tall stage on the right, where the
+   spinning seal sat. Phone: a full-width stage above the name.
+   The poster image shows first (and stays for no-WebGL or
+   reduced motion); the canvas fades in over it once live.
+   ========================================================== */
+
+/* ---------- Hero text stays above the stage ---------- */
+.hero > :not(.hero3d) { position: relative; z-index: 1; }
+
+/* ---------- Stage (desktop / tablet) ---------- */
+.hero3d {
+  position: absolute; z-index: 0;
+  top: clamp(4.5rem, 9vh, 7rem); right: 0;
+  width: min(52vw, 760px); height: min(80vh, 780px);
+  outline: none;
+}
+/* Keyboard focus ring only for keyboard users */
+.hero3d:focus-visible { outline: 2px solid var(--orange); outline-offset: -6px; border-radius: var(--radius); }
+
+/* ---------- Poster and canvas share the whole stage ---------- */
+.hero3d__poster, .hero3d__canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.hero3d__poster { object-fit: contain; transition: opacity .8s var(--ease); }
+/* Canvas: invisible until its first frame is drawn */
+.hero3d__canvas {
+  opacity: 0; transition: opacity .9s var(--ease);
+  cursor: grab;
+  /* Vertical swipes still scroll the page; sideways swipes spin the phone */
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero3d.is-grabbing .hero3d__canvas { cursor: grabbing; }
+.hero3d.is-live .hero3d__canvas { opacity: 1; }
+.hero3d.is-live .hero3d__poster { opacity: 0; }
+
+/* ---------- Interaction hint pill ---------- */
+.hero3d__hint {
+  position: absolute; left: 50%; bottom: 3%; z-index: 2;
+  display: flex; align-items: center; gap: .55rem;
+  padding: .5rem .95rem; border-radius: 999px;
+  font-size: .78rem; letter-spacing: .02em; white-space: nowrap;
+  color: var(--on-ink-dim); background: rgba(20, 20, 20, .55);
+  border: 1px solid var(--line-dark);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  pointer-events: none;
+  opacity: 0; transform: translate(-50%, 8px);
+  transition: opacity .6s var(--ease) .6s, transform .6s var(--ease) .6s;
+}
+/* Shown once the scene is live, hidden after the first drag or tap */
+.hero3d.is-live .hero3d__hint { opacity: 1; transform: translate(-50%, 0); }
+.hero3d.is-live.is-used .hero3d__hint { opacity: 0; transition-delay: 1.2s; }
+/* Little pulsing orange dot inside the hint */
+.hero3d__dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--orange);
+  box-shadow: 0 0 0 0 rgba(255, 90, 54, .6);
+  animation: hero3d-ping 1.8s ease-out infinite;
+}
+@keyframes hero3d-ping { 70%, 100% { box-shadow: 0 0 0 9px rgba(255, 90, 54, 0); } }
+
+/* ---------- Tablet: stage a little narrower ---------- */
+@media (max-width: 980px) {
+  .hero3d { width: 56vw; height: 64vh; top: 5rem; }
+}
+
+/* ---------- Phone: full-width stage above the name ---------- */
+@media (max-width: 640px) {
+  .hero { padding-top: 4.4rem; }
+  .hero3d {
+    position: relative; top: auto; right: auto; flex: none;
+    width: calc(100% + 2 * var(--gutter)); margin: 0 calc(-1 * var(--gutter)) .4rem;
+    height: clamp(300px, 45svh, 420px);
+  }
+  .hero3d__hint { bottom: 0; font-size: .74rem; }
+}
