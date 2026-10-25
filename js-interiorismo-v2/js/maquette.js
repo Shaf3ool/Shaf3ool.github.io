@@ -309,7 +309,7 @@ export function createMaquette(container, opts = {}) {
     camera.lookAt(target);
     // shift the framing: model sits right on desktop, high on mobile
     if (small) camera.setViewOffset(w, h, 0, h * 0.12, w, h);
-    else camera.setViewOffset(w, h, -w * 0.17, -h * 0.03, w, h);
+    else camera.setViewOffset(w, h, -w * 0.2, -h * 0.03, w, h);
     camera.updateProjectionMatrix();
   }
   resize();
