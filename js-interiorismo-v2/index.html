@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Js Interiorismo — Jorge Santana · Diseño de interiores en Aguascalientes</title>
+<meta name="description" content="Js Interiorismo, estudio de Jorge Santana en Aguascalientes, México. Diseño de espacios funcionales y atemporales: residencial, comercial y paisajismo, con visualización 3D fotorrealista.">
+<meta name="theme-color" content="#F7F6F3">
+<meta property="og:title" content="Js Interiorismo — Espacios funcionales y atemporales">
+<meta property="og:description" content="Jorge Santana · Diseño de interiores · Aguascalientes, México. Residencial • Comercial • Paisajismo.">
+<meta property="og:image" content="img/fachada-blanca-1.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F7F6F3'/%3E%3Ctext x='32' y='43' font-family='Helvetica,Arial' font-size='30' font-weight='500' text-anchor='middle' fill='%23111'%3EJs%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/InterTight-normal-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/InterTight-normal-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="vendor/lenis.css">
+<link rel="stylesheet" href="css/main.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<a class="skip" href="#estudio" data-i18n="skip">Saltar al contenido</a>
+
+<!-- ===== Header ===== -->
+<header class="hdr" id="top">
+  <a class="hdr__brand" href="#top" aria-label="Js Interiorismo — inicio">
+    <span class="hdr__js">Js</span><span class="hdr__name">Interiorismo</span>
+  </a>
+  <nav class="hdr__nav" aria-label="Principal">
+    <a href="#estudio" data-i18n="nav.studio">Estudio</a>
+    <a href="#servicios" data-i18n="nav.services">Servicios</a>
+    <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+    <a href="#proceso" data-i18n="nav.process">Proceso</a>
+    <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="hdr__tools">
+    <button class="lang" type="button" data-lang-toggle aria-label="Cambiar idioma / Change language"><span data-l="es">ES</span><i>/</i><span data-l="en">EN</span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-open><span data-i18n="menu">Menú</span><b aria-hidden="true"></b></button>
+  </div>
+</header>
+
+<!-- Mobile menu overlay -->
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menú móvil">
+    <a href="#estudio"><em>02</em><span data-i18n="nav.studio">Estudio</span></a>
+    <a href="#servicios"><em>04</em><span data-i18n="nav.services">Servicios</span></a>
+    <a href="#proyectos"><em>05</em><span data-i18n="nav.projects">Proyectos</span></a>
+    <a href="#proceso"><em>06</em><span data-i18n="nav.process">Proceso</span></a>
+    <a href="#contacto"><em>07</em><span data-i18n="nav.contact">Contacto</span></a>
+  </nav>
+  <p class="menu__foot">Aguascalientes, México · <span data-i18n="tagline.short">Residencial • Comercial • Paisajismo</span></p>
+</div>
+
+<main>
+<!-- ===== Hero + exploding maquette (sticky stage) ===== -->
+<section class="stage" id="maqueta" aria-label="Maqueta 3D">
+  <div class="stage__sticky">
+    <div class="stage__canvas" data-maquette>
+      <img class="stage__fallback" src="img/fachada-blanca-1-sm.webp" width="900" height="1125" alt="Fachada Blanca — render de Jorge Santana" data-i18n-alt="fallback.alt">
+    </div>
+    <div class="stage__labels" aria-hidden="true">
+      <span class="plabel" data-part="roof"><i></i><b data-i18n="part.roof">Cubierta</b></span>
+      <span class="plabel" data-part="pergola"><i></i><b data-i18n="part.pergola">Pérgola</b></span>
+      <span class="plabel" data-part="walls"><i></i><b data-i18n="part.walls">Muros</b></span>
+      <span class="plabel" data-part="arch"><i></i><b data-i18n="part.arch">Arco</b></span>
+      <span class="plabel" data-part="base"><i></i><b data-i18n="part.base">Plataforma</b></span>
+    </div>
+
+    <div class="hero wrap">
+      <div class="hero__meta">
+        <span class="lbl">(01)</span>
+        <span class="lbl" data-i18n="hero.meta">Estudio de diseño de interiores</span>
+        <span class="lbl hero__geo">Aguascalientes, México</span>
+      </div>
+      <h1 class="hero__title" data-hero-title>
+        <span class="ln" data-i18n-html="hero.l1">Espacios</span>
+        <span class="ln" data-i18n-html="hero.l2">funcionales y</span>
+        <span class="ln" data-i18n-html="hero.l3"><em>atemporales.</em></span>
+      </h1>
+      <div class="hero__foot">
+        <p class="hero__lede" data-i18n="hero.lede">Jorge Santana diseña y visualiza en 3D espacios residenciales, comerciales y de paisaje.</p>
+        <span class="hero__cue"><i aria-hidden="true"></i><span data-i18n="hero.cue">Desplaza · gira la maqueta</span></span>
+      </div>
+    </div>
+
+    <div class="xcopy wrap" data-xcopy>
+      <span class="lbl">(01) — <span data-i18n="x.label">La maqueta</span></span>
+      <p class="xcopy__t" data-i18n-html="x.text">Cada espacio se construye <em>por capas</em>: estructura, luz y material.</p>
+    </div>
+    <div class="xcopy xcopy--end wrap" data-xend>
+      <p class="xcopy__t" data-i18n-html="x.end">Y vuelve a ser <em>uno solo</em>.</p>
+    </div>
+    <div class="stage__progress" aria-hidden="true"><i data-stage-bar></i></div>
+  </div>
+</section>
+
+<!-- ===== Estudio ===== -->
+<section class="sec studio wrap" id="estudio">
+  <div class="grid">
+    <p class="lbl col-lbl" data-reveal>(02) <span data-i18n="nav.studio">Estudio</span></p>
+    <p class="statement" data-reveal data-i18n-html="studio.statement">Js Interiorismo es el estudio de <strong>Jorge Santana</strong>, licenciado en Diseño de Interiores. Desde Aguascalientes, México, diseña espacios <em>funcionales y atemporales</em>: casas, comercios y los jardines que los rodean.</p>
+  </div>
+  <div class="grid studio__row">
+    <figure class="studio__img" data-reveal>
+      <img src="img/fachada-blanca-1-sm.webp" srcset="img/fachada-blanca-1-sm.webp 900w, img/fachada-blanca-1.webp 1800w" sizes="(max-width: 800px) 100vw, 40vw" width="900" height="1125" loading="lazy" alt="Fachada Blanca — render de Jorge Santana" data-i18n-alt="studio.imgalt">
+      <figcaption class="cap"><span>Fachada Blanca</span><span>2026</span></figcaption>
+    </figure>
+    <div class="studio__side">
+      <ul class="disc" data-reveal>
+        <li><em>01</em><span data-i18n="disc.1">Residencial</span></li>
+        <li><em>02</em><span data-i18n="disc.2">Comercial</span></li>
+        <li><em>03</em><span data-i18n="disc.3">Paisajismo</span></li>
+        <li><em>04</em><span data-i18n="disc.4">Visualización 3D</span></li>
+      </ul>
+      <dl class="facts" data-reveal>
+        <div><dt>L. DI</dt><dd data-i18n="fact.1">Licenciado en Diseño de Interiores</dd></div>
+        <div><dt>3ds Max + V-Ray</dt><dd data-i18n="fact.2">Sus propios renders fotorrealistas</dd></div>
+        <div><dt>Gilsa Render Awards 2024</dt><dd data-i18n="fact.3">Participante con un baño y una cocina</dd></div>
+        <div><dt>Behance · 2013</dt><dd data-i18n="fact.4">Portafolio público desde 2013</dd></div>
+      </dl>
+      <p class="quote" data-reveal data-i18n-html="studio.quote">“Espacios que no buscan impresionar. <em>Buscan permanecer.</em>”<span data-i18n="studio.quoteby">— Jorge Santana, en Instagram</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Materiales ===== -->
+<section class="sec mats wrap" id="materiales">
+  <div class="grid">
+    <p class="lbl col-lbl" data-reveal>(03) <span data-i18n="mats.label">Materiales</span></p>
+    <div class="sec__head">
+      <h2 class="h2" data-reveal data-i18n-html="mats.title">Una paleta que <em>se toca.</em></h2>
+      <p class="sec__lede" data-reveal data-i18n="mats.lede">Los materiales que se repiten en su trabajo: maderas cálidas, piedra, acabados minerales y un verde salvia.</p>
+    </div>
+  </div>
+  <ul class="swatches" data-swatches>
+    <li class="sw" data-reveal><div class="sw__tile sw--roble" data-tilt><span></span></div><p><em>01</em><b data-i18n="sw.1">Roble</b><small data-i18n="sw.1s">Madera clara</small></p></li>
+    <li class="sw" data-reveal><div class="sw__tile sw--nogal" data-tilt><span></span></div><p><em>02</em><b data-i18n="sw.2">Nogal</b><small data-i18n="sw.2s">Madera oscura</small></p></li>
+    <li class="sw" data-reveal><div class="sw__tile sw--travertino" data-tilt><span></span></div><p><em>03</em><b data-i18n="sw.3">Travertino</b><small data-i18n="sw.3s">Piedra natural</small></p></li>
+    <li class="sw" data-reveal><div class="sw__tile sw--micro" data-tilt><span></span></div><p><em>04</em><b data-i18n="sw.4">Microcemento</b><small data-i18n="sw.4s">Acabado continuo</small></p></li>
+    <li class="sw" data-reveal><div class="sw__tile sw--chukum" data-tilt><span></span></div><p><em>05</em><b data-i18n="sw.5">Chukum</b><small data-i18n="sw.5s">Estuco maya</small></p></li>
+    <li class="sw" data-reveal><div class="sw__tile sw--salvia" data-tilt><span></span></div><p><em>06</em><b data-i18n="sw.6">Salvia</b><small data-i18n="sw.6s">Laca mate</small></p></li>
+  </ul>
+  <p class="note" data-i18n="mats.note">Texturas dibujadas con código, como muestra de la paleta.</p>
+</section>
+
+<!-- ===== Servicios ===== -->
+<section class="sec services wrap" id="servicios">
+  <div class="grid">
+    <p class="lbl col-lbl" data-reveal>(04) <span data-i18n="nav.services">Servicios</span></p>
+    <div class="sec__head">
+      <h2 class="h2" data-reveal data-i18n-html="srv.title">Del primer trazo <em>al último detalle.</em></h2>
+    </div>
+  </div>
+  <ol class="srv">
+    <li class="srv__row" data-reveal><em>01</em><h3 data-i18n="srv.1">Diseño interior residencial</h3><p data-i18n="srv.1d">Recámaras, baños, cocinas y estancias pensados para la vida diaria: primero la función, después una belleza que dura.</p></li>
+    <li class="srv__row" data-reveal><em>02</em><h3 data-i18n="srv.2">Espacios comerciales</h3><p data-i18n="srv.2d">Cafeterías y locales con identidad propia, donde la luz y los materiales trabajan para la marca.</p></li>
+    <li class="srv__row" data-reveal><em>03</em><h3 data-i18n="srv.3">Paisajismo y fachadas</h3><p data-i18n="srv.3d">Patios, jardines y fachadas que unen la arquitectura con el paisaje mexicano.</p></li>
+    <li class="srv__row" data-reveal><em>04</em><h3 data-i18n="srv.4">Visualización 3D fotorrealista</h3><p data-i18n="srv.4d">Renders en 3ds Max y V-Ray para ver cada material y cada luz antes de construir.</p></li>
+    <li class="srv__row" data-reveal><em>05</em><h3 data-i18n="srv.5">Mobiliario a medida</h3><p data-i18n="srv.5d">Closets, tocadores y vestidores diseñados a la medida, con iluminación integrada.</p></li>
+  </ol>
+</section>
+
+<!-- ===== Proyectos (filterable index + viewer) ===== -->
+<section class="sec work wrap" id="proyectos">
+  <div class="grid">
+    <p class="lbl col-lbl" data-reveal>(05) <span data-i18n="nav.projects">Proyectos</span></p>
+    <div class="sec__head">
+      <h2 class="h2" data-reveal data-i18n-html="work.title">Índice de <em>proyectos</em></h2>
+      <p class="sec__lede" data-reveal data-i18n="work.lede">Dieciséis espacios diseñados y visualizados por Jorge Santana. Elige uno para verlo en grande.</p>
+    </div>
+  </div>
+  <div class="filters" role="tablist" aria-label="Filtrar proyectos" data-filters></div>
+  <div class="work__body">
+    <ol class="index" data-index></ol>
+    <aside class="viewer" data-viewer aria-live="polite">
+      <button class="viewer__frame" type="button" data-viewer-open data-cursor="ver">
+        <img data-viewer-img alt="" width="900" height="1125">
+      </button>
+      <div class="viewer__cap">
+        <p class="viewer__title" data-viewer-title></p>
+        <p class="viewer__meta" data-viewer-meta></p>
+        <p class="viewer__text" data-viewer-text></p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== Proceso ===== -->
+<section class="sec process wrap" id="proceso">
+  <div class="grid">
+    <p class="lbl col-lbl" data-reveal>(06) <span data-i18n="nav.process">Proceso</span></p>
+    <div class="sec__head">
+      <h2 class="h2" data-reveal data-i18n-html="proc.title">Cinco pasos, <em>un mismo cuidado.</em></h2>
+      <p class="tag-proposal" data-reveal data-i18n="proc.badge">Propuesta de proceso · por confirmar con el estudio</p>
+    </div>
+  </div>
+  <ol class="steps" data-steps>
+    <li data-reveal><em>01</em><h3 data-i18n="st.1">Escucha</h3><p data-i18n="st.1d">Visita, medidas y una conversación sobre cómo vives o trabajas el espacio.</p></li>
+    <li data-reveal><em>02</em><h3 data-i18n="st.2">Concepto</h3><p data-i18n="st.2d">Distribución, paleta de materiales y la idea que guía todo el proyecto.</p></li>
+    <li data-reveal><em>03</em><h3 data-i18n="st.3">Visualización 3D</h3><p data-i18n="st.3d">Renders fotorrealistas para decidir con certeza antes de construir.</p></li>
+    <li data-reveal><em>04</em><h3 data-i18n="st.4">Proyecto ejecutivo</h3><p data-i18n="st.4d">Planos, detalles y mobiliario a medida, listos para obra.</p></li>
+    <li data-reveal><em>05</em><h3 data-i18n="st.5">Ejecución</h3><p data-i18n="st.5d">Fabricación y supervisión hasta la entrega del espacio.</p></li>
+  </ol>
+</section>
+
+<!-- ===== Contacto ===== -->
+<section class="sec contact wrap" id="contacto">
+  <div class="grid">
+    <p class="lbl col-lbl" data-reveal>(07) <span data-i18n="nav.contact">Contacto</span></p>
+    <h2 class="contact__title" data-reveal data-i18n-html="ct.title">Hablemos de <em>tu espacio.</em></h2>
+  </div>
+  <div class="grid contact__row">
+    <ul class="clist" data-reveal>
+      <li><span class="lbl">WhatsApp</span><span class="ph" data-i18n="ct.wa">[WhatsApp del estudio]</span></li>
+      <li><span class="lbl" data-i18n="ct.mail.l">Correo</span><span class="ph" data-i18n="ct.mail">[Correo del estudio]</span></li>
+      <li><span class="lbl" data-i18n="ct.place.l">Estudio</span><span>Aguascalientes, México</span></li>
+      <li><span class="lbl">Instagram</span><span class="links"><a href="https://www.instagram.com/js.interiorismo/" target="_blank" rel="noopener">@js.interiorismo</a><a href="https://www.instagram.com/missyplicity/" target="_blank" rel="noopener">@missyplicity</a></span></li>
+      <li><span class="lbl">Behance</span><a href="https://www.behance.net/JorgeSantana" target="_blank" rel="noopener">be.net/JorgeSantana</a></li>
+      <li class="clist__note" data-i18n="ct.phnote">Los datos entre corchetes se completan con el estudio.</li>
+    </ul>
+    <form class="form" data-form novalidate data-reveal>
+      <p class="lbl" data-i18n="f.kind">Tipo de proyecto</p>
+      <div class="chips" data-chips>
+        <button type="button" class="chip is-on" data-i18n="f.k1">Residencial</button>
+        <button type="button" class="chip" data-i18n="f.k2">Comercial</button>
+        <button type="button" class="chip" data-i18n="f.k3">Paisajismo</button>
+        <button type="button" class="chip" data-i18n="f.k4">Render 3D</button>
+      </div>
+      <label class="field"><span data-i18n="f.name">Nombre</span><input name="name" autocomplete="name" data-i18n-ph="f.name.ph" placeholder="Tu nombre"></label>
+      <label class="field"><span data-i18n="f.msg">Mensaje</span><textarea name="msg" rows="3" data-i18n-ph="f.msg.ph" placeholder="Cuéntanos sobre el espacio"></textarea></label>
+      <div class="form__foot">
+        <button class="btn" type="submit"><span data-i18n="f.send">Enviar</span><i aria-hidden="true">→</i></button>
+        <p class="form__demo" data-form-note data-i18n="f.demo">Formulario de demostración: no envía datos.</p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="ftr wrap">
+  <p class="ftr__mark" aria-hidden="true">Js <em>Interiorismo</em></p>
+  <div class="ftr__row">
+    <p>Jorge Santana · Aguascalientes, México</p>
+    <p data-i18n="ft.renders">Renders © Jorge Santana / Js Interiorismo</p>
+    <p data-i18n="ft.visual">Maqueta y texturas generadas por código · sin imágenes IA</p>
+    <p data-i18n="ft.concept">Propuesta conceptual · v2 Galería blanca</p>
+    <p class="ftr__credit">Concept by Shaf3ool</p>
+    <a href="#top" class="ftr__top" data-i18n="ft.top">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<!-- ===== Lightbox (large image viewer) ===== -->
+<div class="lb" data-lb hidden role="dialog" aria-modal="true" aria-label="Visor de proyecto">
+  <div class="lb__bar">
+    <span class="lbl" data-lb-count>01 / 02</span>
+    <button class="lb__close" type="button" data-lb-close><span data-i18n="lb.close">Cerrar</span> ✕</button>
+  </div>
+  <div class="lb__stage" data-lb-stage>
+    <button class="lb__nav lb__nav--prev" type="button" data-lb-prev aria-label="Anterior">←</button>
+    <img data-lb-img alt="">
+    <button class="lb__nav lb__nav--next" type="button" data-lb-next aria-label="Siguiente">→</button>
+  </div>
+  <div class="lb__cap">
+    <div><p class="lb__title" data-lb-title></p><p class="lbl" data-lb-meta></p></div>
+    <p class="lb__text" data-lb-text></p>
+    <div class="lb__links"><a data-lb-src target="_blank" rel="noopener" data-i18n="lb.src">Ver publicación original</a><button type="button" data-lb-nextp><span data-i18n="lb.nextp">Siguiente proyecto</span> →</button></div>
+  </div>
+</div>
+
+<div class="cursor" aria-hidden="true"><span data-i18n="cursor.view">Ver</span></div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
