@@ -24,6 +24,8 @@ export function sheet(inner, opts = {}) {
   const wrap = h('div', { class: 'sheet-wrap', role: 'dialog', 'aria-modal': 'true' },
     `<div class="sheet-scrim"></div><div class="sheet"><div class="grab"></div>${inner}</div>`);
   host.appendChild(wrap);
+  // a pending toast would sit on top of the sheet: hide it
+  document.getElementById('toast').classList.remove('show');
   // open on the next frame so the CSS transition runs
   requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add('open')));
   const close = () => {
